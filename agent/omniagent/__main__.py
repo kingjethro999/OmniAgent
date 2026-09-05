@@ -58,7 +58,26 @@ async def main_async(prompt: str | None = None):
 def main():
     parser = argparse.ArgumentParser(description="OmniAgent Engine CLI")
     parser.add_argument("prompt", nargs="?", help="Optional task prompt to run immediately")
+    parser.add_argument(
+        "--ide-hook",
+        "--server",
+        action="store_true",
+        help="Start the OmniAgent IDE Hook & MCP server on localhost",
+    )
+    parser.add_argument(
+        "--port",
+        "-p",
+        type=int,
+        default=8765,
+        help="Port for the IDE Hook / MCP server (default: 8765)",
+    )
     args = parser.parse_args()
+
+    if args.ide_hook:
+        from omniagent.ide_hook import run_standalone
+        run_standalone(port=args.port)
+        return
+
     asyncio.run(main_async(args.prompt))
 
 if __name__ == "__main__":

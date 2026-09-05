@@ -13,14 +13,14 @@ export const Header: React.FC<HeaderProps> = ({ isConnected, theme, onToggleThem
   return (
     <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border-b border-[var(--border-subtle)] bg-[var(--bg-card)] gap-4 transition-colors">
       <div className="flex items-center gap-3">
-        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-cobalt-subtle)] text-[var(--accent-cobalt)]">
-          <Cpu className="w-5 h-5" />
+        <div className="flex items-center justify-center w-9 h-9 rounded-lg overflow-hidden border border-[var(--border-subtle)] bg-[#121211]">
+          <img src="/icon.png" alt="OmniAgent Logo" className="w-full h-full object-cover" />
         </div>
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-base font-semibold tracking-tight text-[var(--text-primary)]">OmniAgent Engine</h1>
             <span className="px-2 py-0.5 text-xs font-mono font-medium rounded bg-[var(--accent-cobalt-subtle)] text-[var(--accent-cobalt)] border border-[var(--accent-cobalt)]/20">
-              v0.1.0-hybridedge
+              v0.1.1
             </span>
           </div>
           <p className="text-xs text-[var(--text-secondary)]">Hybrid Local/Cloud Edge Agent Framework</p>

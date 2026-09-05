@@ -112,3 +112,26 @@ class IDEHookServer:
     def stop(self):
         self.server.shutdown()
         self.server.server_close()
+
+
+def run_standalone(port: int = 8765):
+    """Run the IDE Hook / MCP server in the foreground."""
+    server = HTTPServer(('127.0.0.1', port), IDEHookHandler)
+    print(f"🚀 [IDE Hook / MCP] OmniAgent Bridge listening at http://127.0.0.1:{port}")
+    print(f"   • Endpoints: POST / (JSON-RPC 2.0: 'audit', 'route'), GET /status")
+    print(f"   • Ready for Cursor, VS Code, JetBrains, and Claude/Antigravity hooks.")
+    print("   • Press Ctrl+C to stop.\n")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\n[IDE Hook] Stopping server...")
+    finally:
+        server.server_close()
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="OmniAgent IDE Hook & MCP Server")
+    parser.add_argument("--port", "-p", type=int, default=8765, help="Port to listen on (default: 8765)")
+    args = parser.parse_args()
+    run_standalone(port=args.port)

@@ -69,11 +69,14 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# ─── Models (large files) ───
-models/
+# ─── Models (large weight files) ───
+models/*.gguf
+models/*.bin
+models/*.safetensors
 *.gguf
 *.bin
 *.safetensors
+!models/download_model.py
 
 # ─── Project Planning & Temporary Notes ───
 idea.md
