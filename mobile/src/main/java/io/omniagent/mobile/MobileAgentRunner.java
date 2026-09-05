@@ -3,92 +3,112 @@ package io.omniagent.mobile;
 import java.util.Scanner;
 
 /**
- * OmniAgent Mobile Companion — Standalone Java Runner
+ * OmniAgent Mobile Companion — Standalone Phone Assistant Runner
  *
- * Allows testing and running the complete Consumer Mobile Companion engine
- * directly on workstation JVM or server without requiring an Android emulator.
+ * Runs the full Phone Assistant pipeline directly on workstation JVM or server:
+ *  - Entry onboarding: Select On-Device SLM vs Custom Remote Server
+ *  - Free wake word spotting ("Hey Omni")
+ *  - Native phone automation: Spotify playback, Alarms, Calls, SMS, WhatsApp, Gmail, App launches
  */
 public class MobileAgentRunner {
 
     public static void main(String[] args) {
         System.out.println("==========================================================");
-        System.out.println("  OmniAgent Consumer Mobile Companion (Android / Java)");
-        System.out.println("  Battery-Saver SLM Assistant & Native System Integration");
+        System.out.println("  OmniAgent Phone Assistant & Mobile Companion");
+        System.out.println("  Native Voice Automation • Zero 3rd-Party Cloud API Cost");
         System.out.println("==========================================================");
 
-        MobileAgentService service = new MobileAgentService();
-        System.out.println("Engine:  " + (NativeEngineJNI.isNativeAvailable() ? "Native NPU/CPU JNI (Active)" : "Edge Fallback Simulation"));
-        System.out.println("Battery: " + service.getBatteryPercent() + "% (Power Save: " + service.isPowerSaveMode() + ")");
-        System.out.println("Privacy: 100% On-Device Execution for Routine Queries\n");
+        AssistantConfig config = new AssistantConfig();
 
+        // 1. Direct Command Mode (CLI arguments)
         if (args.length > 0) {
-            String prompt = String.join(" ", args);
-            System.out.println("Processing query: \"" + prompt + "\"");
-            MobileTaskRouter.RoutingResult route = service.routeTask(prompt);
-            System.out.println("Routing: " + route);
-            String output = service.executeTask(prompt);
-            System.out.println("\nResponse:\n" + output);
+            MobileAgentService service = new MobileAgentService(config);
+            String input = String.join(" ", args);
+            System.out.println("\n🎙️ Received Voice Input: \"" + input + "\"");
+            MobileAgentService.VoiceCommandResult result = service.processVoiceCommand(input);
+            System.out.println("\n" + result + "\n");
             service.destroy();
             return;
         }
 
-        // Run interactive CLI demo
+        // 2. Interactive Assistant Mode with Entry Onboarding
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Simulated Mobile Assistant Actions:");
-        System.out.println("  [1] Summarize recent notifications (\"Summarize notifications from the last hour\")");
-        System.out.println("  [2] Draft a quick reply to Mom (\"Draft reply to Mom\")");
-        System.out.println("  [3] Test task routing (Local NPU vs Cloud Offload)");
-        System.out.println("  [4] Toggle battery saver mode (<15% enforcement)");
-        System.out.println("  [0] Exit\n");
+        System.out.println("\n┌────────────────────────────────────────────────────────────┐");
+        System.out.println("│ 🚀 Choose Assistant Backend on Entry:                      │");
+        System.out.println("│  [1] On-Device SLM (Local NPU/CPU — 100% Offline & Free)   │");
+        System.out.println("│  [2] Custom Remote Server (Point to self-hosted HTTP API)  │");
+        System.out.println("└────────────────────────────────────────────────────────────┘");
+        System.out.print("Select Setup [1 or 2, default: 1]: ");
+
+        String setupChoice = scanner.hasNextLine() ? scanner.nextLine().trim() : "1";
+        if (setupChoice.equals("2")) {
+            System.out.print("Enter your OmniAgent Server URL (default: http://127.0.0.1:8765): ");
+            String serverUrl = scanner.hasNextLine() ? scanner.nextLine().trim() : "";
+            if (serverUrl.isEmpty()) serverUrl = "http://127.0.0.1:8765";
+            config.setMode(AssistantConfig.EngineMode.REMOTE_SERVER);
+            config.setServerUrl(serverUrl);
+            System.out.println("✅ Configured to use Remote Server: " + serverUrl);
+        } else {
+            config.setMode(AssistantConfig.EngineMode.ON_DEVICE_SLM);
+            System.out.println("✅ Configured to use On-Device SLM: " + config.getLocalModelPath());
+        }
+
+        MobileAgentService service = new MobileAgentService(config);
+        System.out.println("\nActive Engine: " + (NativeEngineJNI.isNativeAvailable() ? "Native NPU/CPU JNI (Active)" : "Edge Fallback Simulation"));
+        System.out.println("Wake Word:     \"" + config.getWakeWord() + "\"");
+        System.out.println("Battery Level: " + service.getBatteryPercent() + "% (Power Save: " + service.isPowerSaveMode() + ")");
+        System.out.println("Privacy:       100% On-Device (Zero data leaves phone for routine tasks)\n");
+
+        printHelp();
 
         while (true) {
-            System.out.print("Mobile Action > ");
+            System.out.print("\nVoice Command > ");
             if (!scanner.hasNextLine()) break;
-            String choice = scanner.nextLine().trim();
+            String line = scanner.nextLine().trim();
 
-            if (choice.equals("0") || choice.equalsIgnoreCase("exit")) {
+            if (line.equalsIgnoreCase("exit") || line.equalsIgnoreCase("quit") || line.equals("0")) {
                 break;
             }
 
-            switch (choice) {
-                case "1":
-                    System.out.println("\n--- Notifications Digest ---");
-                    for (NotificationAssistant.NotificationItem n : service.getNotificationAssistant().getRecentNotifications()) {
-                        System.out.println("  " + n);
-                    }
-                    System.out.println("\n🤖 AI Summary:");
-                    System.out.println(service.summarizeNotifications() + "\n");
-                    break;
-
-                case "2":
-                    System.out.println("\nIncoming Message from Mom: \"Are you coming over for dinner tonight?\"");
-                    System.out.println("🤖 Drafted Quick Reply:");
-                    System.out.println(service.draftReply("Mom", "Are you coming over for dinner tonight?") + "\n");
-                    break;
-
-                case "3":
-                    System.out.print("Enter prompt to route: ");
-                    String prompt = scanner.nextLine().trim();
-                    if (!prompt.isEmpty()) {
-                        MobileTaskRouter.RoutingResult route = service.routeTask(prompt);
-                        System.out.println("Routing Decision: " + route);
-                        System.out.println("Execution Output: " + service.executeTask(prompt) + "\n");
-                    }
-                    break;
-
-                case "4":
-                    boolean newMode = !service.isPowerSaveMode();
-                    service.setBatteryStatus(newMode ? 12 : 85, newMode);
-                    System.out.println("\nBattery mode updated: " + service.getBatteryPercent() + "% (Power Save: " + service.isPowerSaveMode() + ")\n");
-                    break;
-
-                default:
-                    System.out.println("Unknown option.");
-                    break;
+            if (line.equalsIgnoreCase("help") || line.equals("?")) {
+                printHelp();
+                continue;
             }
+
+            if (line.equalsIgnoreCase("mode")) {
+                boolean isRemote = config.getMode() == AssistantConfig.EngineMode.REMOTE_SERVER;
+                config.setMode(isRemote ? AssistantConfig.EngineMode.ON_DEVICE_SLM : AssistantConfig.EngineMode.REMOTE_SERVER);
+                service.setConfig(config);
+                System.out.println("Switched mode to: " + config.getMode());
+                continue;
+            }
+
+            if (line.equalsIgnoreCase("battery")) {
+                boolean newMode = !service.isPowerSaveMode();
+                service.setBatteryStatus(newMode ? 12 : 85, newMode);
+                System.out.println("Battery updated: " + service.getBatteryPercent() + "% (Power Save: " + service.isPowerSaveMode() + ")");
+                continue;
+            }
+
+            // Process voice or typed assistant command
+            MobileAgentService.VoiceCommandResult result = service.processVoiceCommand(line);
+            System.out.println("\n" + result);
         }
 
         service.destroy();
-        System.out.println("\nMobile companion stopped.");
+        System.out.println("\nPhone Assistant session stopped.");
+    }
+
+    private static void printHelp() {
+        System.out.println("Try speaking or typing commands (with or without 'Hey Omni'):");
+        System.out.println("  • Music:        \"Hey Omni, play the box by roddy rich\"");
+        System.out.println("  • Clock:        \"Hey Omni, set an alarm for 7:00 AM\"");
+        System.out.println("  • Calls:        \"Hey Omni, call mum\" | \"Hey Omni, pick the call\" | \"Hey Omni, end call\"");
+        System.out.println("  • Messages:     \"Hey Omni, send message to Sarah saying on my way\"");
+        System.out.println("  • WhatsApp:     \"Hey Omni, send whatsapp to John saying meeting in 5 minutes\"");
+        System.out.println("  • Gmail:        \"Hey Omni, draft a gmail to boss saying working remotely today\"");
+        System.out.println("  • Launch Apps:  \"Hey Omni, open whatsapp\" | \"open tiktok\" | \"open gallery\" | \"open youtube\"");
+        System.out.println("  • Notifications:\"Hey Omni, summarize my notifications\"");
+        System.out.println("  • Controls:     'mode' (toggle server/local) | 'battery' (toggle saver) | 'exit'");
     }
 }

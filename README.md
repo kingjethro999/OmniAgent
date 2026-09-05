@@ -566,25 +566,55 @@ dotnet run --project desktop
 
 ---
 
-### 5. Consumer Mobile Companion (Android / Java JNI)
+### 5. Consumer Mobile Companion & Voice Phone Assistant (Android / Java JNI)
 
-The Consumer Mobile Companion executes on Android (or on workstation JVMs for developer testing) via JNI to the C++ Core (`libomni_engine_jni.so`). It automatically manages battery thresholds, notification summaries, and context-aware quick replies.
+The Consumer Mobile Companion executes on Android (or on workstation JVMs for developer testing) via JNI to the C++ Core (`libomni_engine_jni.so`). It turns the phone into an autonomous on-device assistant with zero 3rd-party API costs or cloud dependencies.
 
+#### Key Phone Assistant Features:
+- **Onboarding Setup on Entry**: Prompts user on first launch to either:
+  1. `On-Device SLM`: Download/run local quantized model on phone NPU/CPU.
+  2. `Custom Remote Server`: Point to their own self-hosted OmniAgent server / desktop IDE hook URL.
+- **Free Wake Word Engine**: Listens for `"Hey Omni"` (or `"Hey Agent"`, `"Hey Phone"`) locally without cloud speech services.
+- **Native Phone Automation**: Automatically maps spoken commands to native Android Intents:
+  - **Music**: `"Hey Omni, play the box by roddy rich"` ➔ Launches Spotify search intent (`spotify:search:...`) and plays track.
+  - **Clock & Alarms**: `"Hey Omni, set an alarm for 7:00 AM"` ➔ Registers alarm via Android `AlarmClock`.
+  - **Calls & Telecom**: `"Hey Omni, call mum"` ➔ Direct telephone dialer intent.
+  - **Call Control**: `"Hey Omni, pick the call"` ➔ Accepts incoming call; `"Hey Omni, end call"` ➔ Hangs up call.
+  - **Messaging**: `"Hey Omni, send message to Dad saying on my way"` ➔ Native SMS compose.
+  - **WhatsApp**: `"Hey Omni, send whatsapp to Alice saying let's meet at 5"` ➔ Launches WhatsApp conversation.
+  - **Gmail**: `"Hey Omni, draft a gmail to boss saying working remotely today"` ➔ Composes email in Gmail app.
+  - **App Launching**: `"Hey Omni, open whatsapp"`, `"open tiktok"`, `"open gallery"`, `"open youtube"` ➔ Direct package launcher intent.
+
+#### Running Voice Commands from the CLI:
 ```bash
 # Compile Java classes
 mkdir -p mobile/bin
 javac -d mobile/bin mobile/src/main/java/io/omniagent/mobile/*.java
 
-# 1. Run a routine mobile task on-device (notification digest)
-java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Summarize my notifications from the last hour"
+# 1. Play song on Spotify
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, play the box by roddy rich"
 
-# 2. Draft an encrypted quick reply locally
-java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Draft reply to Mom: Are you coming over for dinner tonight?"
+# 2. Set an alarm
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, set an alarm for 7:00 AM"
 
-# 3. Test cloud offloading for high-complexity queries
-java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Derive the mathematical proof for quantum entanglement entropy"
+# 3. Call contact & Telecom control
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, call mum"
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, pick the call"
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, end call"
 
-# 4. Launch the interactive mobile assistant simulation CLI
+# 4. Send SMS & WhatsApp
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, send message to Sarah saying on my way"
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, send whatsapp to John saying meeting in 5 minutes"
+
+# 5. Draft Gmail
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, draft a gmail to boss saying working remotely today"
+
+# 6. Launch apps
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open whatsapp"
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open tiktok"
+java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open gallery"
+
+# 7. Launch interactive Phone Assistant with entry onboarding setup
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner
 ```
 
