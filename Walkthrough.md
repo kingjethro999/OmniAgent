@@ -130,3 +130,20 @@ agent/.venv/bin/python -m omniagent "Audit my local files"
 # [C++ Native SLM Inference] Processed on-device: Audit my local files
 # [OmniEngine C++ Core] Unloaded model from memory pool.
 ```
+
+---
+
+## 📦 4. Cross-Platform Release Packages Published (v0.2.0)
+
+All packages have been built, packaged into self-contained archives/installers, and uploaded directly to [GitHub Release v0.2.0](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0):
+
+| Component | Target Platform | Format | Asset File |
+| :--- | :--- | :--- | :--- |
+| **Android Assistant** | Android 8.0+ | Signed APK (Scheme v2) | `OmniAgent-v0.2.0-Android.apk` (4.4 MB) |
+| **Desktop Worker (Linux)** | Linux x86_64 | Self-Contained + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` (30.5 MB) |
+| **Desktop Worker (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.0.zip` (30.6 MB) |
+| **Desktop Worker (macOS ARM)** | Apple Silicon M1-M4 | Self-Contained Binary | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` (28.9 MB) |
+| **Desktop Worker (macOS Intel)**| macOS Intel x64 | Self-Contained Binary | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz` (30.6 MB) |
+| **Main Omni Engine Core** | Linux C / C++ / JNI | C Headers, CMake & `.so` | `omniagent-engine-linux-x64-v0.2.0.tar.gz` (26.6 KB) |
+| **Python SDK** | Python 3.10+ | Standalone Wheel & sdist | `omniagent-0.2.0-py3-none-any.whl` & `tar.gz` |
+
