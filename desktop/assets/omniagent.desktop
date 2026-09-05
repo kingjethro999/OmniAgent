@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OmniAgent
+GenericName=Desktop Voice Assistant & Autonomous Edge Agent
+Comment=Siri-like Desktop Voice Assistant with On-Device Reasoning & System Automation
+Exec=omniagent %u
+Icon=omniagent
+Terminal=false
+Categories=Utility;AudioVideo;System;Development;
+Keywords=siri;assistant;voice;ai;omni;agent;automation;spotify;
+StartupNotify=true
+StartupWMClass=OmniAgent Assistant
+Actions=Assistant;Audit;Watch;
+
+[Desktop Action Assistant]
+Name=Open Voice Assistant
+Exec=omniagent
+
+[Desktop Action Audit]
+Name=Run Codebase Security Audit
+Exec=omniagent --audit .
+
+[Desktop Action Watch]
+Name=Start Dropzone Watcher
+Exec=omniagent --watch ./dropzone

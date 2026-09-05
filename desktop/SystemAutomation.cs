@@ -269,6 +269,60 @@ $bmp.Dispose();";
         // 4. System Telemetry & Weather
         // ══════════════════════════════════════════════════════
 
+        public static (int cpuPercent, int ramPercent, int diskPercent) GetTelemetrySnapshot()
+        {
+            int cpu = 20;
+            int ram = 45;
+            int disk = 35;
+
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    if (File.Exists("/proc/meminfo"))
+                    {
+                        long total = 0, avail = 0;
+                        foreach (var line in File.ReadAllLines("/proc/meminfo"))
+                        {
+                            if (line.StartsWith("MemTotal:"))
+                                long.TryParse(line.Split(':', StringSplitOptions.TrimEntries)[1].Split(' ')[0], out total);
+                            else if (line.StartsWith("MemAvailable:"))
+                                long.TryParse(line.Split(':', StringSplitOptions.TrimEntries)[1].Split(' ')[0], out avail);
+                        }
+                        if (total > 0)
+                        {
+                            ram = (int)(((total - avail) * 100) / total);
+                        }
+                    }
+
+                    if (File.Exists("/proc/loadavg"))
+                    {
+                        string load = File.ReadAllText("/proc/loadavg").Split(' ')[0];
+                        if (double.TryParse(load, out double l))
+                        {
+                            cpu = (int)Math.Min(95, (l / Environment.ProcessorCount) * 100);
+                        }
+                    }
+                }
+
+                var rootDrive = DriveInfo.GetDrives().FirstOrDefault(d => d.IsReady && (d.Name == "/" || d.Name.StartsWith("C")));
+                if (rootDrive != null && rootDrive.TotalSize > 0)
+                {
+                    long used = rootDrive.TotalSize - rootDrive.AvailableFreeSpace;
+                    disk = (int)((used * 100) / rootDrive.TotalSize);
+                }
+            }
+            catch { }
+
+            return (Math.Clamp(cpu, 5, 95), Math.Clamp(ram, 5, 98), Math.Clamp(disk, 5, 98));
+        }
+
+        public static string GetQuickSystemTelemetry()
+        {
+            var auto = new SystemAutomation();
+            return auto.GetSystemTelemetry();
+        }
+
         public string GetSystemTelemetry()
         {
             var sb = new StringBuilder();

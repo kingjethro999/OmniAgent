@@ -148,19 +148,23 @@ All packages have been built, packaged into self-contained archives/installers, 
 
 ---
 
-## 🎙️ 5. Siri-Like Desktop Voice Assistant & Voice Match Calibration (v0.2.1)
+## 🎙️ 5. Siri-Like Desktop GUI Assistant & Voice Match Calibration (v0.2.1)
 
-### Desktop Assistant (Windows & Linux)
-- **Wake Word Listening Loop**: [DesktopAssistant.cs](/desktop/DesktopAssistant.cs) runs continuous, low-overhead wake word detection listening for *"Hey Omni"*, *"OK Omni"*, and trained phonetic variants.
-- **Audible Speech Engine & Desktop Toasts**: [DesktopSpeechEngine.cs](/desktop/DesktopSpeechEngine.cs) provides realistic text-to-speech via `spd-say` (Linux) and PowerShell SAPI (Windows), along with desktop notifications and audio alert chimes.
-- **Deep System Automation**: [SystemAutomation.cs](/desktop/SystemAutomation.cs) executes native commands without cloud dependencies:
-  - *Spotify Control*: Playback toggle, volume control, track navigation, and instant search playback via `playerctl` and D-Bus.
-  - *App Launcher*: Instant launching of Chrome, VS Code, terminal, calculator, file manager, Steam, and custom utilities.
-  - *System Controls*: Workstation lock (`loginctl lock-session` / Windows `LockWorkStation`), volume adjustment via `pactl` / Windows volume keys, and full-screen screenshot capture.
-  - *Timers & Alarms*: Asynchronous background countdown timers with audible chime and notification alarm when complete.
-  - *Weather & Telemetry*: Real-time weather reports and system health stats (CPU load, RAM consumption, and storage space).
+### Native Desktop GUI Assistant (Windows & Linux - Not Terminal Only!)
+- **Native GUI Window Architecture**: [DesktopGuiWindow.cs](/desktop/DesktopGuiWindow.cs) hosts a frameless, glassmorphic, floating Siri HUD window using `Photino.NET` (WebKitGTK on Linux, WebView2 on Windows) that stays on top of all active workstation windows without requiring a terminal.
+- **Glowing Siri Orb & Waveform Visualizer**: Features an animated multi-layer radial gradient orb (Cobalt `#4F5FF7`, Cyan `#00F0FF`, Purple `#8A2BE2`) that gently breathes when idle, pulses brightly with active soundwave frequency bars when listening, and ripples during speech.
+- **One-Click OS Installers**:
+  - `install.sh`: Installs executable to `~/.local/bin/omniagent`, icon to `~/.local/share/icons/`, and `.desktop` entry to `~/.local/share/applications/omniagent.desktop`. Appears directly in GNOME Dash and KDE Application Menu.
+  - `install.ps1`: Registers OmniAgent in Windows Start Menu and auto-starts on login.
+- **Wake Word Call-out**: Continuous low-overhead background listening spots *"Hey Omni"* or *"OK Omni"* and brings up the floating GUI overlay with real-time speech transcription.
+- **Interactive Action Cards**:
+  - *Spotify Player Card*: Track title, artist, live play/pause toggle, skip, and volume slider.
+  - *Hardware Telemetry Gauges*: Real-time progress bars for CPU load, RAM usage, and storage space.
+  - *Animated Timers & Alarms*: Visual circular countdown with chime and notification alarms.
+  - *App Launcher*: Opens Chrome, VS Code, Terminal, Calculator, Steam, and File Manager.
+  - *System Controls*: Workstation lock (`loginctl lock-session` / Windows `LockWorkStation`), volume adjustment, and full-screen screenshot capture.
   - *Local SLM Fallback*: Conversational queries routed locally to the C++ Core (`libomni_engine.so`) with zero privacy leakage.
-- **Personalized Voice Match & Accent Calibration**: [VoiceProfileManager.cs](/desktop/VoiceProfileManager.cs) runs a guided 4-phrase calibration wizard (`--train-voice`) that measures acoustic energy, pitch, and phonetic variants to adapt to regional accents across diverse backgrounds.
+- **Personalized Voice Match & Accent Calibration**: Interactive GUI wizard tab allowing users to record 4 calibration phrases to tune acoustic energy thresholds and phonetic distance tolerance for their unique vocal pitch and accent.
 
 ### Android Mobile Voice Match (Pure Java Architecture)
 - **Why Pure Java for Low-Level Audio**: Mobile audio capture and wake-word spotting are built in pure Java (`AudioRecord`, `MediaRecorder.AudioSource.VOICE_RECOGNITION`, 16kHz mono PCM buffers). This provides direct, transparent access to Android's native audio pipeline with zero foreign library bloat or expensive cloud SDKs (such as Picovoice or ONNX).

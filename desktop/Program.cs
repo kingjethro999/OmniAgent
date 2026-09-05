@@ -9,29 +9,31 @@ namespace OmniAgent.Desktop
     {
         static async Task Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            PrintHeader();
-
-            string modelPath = Environment.GetEnvironmentVariable("OMNI_LOCAL_MODEL_PATH") ?? "../models/phi-4-mini.gguf";
-            IntPtr engineCtx = NativeEngineBridge.InitEngine(modelPath);
-
-            try
+            // If explicit CLI arguments are provided (e.g. --audit, --watch, --say, --cli), run headless / CLI mode
+            if (args.Length > 0 && !args[0].Equals("--gui", StringComparison.OrdinalIgnoreCase))
             {
-                if (args.Length > 0)
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
+                PrintHeader();
+
+                string modelPath = Environment.GetEnvironmentVariable("OMNI_LOCAL_MODEL_PATH") ?? "../models/phi-4-mini.gguf";
+                IntPtr engineCtx = NativeEngineBridge.InitEngine(modelPath);
+
+                try
                 {
                     await HandleCliArgsAsync(args, engineCtx);
                     return;
                 }
-
-                await RunInteractiveMenuAsync(engineCtx);
-            }
-            finally
-            {
-                if (engineCtx != IntPtr.Zero)
+                finally
                 {
-                    NativeEngineBridge.FreeEngine(engineCtx);
+                    if (engineCtx != IntPtr.Zero)
+                    {
+                        NativeEngineBridge.FreeEngine(engineCtx);
+                    }
                 }
             }
+
+            // Default behavior: Launch Native Siri-Like Desktop GUI Window
+            DesktopGuiWindow.Run(args);
         }
 
         static void PrintHeader()
@@ -61,6 +63,12 @@ namespace OmniAgent.Desktop
 
             switch (command)
             {
+                case "--cli":
+                case "--menu":
+                case "-m":
+                    await RunInteractiveMenuAsync(engineCtx);
+                    break;
+
                 case "--assistant":
                 case "-s":
                 case "--voice":

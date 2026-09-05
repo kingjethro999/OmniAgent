@@ -85,47 +85,41 @@ adb install -r OmniAgent-v0.2.1-Android.apk
 ```
 *Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), personal **Voice Match & Accent Calibration**, native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
 
-#### 2. Desktop Siri Assistant (Linux x64)
-Extract and run the self-contained binary:
+#### 2. Desktop Siri Assistant GUI Application (Linux x64)
+Extract and run the one-click installer to register OmniAgent in your Applications menu / Dash:
 ```bash
 # Download and unpack
 curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
 tar -xzf OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
 cd linux-x64
 
-# Ensure executable permissions and test
-chmod +x OmniAgent.Desktop
+# One-Click Linux Desktop Installer:
+./install.sh
+```
+> [!TIP]
+> Once installed, launch **OmniAgent** directly from your application launcher (GNOME Dash / KDE Menu) or run `omniagent`. It opens as a **floating Siri GUI overlay with animated voice orb and live visual cards**—no terminal required!
 
-# 1. Run Siri-Like Desktop Assistant (Hands-Free Voice / Interactive HUD)
-./OmniAgent.Desktop --assistant
+You can also run headless / script commands anytime:
+```bash
+# 1. Spoken one-shot command
+omniagent --say "Hey Omni, play Bohemian Rhapsody on Spotify"
 
-# 2. Issue a one-shot spoken command
-./OmniAgent.Desktop --say "Hey Omni, play Bohemian Rhapsody on Spotify"
+# 2. Interactive terminal HUD (for headless servers)
+omniagent --assistant
 
-# 3. Train your voice match & accent calibration profile
-./OmniAgent.Desktop --train-voice
-
-# 4. Standard enterprise worker tasks (watch, audit, organize)
-./OmniAgent.Desktop --watch ./dropzone
-./OmniAgent.Desktop --audit /path/to/project
+# 3. Enterprise worker tasks
+omniagent --watch ./dropzone
+omniagent --audit /path/to/project
 ```
 
-#### 3. Desktop Siri Assistant (Windows x64)
-Download `OmniAgent-Desktop-win-x64-v0.2.1.zip`, extract to any folder, and run from Command Prompt or PowerShell:
-```cmd
-:: 1. Launch hands-free Siri-like Desktop Assistant
-OmniAgent.Desktop.exe --assistant
-
-:: 2. Execute a single voice automation
-OmniAgent.Desktop.exe --say "Hey Omni, lock screen"
-
-:: 3. Train personalized accent calibration profile
-OmniAgent.Desktop.exe --train-voice
-
-:: 4. Background dropzone and security audit
-OmniAgent.Desktop.exe --watch C:\dropzone
-OmniAgent.Desktop.exe --audit C:\my-codebase
+#### 3. Desktop Siri Assistant GUI Application (Windows x64)
+Download `OmniAgent-Desktop-win-x64-v0.2.1.zip`, extract to any folder, and run the installer:
+```powershell
+# Run the Windows Installer (registers Start Menu shortcut & background startup)
+.\install.ps1
 ```
+> [!TIP]
+> Launch **OmniAgent** from your Windows Start Menu or double-click `OmniAgent.Desktop.exe`. The floating Siri GUI will appear with audio waves and quick action cards. Speak *"Hey Omni"* anytime from your desk!
 
 #### 4. Main Omni Engine Core (C / C++ SDK)
 Incorporate the C++ edge inference engine into your own native C, C++, Rust, or Go applications:
@@ -673,34 +667,37 @@ if __name__ == "__main__":
 
 ### 4. Enterprise Desktop Worker (.NET 10 C#)
 
-### 4. Siri-Like Desktop Assistant & Worker (.NET 10 C# - Windows & Linux)
+### 4. Siri-Like Desktop GUI Assistant & Worker (.NET 10 C# - Windows & Linux)
 
-The Desktop Assistant turns your Windows or Linux workstation into an autonomous, voice-interactive workstation companion (Siri-like for PC). Built in C# with .NET 10, it hooks directly into low-level OS interfaces for media, apps, and hardware telemetry, binding dynamically to the native C++ Core (`libomni_engine.so`) for on-device reasoning.
+The Desktop Assistant turns your Windows or Linux workstation into an autonomous, voice-interactive workstation companion (Siri-like for PC). Built in C# with .NET 10 and Photino.NET, it launches as a **native floating GUI application** that hooks directly into low-level OS interfaces for media, apps, and hardware telemetry, binding dynamically to the native C++ Core (`libomni_engine.so`) for on-device reasoning.
 
 > [!NOTE]
 > macOS is intentionally omitted from the desktop assistant target, as macOS already features native system-integrated Siri.
 
 #### Key Desktop Assistant Features:
-- **Hands-Free Wake Word Listening ("Hey Omni", "OK Omni")**: Continuous low-latency background audio monitoring with custom voice matching.
-- **Audible Speech Synthesis & Toast Chimes**: Responsive Text-to-Speech (native Speech Dispatcher on Linux, SAPI on Windows) and desktop notification toasts via `notify-send` and Windows Notification Center.
+- **Installed Native GUI Application (No Terminal Required)**: Installs directly into the OS Application Menu / Dash / Start Menu. When launched, opens as a floating frameless glassmorphic Siri HUD above all other windows.
+- **Glowing Voice Orb & Audio Waveform Visualizer**: Central multi-layer animated radial gradient orb with active frequency soundwaves reacting in real time to speech and music.
+- **Hands-Free Wake Word Call-out ("Hey Omni", "OK Omni")**: Continuous low-latency background audio monitoring with personal voice matching.
+- **Audible Speech Synthesis & Desktop Chimes**: Realistic Text-to-Speech (native Speech Dispatcher on Linux, SAPI on Windows) and desktop notification toasts via `notify-send` and Windows Notification Center.
 - **Deep System Automations**:
-  - **Spotify & Media Playback**: Play/pause, track navigation, and instant Spotify search (`"Hey Omni, play Bohemian Rhapsody on Spotify"`).
+  - **Spotify & Media Playback**: Interactive player card with play/pause, track navigation, and instant Spotify search (`"Hey Omni, play Bohemian Rhapsody on Spotify"`).
   - **Workstation App Launcher**: Launch browser, code editors, terminal, or tools (`"Hey Omni, open Chrome"`, `"open VS Code"`, `"open terminal"`, `"open calculator"`, `"open steam"`).
   - **Hardware Controls**: Volume adjustment (`"Hey Omni, set volume to 80%"` / `"mute volume"`), screenshot capture (`"take a screenshot"`), and workstation lock (`"lock screen"`).
-  - **Timers, Alarms & Clock**: Background timer with audio chime & alarm alert (`"set a timer for 10 minutes"`), instant date & time.
-  - **Live Weather & Telemetry**: Instant live weather reports and system metrics (CPU load, RAM usage, storage).
+  - **Timers, Alarms & Clock**: Visual animated countdown timer card with audio chime & alarm alert (`"set a timer for 10 minutes"`), instant date & time.
+  - **Live Weather & Telemetry**: Instant live weather reports and real-time visual progress bars for CPU load, RAM usage, and storage.
   - **Private On-Device Inference**: General inquiries and natural conversation processed locally via C++ Core SLM with zero internet leakage.
 
 ```bash
-# 1. Launch hands-free Siri-like Desktop Assistant (Voice HUD)
-dotnet run --project desktop -- --assistant
+# 1. Launch the Native Siri-like Desktop GUI Application
+dotnet run --project desktop
+# (Or run 'omniagent' after running ./scripts/install-desktop.sh)
 
 # 2. Execute a single voice automation directly
 dotnet run --project desktop -- --say "Hey Omni, play bohemian rhapsody on spotify"
 dotnet run --project desktop -- --say "Hey Omni, take a screenshot"
 dotnet run --project desktop -- --say "Hey Omni, lock screen"
 
-# 3. Train your personalized Voice Match & Accent profile
+# 3. Train your personalized Voice Match & Accent profile (CLI mode)
 dotnet run --project desktop -- --train-voice
 
 # 4. Standard enterprise worker tasks
@@ -709,9 +706,6 @@ dotnet run --project desktop -- --watch ./dropzone
 dotnet run --project desktop -- --organize ./cluttered-folder
 dotnet run --project desktop -- --format-csv ./data.csv
 dotnet run --project desktop -- --git-status
-
-# 5. Interactive text menu
-dotnet run --project desktop
 ```
 
 ---

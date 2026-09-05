@@ -15,74 +15,72 @@ cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$D
 cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$REPO_ROOT/OmniAgent-v0.2.1-Android.apk"
 cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$REPO_ROOT/OmniAgent-release.apk"
 
-# 2. Desktop Linux x64 (Siri-like Voice Assistant & Enterprise Automation)
-echo "--> Packaging Desktop Linux x64..."
+# 2. Desktop Linux x64 (Native GUI Siri Assistant & Enterprise Automation)
+echo "--> Packaging Desktop Linux x64 (Native GUI Application)..."
 STAGING_LINUX="$REPO_ROOT/release_packages/staging/linux-x64"
 rm -rf "$STAGING_LINUX"
 mkdir -p "$STAGING_LINUX"
-cp "$REPO_ROOT/release_packages/desktop/linux-x64/OmniAgent.Desktop" "$STAGING_LINUX/"
-cp "$REPO_ROOT/core/build/libomni_engine.so" "$STAGING_LINUX/"
-cp -r "$REPO_ROOT/desktop/assets" "$STAGING_LINUX/"
-cat << 'README' > "$STAGING_LINUX/README.md"
-# OmniAgent Desktop Worker & Siri-like Assistant v0.2.1 (Linux x64)
 
-Standalone native Linux assistant and enterprise automation worker with bundled C++ Core inference engine (`libomni_engine.so`).
+dotnet publish "$REPO_ROOT/desktop/OmniAgent.Desktop.csproj" -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o "$STAGING_LINUX"
+cp "$REPO_ROOT/core/build/libomni_engine.so" "$STAGING_LINUX/" || true
+cp -r "$REPO_ROOT/desktop/assets" "$STAGING_LINUX/"
+cp "$REPO_ROOT/desktop/assets/omniagent.desktop" "$STAGING_LINUX/"
+cp "$REPO_ROOT/scripts/install-desktop.sh" "$STAGING_LINUX/install.sh"
+chmod +x "$STAGING_LINUX/install.sh"
+chmod +x "$STAGING_LINUX/OmniAgent.Desktop"
+
+cat << 'README' > "$STAGING_LINUX/README.md"
+# OmniAgent Desktop GUI Assistant v0.2.1 (Linux x64)
+
+Native Siri-like Desktop GUI Application and enterprise automation worker for Linux workstations.
+
+## Installation
+Run the installer to register OmniAgent in your Applications menu / Dash:
+```bash
+./install.sh
+```
+Once installed, search for **OmniAgent** in your GNOME/KDE Dash or launch from terminal with `omniagent`.
 
 ## Features
-- **Siri-like Voice Assistant**: Hands-free wake-word detection ("Hey Omni", "OK Omni") with speech output (TTS via `spd-say`) and desktop notifications (`notify-send`).
-- **Voice Match & Accent Calibration**: Adapts to user vocal tone, pitch, and natural regional accents (`--train-voice`).
-- **Desktop System Automations**: Spotify playback & media controls, app launcher (Chrome, VS Code, Terminal, etc.), volume controls, screenshot capture, lock screen, weather, system telemetry, and timers/alarms.
-- **Privacy & Security**: 100% on-device code & document auditing with zero data leaving the workstation.
-
-## Quick Start
-```bash
-chmod +x OmniAgent.Desktop
-
-# 1. Launch Interactive Siri Assistant HUD
-./OmniAgent.Desktop --assistant
-
-# 2. Run a direct voice command with speech output
-./OmniAgent.Desktop --say "Hey Omni, play the box by roddy rich on spotify"
-./OmniAgent.Desktop --say "Hey Omni, what is the weather in London"
-./OmniAgent.Desktop --say "Hey Omni, how is my system doing"
-
-# 3. Train your voice & accent profile
-./OmniAgent.Desktop --train-voice
-
-# 4. Enterprise Dropzone Watcher & Document Auditing
-./OmniAgent.Desktop --watch ./dropzone
-./OmniAgent.Desktop --audit /path/to/docs
-```
+- **Siri-like Floating GUI**: Real-time voice orb animation, soundwave visualizer, and frosted glass dynamic HUD.
+- **Hands-Free Wake Word**: Speak *"Hey Omni"* or *"OK Omni"* anytime from your desk.
+- **Desktop System Automations**: Spotify playback, application launcher, volume control, screen lock, screenshot capture, timers, live weather, and system telemetry.
+- **Voice Match & Accent Calibration**: Interactive GUI wizard to train your personal voice profile and accents.
+- **Private On-Device Reasoning**: 100% local C++ Core SLM inference (`libomni_engine.so`).
+- **CLI Fallback**: Headless support via `--say`, `--audit`, `--watch`, or `--cli`.
 README
+
 tar -czf "$DIST_DIR/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz" -C "$REPO_ROOT/release_packages/staging" linux-x64
 
-# 3. Desktop Windows x64 (Siri-like Voice Assistant & Enterprise Automation)
-echo "--> Packaging Desktop Windows x64..."
+# 3. Desktop Windows x64 (Native GUI Siri Assistant & Enterprise Automation)
+echo "--> Packaging Desktop Windows x64 (Native GUI Application)..."
 STAGING_WIN="$REPO_ROOT/release_packages/staging/win-x64"
 rm -rf "$STAGING_WIN"
 mkdir -p "$STAGING_WIN"
-cp "$REPO_ROOT/release_packages/desktop/win-x64/OmniAgent.Desktop.exe" "$STAGING_WIN/"
-cp -r "$REPO_ROOT/desktop/assets" "$STAGING_WIN/"
-cat << 'README' > "$STAGING_WIN/README.txt"
-OmniAgent Desktop Worker & Siri-like Assistant v0.2.1 (Windows x64)
-===================================================================
 
-Standalone native assistant and enterprise automation worker for Windows 10/11 x64.
+dotnet publish "$REPO_ROOT/desktop/OmniAgent.Desktop.csproj" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o "$STAGING_WIN"
+cp -r "$REPO_ROOT/desktop/assets" "$STAGING_WIN/"
+cp "$REPO_ROOT/scripts/install-desktop.ps1" "$STAGING_WIN/install.ps1"
+
+cat << 'README' > "$STAGING_WIN/README.txt"
+OmniAgent Desktop GUI Assistant v0.2.1 (Windows x64)
+=====================================================
+
+Native Siri-like Desktop GUI Application for Windows 10/11 x64.
+
+Installation:
+  Right-click 'install.ps1' -> Run with PowerShell
+  (This creates a Start Menu shortcut and enables background startup)
 
 Features:
-- Siri-like Voice Assistant: SAPI Text-to-Speech, toast notifications, wake-word detection ("Hey Omni").
-- Voice Match & Accent Calibration: Adapts to your voice and pronunciation across 4 quick prompts.
-- Windows System Automations: Spotify playback, media controls, app launching (Chrome, Code, Notepad, Calc), volume control, lock workstation, screenshot capture, timers/alarms, and weather.
-- 100% On-Device Privacy: Local code auditing and C++ SLM execution without cloud dependencies.
-
-Usage:
-  OmniAgent.Desktop.exe --assistant
-  OmniAgent.Desktop.exe --say "Hey Omni, play music on spotify"
-  OmniAgent.Desktop.exe --say "Hey Omni, what time is it"
-  OmniAgent.Desktop.exe --train-voice
-  OmniAgent.Desktop.exe --watch C:\dropzone
-  OmniAgent.Desktop.exe --audit C:\documents
+  - Siri-like Floating GUI: Animated voice orb, soundwaves, and interactive HUD.
+  - Hands-Free Wake Word: Speak "Hey Omni" anytime to trigger actions.
+  - System Automations: Spotify playback, open apps, volume, lock PC, screenshot.
+  - Voice Match & Accent Calibration: Personal voice training across 4 phrases.
+  - Private C++ SLM: 100% on-device local execution without cloud leakage.
+  - CLI Fallback: Run with --say, --audit, or --watch from PowerShell/CMD.
 README
+
 (cd "$REPO_ROOT/release_packages/staging" && zip -r "$DIST_DIR/OmniAgent-Desktop-win-x64-v0.2.1.zip" win-x64)
 
 # 4. Main Omni Engine Core (C++ SDK & Shared Libraries)
