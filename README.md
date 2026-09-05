@@ -25,7 +25,7 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 - [Target Use Cases & Hands-On Examples](#-target-use-cases--hands-on-examples)
   - [1. Privacy-Preserving Code & Document Audits](#1-privacy-preserving-code--document-audits)
   - [2. Silent Dropzone Folder Monitoring](#2-silent-dropzone-folder-monitoring)
-  - [3. Offline OS-Level Task Automation & Siri-Like Assistant](#3-offline-os-level-task-automation)
+  - [3. Offline OS-Level Task Automation & Autonomous Desktop Assistant](#3-offline-os-level-task-automation)
   - [4. Battery-Saver Mobile Assistant & Accent Calibration](#4-battery-saver-mobile-assistant--notifications)
   - [5. Cost Optimization for High-Volume Workflows](#5-cost-optimization-for-high-volume-workflows)
   - [6. IDE Copilot Enhancement via MCP](#6-ide-copilot-enhancement-via-mcp)
@@ -38,7 +38,7 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
   - [1. CLI Quick Execution (Python)](#1-cli-quick-execution-python)
   - [2. Interactive Terminal REPL (Python)](#2-interactive-terminal-repl-python)
   - [3. Python Developer SDK](#3-python-developer-sdk)
-  - [4. Siri-Like Desktop Assistant & Worker (.NET 10 C# - Windows & Linux)](#4-enterprise-desktop-worker-net-10-c)
+  - [4. Autonomous Desktop Desktop Assistant & Worker (.NET 10 C# - Windows & Linux)](#4-enterprise-desktop-worker-net-10-c)
   - [5. Consumer Mobile Companion & Voice Match Calibration (Android / Java JNI)](#5-consumer-mobile-companion-android--java-jni)
   - [6. Developer Prototyping & Benchmarking (Jupyter)](#6-developer-prototyping--benchmarking-jupyter)
   - [7. Real-Time Web Dashboard (Next.js 16)](#7-real-time-web-dashboard-nextjs-16)
@@ -61,14 +61,14 @@ Pre-built standalone binaries, signed application packages, and developer SDKs a
 | Component / Platform | Target Architecture | Distribution File | Size | Verification / Integrity | Direct Download |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.1-Android.apk` | 4.4 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk) |
-| **Desktop Siri Assistant (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` | 31 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz) |
-| **Desktop Siri Assistant (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.1.zip` | 31 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-win-x64-v0.2.1.zip) |
+| **Desktop Voice Assistant (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` | 31 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz) |
+| **Desktop Voice Assistant (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.1.zip` | 31 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-win-x64-v0.2.1.zip) |
 | **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | `omniagent-engine-linux-x64-v0.2.1.tar.gz` | 27 KiB | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz) |
 | **Python SDK Wheel** | Python 3.10+ | `omniagent-0.2.1-py3-none-any.whl` | 38 KiB | **Verified**: PyPI-compliant wheel distribution | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl) |
 | **Python Source Distribution** | Python 3.10+ | `omniagent-0.2.1.tar.gz` | 60 KiB | **Verified**: Standard sdist source tarball | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1.tar.gz) |
 
 > [!NOTE]
-> Desktop Siri Assistant is specifically engineered for **Windows** and **Linux** workstations. (macOS already has native Siri built-in).
+> Desktop Voice Assistant is specifically engineered for **Windows** and **Linux** workstations. (macOS already has native Voice Assistant built-in).
 
 ---
 
@@ -85,7 +85,7 @@ adb install -r OmniAgent-v0.2.1-Android.apk
 ```
 *Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), personal **Voice Match & Accent Calibration**, native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
 
-#### 2. Desktop Siri Assistant GUI Application (Linux x64)
+#### 2. Desktop Voice Assistant GUI Application (Linux x64)
 Extract and run the one-click installer to register OmniAgent in your Applications menu / Dash:
 ```bash
 # Download and unpack
@@ -97,7 +97,7 @@ cd linux-x64
 ./install.sh
 ```
 > [!TIP]
-> Once installed, launch **OmniAgent** directly from your application launcher (GNOME Dash / KDE Menu) or run `omniagent`. It opens as a **floating Siri GUI overlay with animated voice orb and live visual cards**—no terminal required!
+> Once installed, launch **OmniAgent** directly from your application launcher (GNOME Dash / KDE Menu) or run `omniagent`. It opens as a **floating Voice Assistant GUI overlay with animated voice orb and live visual cards**—no terminal required!
 
 You can also run headless / script commands anytime:
 ```bash
@@ -112,14 +112,14 @@ omniagent --watch ./dropzone
 omniagent --audit /path/to/project
 ```
 
-#### 3. Desktop Siri Assistant GUI Application (Windows x64)
+#### 3. Desktop Voice Assistant GUI Application (Windows x64)
 Download `OmniAgent-Desktop-win-x64-v0.2.1.zip`, extract to any folder, and run the installer:
 ```powershell
 # Run the Windows Installer (registers Start Menu shortcut & background startup)
 .\install.ps1
 ```
 > [!TIP]
-> Launch **OmniAgent** from your Windows Start Menu or double-click `OmniAgent.Desktop.exe`. The floating Siri GUI will appear with audio waves and quick action cards. Speak *"Hey Omni"* anytime from your desk!
+> Launch **OmniAgent** from your Windows Start Menu or double-click `OmniAgent.Desktop.exe`. The floating Voice Assistant GUI will appear with audio waves and quick action cards. Speak *"Hey Omni"* anytime from your desk!
 
 #### 4. Main Omni Engine Core (C / C++ SDK)
 Incorporate the C++ edge inference engine into your own native C, C++, Rust, or Go applications:
@@ -667,15 +667,15 @@ if __name__ == "__main__":
 
 ### 4. Enterprise Desktop Worker (.NET 10 C#)
 
-### 4. Siri-Like Desktop GUI Assistant & Worker (.NET 10 C# - Windows & Linux)
+### 4. Autonomous Desktop Desktop GUI Assistant & Worker (.NET 10 C# - Windows & Linux)
 
-The Desktop Assistant turns your Windows or Linux workstation into an autonomous, voice-interactive workstation companion (Siri-like for PC). Built in C# with .NET 10 and Photino.NET, it launches as a **native floating GUI application** that hooks directly into low-level OS interfaces for media, apps, and hardware telemetry, binding dynamically to the native C++ Core (`libomni_engine.so`) for on-device reasoning.
+The Desktop Assistant turns your Windows or Linux workstation into an autonomous, voice-interactive workstation companion (Autonomous Desktop for PC). Built in C# with .NET 10 and Photino.NET, it launches as a **native floating GUI application** that hooks directly into low-level OS interfaces for media, apps, and hardware telemetry, binding dynamically to the native C++ Core (`libomni_engine.so`) for on-device reasoning.
 
 > [!NOTE]
-> macOS is intentionally omitted from the desktop assistant target, as macOS already features native system-integrated Siri.
+> macOS is intentionally omitted from the desktop assistant target, as macOS already features native system-integrated Voice Assistant.
 
 #### Key Desktop Assistant Features:
-- **Installed Native GUI Application (No Terminal Required)**: Installs directly into the OS Application Menu / Dash / Start Menu. When launched, opens as a floating frameless glassmorphic Siri HUD above all other windows.
+- **Installed Native GUI Application (No Terminal Required)**: Installs directly into the OS Application Menu / Dash / Start Menu. When launched, opens as a floating frameless glassmorphic Voice HUD above all other windows.
 - **Glowing Voice Orb & Audio Waveform Visualizer**: Central multi-layer animated radial gradient orb with active frequency soundwaves reacting in real time to speech and music.
 - **Hands-Free Wake Word Call-out ("Hey Omni", "OK Omni")**: Continuous low-latency background audio monitoring with personal voice matching.
 - **Audible Speech Synthesis & Desktop Chimes**: Realistic Text-to-Speech (native Speech Dispatcher on Linux, SAPI on Windows) and desktop notification toasts via `notify-send` and Windows Notification Center.
@@ -688,7 +688,7 @@ The Desktop Assistant turns your Windows or Linux workstation into an autonomous
   - **Private On-Device Inference**: General inquiries and natural conversation processed locally via C++ Core SLM with zero internet leakage.
 
 ```bash
-# 1. Launch the Native Siri-like Desktop GUI Application
+# 1. Launch the Native Autonomous Desktop Desktop GUI Application
 dotnet run --project desktop
 # (Or run 'omniagent' after running ./scripts/install-desktop.sh)
 

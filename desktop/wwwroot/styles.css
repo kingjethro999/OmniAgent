@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   OmniAgent Siri Assistant - Modern Glassmorphic Cobalt Theme
+   OmniAgent Desktop Voice Assistant - Modern Glassmorphic Cobalt Theme
    ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -226,8 +226,8 @@ body.theme-dark {
   display: flex;
 }
 
-/* ─── Siri Central Orb & Waves ─── */
-.siri-hero {
+/* ─── Central Voice Orb & Waves ─── */
+.orb-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,7 +252,7 @@ body.theme-dark {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(79, 95, 247, 0.45) 0%, rgba(0, 240, 255, 0.2) 50%, transparent 75%);
   filter: blur(20px);
-  animation: siri-breathe 4s ease-in-out infinite alternate;
+  animation: orb-breathe 4s ease-in-out infinite alternate;
 }
 
 .orb-core {
@@ -274,13 +274,13 @@ body.theme-dark {
 
 .layer-1 {
   background: radial-gradient(circle at 35% 35%, #00F0FF, #4F5FF7, #1E1B4B);
-  animation: siri-spin 8s linear infinite;
+  animation: orb-spin 8s linear infinite;
 }
 
 .layer-2 {
   background: radial-gradient(circle at 75% 75%, #8A2BE2, transparent 60%);
   mix-blend-mode: screen;
-  animation: siri-spin-reverse 6s ease-in-out infinite;
+  animation: orb-spin-reverse 6s ease-in-out infinite;
 }
 
 .layer-3 {
@@ -292,37 +292,37 @@ body.theme-dark {
 .orb-wrapper.listening .orb-halo {
   background: radial-gradient(circle, rgba(0, 240, 255, 0.7) 0%, rgba(79, 95, 247, 0.5) 45%, transparent 75%);
   filter: blur(28px);
-  animation: siri-pulse-active 0.8s ease-in-out infinite alternate;
+  animation: orb-pulse-active 0.8s ease-in-out infinite alternate;
 }
 
 .orb-wrapper.speaking .orb-halo {
   background: radial-gradient(circle, rgba(138, 43, 226, 0.7) 0%, rgba(79, 95, 247, 0.6) 45%, transparent 75%);
-  animation: siri-pulse-speaking 0.5s ease-in-out infinite alternate;
+  animation: orb-pulse-speaking 0.5s ease-in-out infinite alternate;
 }
 
-@keyframes siri-spin {
+@keyframes orb-spin {
   0% { transform: rotate(0deg) scale(1); }
   50% { transform: rotate(180deg) scale(1.05); }
   100% { transform: rotate(360deg) scale(1); }
 }
 
-@keyframes siri-spin-reverse {
+@keyframes orb-spin-reverse {
   0% { transform: rotate(360deg) scale(1.03); }
   50% { transform: rotate(180deg) scale(0.97); }
   100% { transform: rotate(0deg) scale(1.03); }
 }
 
-@keyframes siri-breathe {
+@keyframes orb-breathe {
   0% { transform: scale(0.92); opacity: 0.55; }
   100% { transform: scale(1.15); opacity: 0.95; }
 }
 
-@keyframes siri-pulse-active {
+@keyframes orb-pulse-active {
   0% { transform: scale(1.05); opacity: 0.8; }
   100% { transform: scale(1.35); opacity: 1; }
 }
 
-@keyframes siri-pulse-speaking {
+@keyframes orb-pulse-speaking {
   0% { transform: scale(1); opacity: 0.75; }
   100% { transform: scale(1.25); opacity: 1; }
 }

@@ -33,7 +33,7 @@ $shortcutPath = Join-Path $programsDir "OmniAgent.lnk"
 $shortcut = $wshShell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = Join-Path $installDir "OmniAgent.Desktop.exe"
 $shortcut.WorkingDirectory = $installDir
-$shortcut.Description = "Siri-like Desktop Voice Assistant for PC"
+$shortcut.Description = "Autonomous Desktop Voice Assistant for PC"
 $iconPath = Join-Path $installDir "assets\app_icon.ico"
 if (Test-Path $iconPath) {
     $shortcut.IconLocation = $iconPath

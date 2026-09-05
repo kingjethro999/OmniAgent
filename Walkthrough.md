@@ -140,19 +140,19 @@ All packages have been built, packaged into self-contained archives/installers, 
 | Component | Target Platform | Format | Asset File |
 | :--- | :--- | :--- | :--- |
 | **Android Assistant & Voice Match** | Android 8.0+ | Signed APK (Scheme v2) | `OmniAgent-v0.2.1-Android.apk` (4.4 MB) |
-| **Desktop Siri Assistant (Linux)** | Linux x86_64 | Self-Contained + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` (31.0 MB) |
-| **Desktop Siri Assistant (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.1.zip` (31.0 MB) |
+| **Desktop Voice Assistant (Linux)** | Linux x86_64 | Self-Contained + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` (31.0 MB) |
+| **Desktop Voice Assistant (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.1.zip` (31.0 MB) |
 | **Main Omni Engine Core** | Linux C / C++ / JNI | C Headers, CMake & `.so` | `omniagent-engine-linux-x64-v0.2.1.tar.gz` (27.0 KB) |
 | **Python SDK Wheel** | Python 3.10+ | Standalone Wheel | `omniagent-0.2.1-py3-none-any.whl` (38.0 KB) |
 | **Python Source Distribution** | Python 3.10+ | Standard Source Tarball | `omniagent-0.2.1.tar.gz` (60.0 KB) |
 
 ---
 
-## 🎙️ 5. Siri-Like Desktop GUI Assistant & Voice Match Calibration (v0.2.1)
+## 🎙️ 5. Autonomous Desktop Desktop GUI Assistant & Voice Match Calibration (v0.2.1)
 
 ### Native Desktop GUI Assistant (Windows & Linux - Not Terminal Only!)
-- **Native GUI Window Architecture**: [DesktopGuiWindow.cs](/desktop/DesktopGuiWindow.cs) hosts a frameless, glassmorphic, floating Siri HUD window using `Photino.NET` (WebKitGTK on Linux, WebView2 on Windows) that stays on top of all active workstation windows without requiring a terminal.
-- **Glowing Siri Orb & Waveform Visualizer**: Features an animated multi-layer radial gradient orb (Cobalt `#4F5FF7`, Cyan `#00F0FF`, Purple `#8A2BE2`) that gently breathes when idle, pulses brightly with active soundwave frequency bars when listening, and ripples during speech.
+- **Native GUI Window Architecture**: [DesktopGuiWindow.cs](/desktop/DesktopGuiWindow.cs) hosts a frameless, glassmorphic, floating Voice HUD window using `Photino.NET` (WebKitGTK on Linux, WebView2 on Windows) that stays on top of all active workstation windows without requiring a terminal.
+- **Glowing voice orb & Waveform Visualizer**: Features an animated multi-layer radial gradient orb (Cobalt `#4F5FF7`, Cyan `#00F0FF`, Purple `#8A2BE2`) that gently breathes when idle, pulses brightly with active soundwave frequency bars when listening, and ripples during speech.
 - **One-Click OS Installers**:
   - `install.sh`: Installs executable to `~/.local/bin/omniagent`, icon to `~/.local/share/icons/`, and `.desktop` entry to `~/.local/share/applications/omniagent.desktop`. Appears directly in GNOME Dash and KDE Application Menu.
   - `install.ps1`: Registers OmniAgent in Windows Start Menu and auto-starts on login.

@@ -1,13 +1,13 @@
 ## OmniAgent v0.2.1 — Native Desktop GUI Assistant & Cross-Platform Voice Match Calibration
 
-OmniAgent v0.2.1 delivers a complete, installable **Native Desktop GUI Assistant** (Siri-like for PC) for Windows and Linux, along with personal **Voice Match & Accent Calibration** for both Android mobile and desktop systems.
+OmniAgent v0.2.1 delivers a complete, installable **Native Desktop GUI Assistant** (Autonomous Desktop for PC) for Windows and Linux, along with personal **Voice Match & Accent Calibration** for both Android mobile and desktop systems.
 
 ### What's New in v0.2.1:
 
-- **Native Desktop GUI Application (Siri for PC — Not Just Terminal)**:
+- **Native Desktop GUI Application (Autonomous Voice Assistant for PC — Not Just Terminal)**:
   - An actual installed desktop application with launcher icons in GNOME/KDE Dash and Windows Start Menu.
-  - Sleek, frameless, floating glassmorphic Siri HUD overlay that floats above your active workstation windows.
-  - Dynamic animated Siri voice orb with multi-layer radial gradient mesh and real-time audio soundwave frequency visualizer.
+  - Sleek, frameless, floating glassmorphic Voice Assistant HUD overlay that floats above your active workstation windows.
+  - Dynamic animated glowing voice orb with multi-layer radial gradient mesh and real-time audio soundwave frequency visualizer.
   - Hands-free wake word call-out: speak *"Hey Omni"* or *"OK Omni"* anytime from your desk to summon the assistant.
   - One-click installers: `./install.sh` (Linux) and `install.ps1` (Windows) for seamless OS installation with autostart.
 - **Interactive Visual Action Cards**:

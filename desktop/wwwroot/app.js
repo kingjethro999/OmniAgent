@@ -1,10 +1,10 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   OmniAgent Siri Assistant - Client Controller & IPC Bridge
+   OmniAgent Desktop Voice Assistant - Client Controller & IPC Bridge
    ══════════════════════════════════════════════════════════════════════════ */
 
 (function () {
   // DOM Elements
-  const siriOrb = document.getElementById("siri-orb");
+  const voiceOrb = document.getElementById("voice-orb");
   const assistantStatus = document.getElementById("assistant-status");
   const responseCard = document.getElementById("response-card");
   const userQueryText = document.getElementById("user-query-text");
@@ -136,16 +136,16 @@
 
   // ─── UI State Transitions ───
   function setAssistantState(state, captionHtml) {
-    siriOrb.classList.remove("listening", "speaking");
+    voiceOrb.classList.remove("listening", "speaking");
     btnVoiceMic.classList.remove("active");
 
     if (state === "listening") {
       isListening = true;
-      siriOrb.classList.add("listening");
+      voiceOrb.classList.add("listening");
       btnVoiceMic.classList.add("active");
     } else if (state === "speaking") {
       isSpeaking = true;
-      siriOrb.classList.add("speaking");
+      voiceOrb.classList.add("speaking");
     } else {
       isListening = false;
       isSpeaking = false;
@@ -336,7 +336,7 @@
     }
   });
 
-  siriOrb.addEventListener("click", () => {
+  voiceOrb.addEventListener("click", () => {
     btnVoiceMic.click();
   });
 

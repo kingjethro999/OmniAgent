@@ -32,7 +32,7 @@ namespace OmniAgent.Desktop
                 }
             }
 
-            // Default behavior: Launch Native Siri-Like Desktop GUI Window
+            // Default behavior: Launch Native Autonomous Desktop Desktop GUI Window
             DesktopGuiWindow.Run(args);
         }
 
@@ -41,7 +41,7 @@ namespace OmniAgent.Desktop
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("==========================================================");
             Console.WriteLine("  OmniAgent Enterprise Desktop Worker v0.2.1 (.NET 10)");
-            Console.WriteLine("  Silent Automation & Siri-like Voice Assistant for PC");
+            Console.WriteLine("  Silent Automation & Autonomous Desktop Voice Assistant for PC");
             Console.WriteLine("==========================================================");
             Console.ResetColor();
 
@@ -153,7 +153,7 @@ namespace OmniAgent.Desktop
             while (true)
             {
                 Console.WriteLine("\nSelect an enterprise automation or assistant action:");
-                Console.WriteLine("  [1] Launch Desktop Siri Assistant (Interactive Voice & HUD)");
+                Console.WriteLine("  [1] Launch Desktop Voice Assistant (Interactive Voice & HUD)");
                 Console.WriteLine("  [2] Hands-Free Wake Word Listening Loop (\"Hey Omni\")");
                 Console.WriteLine("  [3] Train Voice Match & Accent Calibration Wizard");
                 Console.WriteLine("  [4] Audit a file or folder for security/secrets");
@@ -280,8 +280,8 @@ namespace OmniAgent.Desktop
         static void PrintHelp()
         {
             Console.WriteLine("Usage: dotnet run --project desktop [options]\n");
-            Console.WriteLine("Desktop Siri Assistant Options:");
-            Console.WriteLine("  --assistant, -s, --voice Start Siri-like Desktop Voice Assistant HUD");
+            Console.WriteLine("Desktop Voice Assistant Options:");
+            Console.WriteLine("  --assistant, -s, --voice Start Autonomous Desktop Desktop Voice Assistant HUD");
             Console.WriteLine("  --say \"<command>\"         Run natural language voice command directly with speech");
             Console.WriteLine("  --listen                 Start hands-free wake word listening loop (\"Hey Omni\")");
             Console.WriteLine("  --train-voice            Run personalized voice & accent calibration wizard\n");

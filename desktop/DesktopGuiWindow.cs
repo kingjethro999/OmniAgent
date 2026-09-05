@@ -8,7 +8,7 @@ using Photino.NET;
 namespace OmniAgent.Desktop;
 
 /// <summary>
-/// Native GUI Window host for the Siri-like OmniAgent Desktop Assistant.
+/// Native GUI Window host for the OmniAgent Desktop Voice Assistant.
 /// Powered by Photino.NET (WebKitGTK on Linux, WebView2 on Windows).
 /// </summary>
 public static class DesktopGuiWindow
@@ -22,7 +22,7 @@ public static class DesktopGuiWindow
 
     public static void Run(string[] args)
     {
-        Console.WriteLine("[OmniAgent GUI] Initializing Siri-like Desktop Assistant Window...");
+        Console.WriteLine("[OmniAgent GUI] Initializing Desktop Voice Assistant Window...");
 
         string modelPath = Environment.GetEnvironmentVariable("OMNI_LOCAL_MODEL_PATH") ?? "../models/phi-4-mini.gguf";
         IntPtr engineCtx = NativeEngineBridge.InitEngine(modelPath);
@@ -80,7 +80,7 @@ public static class DesktopGuiWindow
         // Register bidirectional IPC message handler
         _window.RegisterWebMessageReceivedHandler(OnWebMessageReceived);
 
-        // Load the Siri UI
+        // Load the Voice Assistant UI
         _window.Load(indexPath);
 
         // Start background wake-word listener

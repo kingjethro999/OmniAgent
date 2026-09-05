@@ -164,7 +164,7 @@ namespace OmniAgent.Desktop
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("║            OmniAgent Desktop Home & System Assistant (v0.2.1)            ║");
-            Console.WriteLine("║                 Zero-Cloud Siri for Windows & Linux                      ║");
+            Console.WriteLine("║            Zero-Cloud Voice Assistant for Windows & Linux                ║");
             Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════╝");
             Console.ResetColor();
 

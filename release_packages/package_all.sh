@@ -15,7 +15,7 @@ cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$D
 cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$REPO_ROOT/OmniAgent-v0.2.1-Android.apk"
 cp "$REPO_ROOT/mobile/build/outputs/apk/release/OmniAgentMobile-release.apk" "$REPO_ROOT/OmniAgent-release.apk"
 
-# 2. Desktop Linux x64 (Native GUI Siri Assistant & Enterprise Automation)
+# 2. Desktop Linux x64 (Native GUI Desktop Voice Assistant & Enterprise Automation)
 echo "--> Packaging Desktop Linux x64 (Native GUI Application)..."
 STAGING_LINUX="$REPO_ROOT/release_packages/staging/linux-x64"
 rm -rf "$STAGING_LINUX"
@@ -32,7 +32,7 @@ chmod +x "$STAGING_LINUX/OmniAgent.Desktop"
 cat << 'README' > "$STAGING_LINUX/README.md"
 # OmniAgent Desktop GUI Assistant v0.2.1 (Linux x64)
 
-Native Siri-like Desktop GUI Application and enterprise automation worker for Linux workstations.
+Native Native Desktop GUI Voice Assistant Application and enterprise automation worker for Linux workstations.
 
 ## Installation
 Run the installer to register OmniAgent in your Applications menu / Dash:
@@ -42,7 +42,7 @@ Run the installer to register OmniAgent in your Applications menu / Dash:
 Once installed, search for **OmniAgent** in your GNOME/KDE Dash or launch from terminal with `omniagent`.
 
 ## Features
-- **Siri-like Floating GUI**: Real-time voice orb animation, soundwave visualizer, and frosted glass dynamic HUD.
+- **Floating Voice Assistant GUI**: Real-time voice orb animation, soundwave visualizer, and frosted glass dynamic HUD.
 - **Hands-Free Wake Word**: Speak *"Hey Omni"* or *"OK Omni"* anytime from your desk.
 - **Desktop System Automations**: Spotify playback, application launcher, volume control, screen lock, screenshot capture, timers, live weather, and system telemetry.
 - **Voice Match & Accent Calibration**: Interactive GUI wizard to train your personal voice profile and accents.
@@ -52,7 +52,7 @@ README
 
 tar -czf "$DIST_DIR/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz" -C "$REPO_ROOT/release_packages/staging" linux-x64
 
-# 3. Desktop Windows x64 (Native GUI Siri Assistant & Enterprise Automation)
+# 3. Desktop Windows x64 (Native GUI Desktop Voice Assistant & Enterprise Automation)
 echo "--> Packaging Desktop Windows x64 (Native GUI Application)..."
 STAGING_WIN="$REPO_ROOT/release_packages/staging/win-x64"
 rm -rf "$STAGING_WIN"
@@ -66,14 +66,14 @@ cat << 'README' > "$STAGING_WIN/README.txt"
 OmniAgent Desktop GUI Assistant v0.2.1 (Windows x64)
 =====================================================
 
-Native Siri-like Desktop GUI Application for Windows 10/11 x64.
+Native Native Desktop GUI Voice Assistant Application for Windows 10/11 x64.
 
 Installation:
   Right-click 'install.ps1' -> Run with PowerShell
   (This creates a Start Menu shortcut and enables background startup)
 
 Features:
-  - Siri-like Floating GUI: Animated voice orb, soundwaves, and interactive HUD.
+  - Floating Voice Assistant GUI: Animated voice orb, soundwaves, and interactive HUD.
   - Hands-Free Wake Word: Speak "Hey Omni" anytime to trigger actions.
   - System Automations: Spotify playback, open apps, volume, lock PC, screenshot.
   - Voice Match & Accent Calibration: Personal voice training across 4 phrases.

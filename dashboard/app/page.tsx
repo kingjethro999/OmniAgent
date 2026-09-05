@@ -6,13 +6,16 @@ import { MetricsGrid } from './components/MetricsGrid';
 import { AgentWorkbench } from './components/AgentWorkbench';
 import { ReasoningStream } from './components/ReasoningStream';
 import { ArchitecturePanel } from './components/ArchitecturePanel';
+import { GetAppModal } from './components/GetAppModal';
 import { AgentEvent } from '@/lib/eventsStore';
+import { Monitor, Smartphone, Download } from 'lucide-react';
 
 export default function Home() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [events, setEvents] = useState<AgentEvent[]>([]);
   const [isDispatching, setIsDispatching] = useState<boolean>(false);
+  const [isGetAppOpen, setIsGetAppOpen] = useState<boolean>(false);
   const [metrics, setMetrics] = useState({
     localTasksRatio: 84,
     cloudTasksRatio: 16,
@@ -148,9 +151,47 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg-surface)] text-[var(--text-primary)] transition-colors">
-      <Header isConnected={isConnected} theme={theme} onToggleTheme={toggleTheme} />
+      <Header
+        isConnected={isConnected}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        onOpenGetApp={() => setIsGetAppOpen(true)}
+      />
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
+        {/* Quick Action Download Banner */}
+        <div className="p-3.5 px-4 rounded-lg border border-[var(--accent-cobalt)]/30 bg-gradient-to-r from-[var(--bg-card)] via-[var(--accent-cobalt-subtle)]/30 to-[var(--bg-card)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-[#14161c] border border-[var(--accent-cobalt)]/40 p-1 flex items-center justify-center flex-shrink-0 shadow-sm">
+              <img src="/icon.png" alt="OmniAgent" className="w-full h-full object-contain rounded-md" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-[var(--text-primary)]">OmniAgent v0.2.1 Native Applications Released</span>
+                <span className="px-1.5 py-0.2 text-[10px] font-mono font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">NEW</span>
+              </div>
+              <p className="text-[11px] text-[var(--text-secondary)]">Run the private on-device Voice Assistant on Linux, Windows, or Android.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              onClick={() => setIsGetAppOpen(true)}
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--accent-cobalt)] hover:bg-[var(--accent-cobalt)]/90 text-white font-medium text-xs shadow-sm transition-all"
+            >
+              <Monitor className="w-3.5 h-3.5" />
+              <span>Desktop (Linux/Win)</span>
+            </button>
+            <button
+              onClick={() => setIsGetAppOpen(true)}
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs shadow-sm transition-all"
+            >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>Android APK</span>
+            </button>
+          </div>
+        </div>
+
         <MetricsGrid
           localRatio={metrics.localTasksRatio}
           cloudRatio={metrics.cloudTasksRatio}
@@ -170,6 +211,8 @@ export default function Home() {
 
         <ArchitecturePanel />
       </main>
+
+      <GetAppModal isOpen={isGetAppOpen} onClose={() => setIsGetAppOpen(false)} />
     </div>
   );
 }
