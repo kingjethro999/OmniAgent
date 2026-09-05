@@ -91,8 +91,8 @@ dotnet run --project desktop -- --audit desktop
   - **Phone Calls**: "call mum" (`tel:mum`), "pick the call" (`TelecomManager.acceptRingingCall`), "end call" (`TelecomManager.endCall`).
   - **Messaging**: "send message to Sarah", "send whatsapp to John", "draft a gmail to boss".
   - **App Launching**: "open whatsapp", "open tiktok", "open gallery", "open youtube".
-- **ChatGPT-Inspired Cobalt UI**: Aligned layout with dark surfaces (`#121211`), cards (`#1E1E1C`), cobalt accent (`#4F5FF7`), quick action chips, status badges, and 100% zero emojis (using vector drawables).
-- **Production APK Build**: Built with Gradle 8.9 and Android SDK 34 (`OmniAgentMobile-debug.apk` / `OmniAgent-debug.apk`, 5.3 MB).
+- **Consumer-Friendly Cobalt UI**: Intuitive, warm interface free of developer jargon. Clear cards for "Hands-Free Voice Assistant", "Assistant Setup", and "Recent Activity" displaying conversational feedback. 100% zero emojis with crisp vector icons.
+- **Signed Production APK**: Built and signed with release keystore (`OmniAgentMobile-release.apk` / `OmniAgent-release.apk`, 4.4 MB, verified with APK Signature Scheme v2).
 
 ### Verification
 ```bash
@@ -109,9 +109,10 @@ java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, play the bo
 # [Engine Output]:
 # [Media Intent] Launched spotify with search query "the box by roddy rich". Audio stream active.
 
-# Build APK:
-./gradlew assembleDebug
-# Generated APK: mobile/build/outputs/apk/debug/OmniAgentMobile-debug.apk (5.3 MB)
+# Build Signed Production APK:
+./gradlew assembleRelease
+# Output: mobile/build/outputs/apk/release/OmniAgentMobile-release.apk (4.4 MB)
+# Signature Verification: Verified using v2 scheme (APK Signature Scheme v2): true
 ```
 
 ---

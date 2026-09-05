@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OmniAgent</string>
-    <string name="header_subtitle">Autonomous Companion &amp; Phone Assistant</string>
-    <string name="accessibility_service_description">Enables OmniAgent to automate on-device actions such as launching apps, media playback, and hands-free phone control.</string>
-    <string name="assistant_mode_title">Phone Assistant Automation</string>
-    <string name="assistant_mode_desc">Optional accessibility feature for hands-free voice automation without altering core companion routines.</string>
-    <string name="privacy_boundary_title">Privacy Boundary</string>
-    <string name="privacy_boundary_status">100% On-Device Execution</string>
-    <string name="backend_engine_title">AI Engine Backend</string>
-    <string name="engine_micro_title">On-Device Smart Engine (0 MB)</string>
-    <string name="engine_micro_desc">Fast native OS automation with zero model download overhead</string>
-    <string name="engine_server_title">Self-Hosted Remote Server</string>
-    <string name="voice_prompt_hint">Speak or type a command (e.g. \"play the box by roddy rich\")...</string>
+    <string name="header_subtitle">Personal Voice Assistant</string>
+    <string name="header_badge">Ready &amp; Private</string>
+    <string name="accessibility_service_description">Allows OmniAgent to open apps, play music, and help you control your phone with your voice.</string>
+    
+    <!-- Hands-Free Voice Control -->
+    <string name="assistant_mode_title">Hands-Free Voice Assistant</string>
+    <string name="assistant_mode_desc">Allows you to say \"Hey Omni\" anytime to play music, set alarms, send messages, and open apps.</string>
+    <string name="accessibility_status_inactive">Tap switch to enable hands-free voice control in Settings</string>
+    <string name="accessibility_status_active">Hands-free voice listening is active</string>
+    
+    <!-- Assistant Setup -->
+    <string name="backend_engine_title">Assistant Setup</string>
+    <string name="engine_micro_title">Built-in Phone Assistant</string>
+    <string name="engine_micro_desc">Fast, private, and works right out of the box with zero setup.</string>
+    <string name="engine_server_title">Connect to Home Computer (Optional)</string>
+    <string name="engine_server_hint">http://192.168.1.50:8765</string>
+    <string name="btn_save">Save</string>
+    
+    <!-- Voice Interaction -->
     <string name="wake_word_label">Wake Word: Hey Omni</string>
-    <string name="quick_actions_title">Quick Automation Triggers</string>
-    <string name="execution_monitor_title">Live Execution Monitor</string>
-    <string name="accessibility_status_inactive">Accessibility Service: Inactive (Tap to Enable)</string>
-    <string name="accessibility_status_active">Accessibility Service: Active (Hands-free Automation Ready)</string>
-    <string name="btn_send">Run</string>
+    <string name="voice_prompt_hint">Speak or type anything (e.g. \"play the box\")...</string>
+    <string name="voice_status_default">Tap the microphone or say \"Hey Omni\"</string>
+    <string name="voice_status_listening">Listening for your command...</string>
+    <string name="btn_send">Ask</string>
+    
+    <!-- Suggestions -->
+    <string name="quick_actions_title">Things you can try</string>
+    
+    <!-- Activity Log -->
+    <string name="execution_monitor_title">Recent Activity</string>
+    <string name="status_ready">Ready</string>
+    <string name="status_done">Completed</string>
+    <string name="status_listening">Listening</string>
+    <string name="activity_default">Ready for your command. Try saying \"Hey Omni, play the box\" or \"Hey Omni, set an alarm for 7 AM\".</string>
 </resources>

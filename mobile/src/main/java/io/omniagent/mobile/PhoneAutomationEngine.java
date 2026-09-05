@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * OmniAgent Mobile Companion — On-Device Phone Automation Engine
  *
  * Converts natural speech / text commands into direct on-device OS automation
- * intents without requiring 3rd-party cloud APIs.
+ * actions without requiring 3rd-party cloud APIs.
  */
 public class PhoneAutomationEngine {
 
@@ -29,6 +29,7 @@ public class PhoneAutomationEngine {
         APP_PACKAGES.put("camera", "com.google.android.GoogleCamera");
         APP_PACKAGES.put("gmail", "com.google.android.gm");
         APP_PACKAGES.put("email", "com.google.android.gm");
+        APP_PACKAGES.put("mail", "com.google.android.gm");
         APP_PACKAGES.put("maps", "com.google.android.apps.maps");
         APP_PACKAGES.put("settings", "com.android.settings");
         APP_PACKAGES.put("chrome", "com.android.chrome");
@@ -40,6 +41,14 @@ public class PhoneAutomationEngine {
         APP_PACKAGES.put("instagram", "com.instagram.android");
         APP_PACKAGES.put("twitter", "com.twitter.android");
         APP_PACKAGES.put("x", "com.twitter.android");
+        APP_PACKAGES.put("contacts", "com.google.android.contacts");
+        APP_PACKAGES.put("messages", "com.google.android.apps.messaging");
+        APP_PACKAGES.put("files", "com.google.android.documentsui");
+        APP_PACKAGES.put("drive", "com.google.android.apps.docs");
+        APP_PACKAGES.put("notes", "com.google.android.keep");
+        APP_PACKAGES.put("keep", "com.google.android.keep");
+        APP_PACKAGES.put("netflix", "com.netflix.mediaclient");
+        APP_PACKAGES.put("uber", "com.ubercab");
     }
 
     public PhoneAutomationEngine() {}
@@ -52,7 +61,7 @@ public class PhoneAutomationEngine {
             return new DeviceAction(
                 DeviceAction.ActionType.GENERAL_QUERY,
                 "Empty Query",
-                "I didn't catch that. How can I help you with your phone?",
+                "I didn't catch that. How can I help you?",
                 null, null, null
             );
         }
@@ -64,7 +73,7 @@ public class PhoneAutomationEngine {
         if (matchesAny(lower, "pick the call", "pick up", "answer call", "answer the call", "accept call", "take the call")) {
             return new DeviceAction(
                 DeviceAction.ActionType.ANSWER_CALL,
-                "Answer Incoming Call",
+                "Answer Call",
                 "Answering incoming call...",
                 "android.telecom.action.ACCEPT_HANDOVER",
                 null,
@@ -76,7 +85,7 @@ public class PhoneAutomationEngine {
         if (matchesAny(lower, "end call", "end the call", "hang up", "decline call", "reject call", "cut the call")) {
             return new DeviceAction(
                 DeviceAction.ActionType.END_CALL,
-                "End Current Call",
+                "End Call",
                 "Ending call.",
                 "android.telecom.action.END_CALL",
                 null,
@@ -110,7 +119,7 @@ public class PhoneAutomationEngine {
             String contact = callMatcher.group(1).trim();
             return new DeviceAction(
                 DeviceAction.ActionType.CALL_CONTACT,
-                "Call Contact: " + contact,
+                "Call: " + contact,
                 "Calling " + contact + "...",
                 "android.intent.action.CALL",
                 "tel:" + urlEncode(contact),
@@ -126,7 +135,7 @@ public class PhoneAutomationEngine {
             return new DeviceAction(
                 DeviceAction.ActionType.SET_ALARM,
                 "Set Alarm: " + timeStr,
-                "Alarm set for " + timeStr + ".",
+                "Setting an alarm for " + timeStr + ".",
                 "android.intent.action.SET_ALARM",
                 null,
                 "com.google.android.deskclock"
@@ -141,7 +150,7 @@ public class PhoneAutomationEngine {
             return new DeviceAction(
                 DeviceAction.ActionType.SET_TIMER,
                 "Set Timer: " + duration,
-                "Timer set for " + duration + ".",
+                "Starting a timer for " + duration + ".",
                 "android.intent.action.SET_TIMER",
                 null,
                 "com.google.android.deskclock"
@@ -159,8 +168,8 @@ public class PhoneAutomationEngine {
 
             return new DeviceAction(
                 DeviceAction.ActionType.DRAFT_GMAIL,
-                "Draft Gmail to: " + recipient,
-                "Drafted Gmail to " + recipient + ": \"" + body + "\"",
+                "Draft Email to: " + recipient,
+                "Opening email to draft a message to " + recipient + ".",
                 "android.intent.action.SENDTO",
                 uri,
                 "com.google.android.gm"
@@ -177,8 +186,8 @@ public class PhoneAutomationEngine {
 
             return new DeviceAction(
                 DeviceAction.ActionType.SEND_WHATSAPP,
-                "WhatsApp to: " + contact,
-                "Sending WhatsApp message to " + contact + (msg.isEmpty() ? "" : ": \"" + msg + "\""),
+                "WhatsApp: " + contact,
+                "Opening WhatsApp to send a message to " + contact + ".",
                 "android.intent.action.VIEW",
                 uri,
                 "com.whatsapp"
@@ -195,8 +204,8 @@ public class PhoneAutomationEngine {
 
             return new DeviceAction(
                 DeviceAction.ActionType.SEND_SMS,
-                "Send SMS to: " + contact,
-                "Sending message to " + contact + (msg.isEmpty() ? "" : ": \"" + msg + "\""),
+                "Text: " + contact,
+                "Opening Messages to text " + contact + ".",
                 "android.intent.action.SENDTO",
                 uri,
                 "com.google.android.apps.messaging"
@@ -236,7 +245,7 @@ public class PhoneAutomationEngine {
         if (lower.contains("notification") || lower.contains("digest") || lower.contains("unread message")) {
             return new DeviceAction(
                 DeviceAction.ActionType.SUMMARIZE_NOTIFICATIONS,
-                "Summarize Notifications",
+                "Notifications",
                 "Checking your recent notifications...",
                 null,
                 null,
@@ -244,10 +253,10 @@ public class PhoneAutomationEngine {
             );
         }
 
-        // 12. Fallback to General AI Query (Local NPU / Cloud Router)
+        // 12. Fallback to General Query
         return new DeviceAction(
             DeviceAction.ActionType.GENERAL_QUERY,
-            "Query: " + (raw.length() > 30 ? raw.substring(0, 30) + "..." : raw),
+            "Question: " + (raw.length() > 30 ? raw.substring(0, 30) + "..." : raw),
             null,
             null,
             null,

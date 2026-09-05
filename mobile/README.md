@@ -63,15 +63,15 @@ Example:
 
 ---
 
-## Building and Running
+## Building Production Signed APK
 
-### Build APK
-Run Gradle to assemble the debug APK:
+To assemble the production signed release APK:
 ```bash
-./gradlew assembleDebug
+./gradlew assembleRelease
 ```
-The resulting APK is generated at:
-`mobile/build/outputs/apk/debug/mobile-debug.apk`
+The production APK is generated at:
+`mobile/build/outputs/apk/release/OmniAgentMobile-release.apk`
+(and copied to repository root `./OmniAgent-release.apk`)
 
 ### Run Standalone CLI Runner (Workstation Testing)
 To test voice parsing, wake words, and intent dispatch without an attached phone:

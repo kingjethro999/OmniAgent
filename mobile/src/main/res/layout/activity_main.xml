@@ -44,7 +44,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- 0 MB Local Core Badge -->
+            <!-- Private & Ready Status Badge -->
             <LinearLayout
                 android:id="@+id/layout_badge_local"
                 android:layout_width="wrap_content"
@@ -64,21 +64,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="0 MB Local Core"
+                    android:text="@string/header_badge"
                     android:textColor="@color/status_local"
                     android:textSize="11sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Divider -->
+        <!-- Subtle Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/border_subtle_dark"
             android:layout_marginBottom="16dp" />
 
-        <!-- Card 1: Assistant Accessibility Mode (Optional Feature) -->
+        <!-- Card 1: Hands-Free Voice Assistant (Accessibility Toggle) -->
         <LinearLayout
             android:id="@+id/card_assistant_mode"
             android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Card 2: AI Engine Backend Configuration (0 MB Engine) -->
+        <!-- Card 2: Assistant Setup (Built-in vs Home Computer) -->
         <LinearLayout
             android:id="@+id/card_engine_config"
             android:layout_width="match_parent"
@@ -200,7 +200,7 @@
                     android:textSize="13sp" />
             </RadioGroup>
 
-            <!-- Remote Server Input Box (visible when server mode selected) -->
+            <!-- Home Server Address Input (only shown if Home Computer selected) -->
             <LinearLayout
                 android:id="@+id/layout_server_input"
                 android:layout_width="match_parent"
@@ -215,7 +215,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_input_field"
-                    android:hint="http://192.168.1.50:8765"
+                    android:hint="@string/engine_server_hint"
                     android:textColor="@color/text_primary_dark"
                     android:textColorHint="@color/text_secondary_dark"
                     android:textSize="12sp"
@@ -228,7 +228,7 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
                     android:backgroundTint="@color/brand_cobalt"
-                    android:text="Save"
+                    android:text="@string/btn_save"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -263,7 +263,7 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:background="@drawable/bg_mic_button"
-                android:contentDescription="Voice Assistant"
+                android:contentDescription="Tap to Speak"
                 android:src="@drawable/ic_mic"
                 app:tint="#FFFFFF"
                 android:scaleType="centerInside"
@@ -273,7 +273,7 @@
                 android:id="@+id/tv_voice_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tap mic or say 'Hey Omni' to automate"
+                android:text="@string/voice_status_default"
                 android:textColor="@color/text_secondary_dark"
                 android:textSize="13sp"
                 android:layout_marginBottom="16dp" />
@@ -311,7 +311,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Card 4: Quick Automation Triggers -->
+        <!-- Card 4: Things you can try -->
         <LinearLayout
             android:id="@+id/card_quick_actions"
             android:layout_width="match_parent"
@@ -465,7 +465,7 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <!-- Gmail Trigger -->
+                    <!-- Email Trigger -->
                     <LinearLayout
                         android:id="@+id/chip_action_gmail"
                         android:layout_width="wrap_content"
@@ -484,7 +484,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
-                            android:text="Draft Gmail"
+                            android:text="Draft Email"
                             android:textColor="@color/text_primary_dark"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -492,7 +492,7 @@
             </HorizontalScrollView>
         </LinearLayout>
 
-        <!-- Card 5: Live Execution Log -->
+        <!-- Card 5: Recent Activity -->
         <LinearLayout
             android:id="@+id/card_execution_monitor"
             android:layout_width="match_parent"
@@ -521,7 +521,7 @@
                     android:id="@+id/tv_monitor_status_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="STANDBY"
+                    android:text="@string/status_ready"
                     android:textColor="@color/status_local"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -532,11 +532,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input_field"
-                android:padding="10dp"
-                android:text="Assistant ready. Say 'Hey Omni' or select an action above."
-                android:textColor="@color/text_secondary_dark"
-                android:fontFamily="monospace"
-                android:textSize="11sp" />
+                android:padding="12dp"
+                android:text="@string/activity_default"
+                android:textColor="@color/text_primary_dark"
+                android:textSize="13sp"
+                android:lineSpacingExtra="4dp" />
         </LinearLayout>
 
     </LinearLayout>

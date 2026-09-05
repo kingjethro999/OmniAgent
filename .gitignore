@@ -54,6 +54,8 @@ obj/
 local.properties
 *.apk
 *.aab
+*.keystore
+*.jks
 
 # ─── IDE ───
 .idea/
