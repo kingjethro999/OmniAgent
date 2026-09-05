@@ -6,8 +6,8 @@
 
 **A Hybrid Local/Cloud Edge Agent Framework with On-Device SLM Inference & IDE Hook (MCP)**
 
-[![Release: v0.2.0](https://img.shields.io/badge/Release-v0.2.0-blue.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0)
-[![Android: Signed APK](https://img.shields.io/badge/Android-APK%20(v0.2.0)-success.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0)
+[![Release: v0.2.1](https://img.shields.io/badge/Release-v0.2.1-blue.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1)
+[![Android: Signed APK](https://img.shields.io/badge/Android-APK%20(v0.2.1)-success.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://python.org)
 [![Next.js: 14](https://img.shields.io/badge/Dashboard-Next.js%2014-black.svg)](https://nextjs.org)
@@ -20,13 +20,13 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 
 ## 📑 Table of Contents
 
-- [Official Release Packages & Downloads](#-official-release-packages--downloads-v020)
+- [Official Release Packages & Downloads](#-official-release-packages--downloads-v021)
 - [Key Features](#-key-features)
 - [Target Use Cases & Hands-On Examples](#-target-use-cases--hands-on-examples)
   - [1. Privacy-Preserving Code & Document Audits](#1-privacy-preserving-code--document-audits)
   - [2. Silent Dropzone Folder Monitoring](#2-silent-dropzone-folder-monitoring)
-  - [3. Offline OS-Level Task Automation](#3-offline-os-level-task-automation)
-  - [4. Battery-Saver Mobile Assistant & Notifications](#4-battery-saver-mobile-assistant--notifications)
+  - [3. Offline OS-Level Task Automation & Siri-Like Assistant](#3-offline-os-level-task-automation)
+  - [4. Battery-Saver Mobile Assistant & Accent Calibration](#4-battery-saver-mobile-assistant--notifications)
   - [5. Cost Optimization for High-Volume Workflows](#5-cost-optimization-for-high-volume-workflows)
   - [6. IDE Copilot Enhancement via MCP](#6-ide-copilot-enhancement-via-mcp)
 - [Architecture Overview & Execution Lifecycle](#-architecture-overview--execution-lifecycle)
@@ -38,8 +38,8 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
   - [1. CLI Quick Execution (Python)](#1-cli-quick-execution-python)
   - [2. Interactive Terminal REPL (Python)](#2-interactive-terminal-repl-python)
   - [3. Python Developer SDK](#3-python-developer-sdk)
-  - [4. Enterprise Desktop Worker (.NET 10 C#)](#4-enterprise-desktop-worker-net-10-c)
-  - [5. Consumer Mobile Companion (Android / Java JNI)](#5-consumer-mobile-companion-android--java-jni)
+  - [4. Siri-Like Desktop Assistant & Worker (.NET 10 C# - Windows & Linux)](#4-enterprise-desktop-worker-net-10-c)
+  - [5. Consumer Mobile Companion & Voice Match Calibration (Android / Java JNI)](#5-consumer-mobile-companion-android--java-jni)
   - [6. Developer Prototyping & Benchmarking (Jupyter)](#6-developer-prototyping--benchmarking-jupyter)
   - [7. Real-Time Web Dashboard (Next.js 16)](#7-real-time-web-dashboard-nextjs-16)
 - [IDE Hook & Model Context Protocol (MCP) Server](#-ide-hook--model-context-protocol-mcp-server)
@@ -52,22 +52,23 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 
 ---
 
-## 📦 Official Release Packages & Downloads (v0.2.0)
+## 📦 Official Release Packages & Downloads (v0.2.1)
 
-Pre-built standalone binaries, signed application packages, and developer SDKs are hosted directly on [GitHub Releases (v0.2.0)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0).
+Pre-built standalone binaries, signed application packages, and developer SDKs are hosted directly on [GitHub Releases (v0.2.1)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1).
 
 ### Package Distribution Matrix
 
 | Component / Platform | Target Architecture | Distribution File | Size | Verification / Integrity | Direct Download |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.0-Android.apk` | 4.38 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-v0.2.0-Android.apk) |
-| **Desktop Worker (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` | 30.55 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz) |
-| **Desktop Worker (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.0.zip` | 30.58 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-win-x64-v0.2.0.zip) |
-| **Desktop Worker (macOS ARM)** | Apple Silicon (M1/M2/M3/M4) | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` | 28.88 MiB | **Verified**: Native self-contained single-file binary for macOS ARM64 | [Download macOS ARM tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz) |
-| **Desktop Worker (macOS Intel)**| macOS Intel x86_64 | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz` | 30.65 MiB | **Verified**: Native self-contained single-file binary for macOS Intel x86_64 | [Download macOS Intel tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz) |
-| **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | `omniagent-engine-linux-x64-v0.2.0.tar.gz` | 26.64 KiB | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-engine-linux-x64-v0.2.0.tar.gz) |
-| **Python SDK Wheel** | Python 3.10+ | `omniagent-0.2.0-py3-none-any.whl` | 35.75 KiB | **Verified**: PyPI-compliant wheel distribution | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0-py3-none-any.whl) |
-| **Python Source Distribution** | Python 3.10+ | `omniagent-0.2.0.tar.gz` | 54.18 KiB | **Verified**: Standard sdist source tarball | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0.tar.gz) |
+| **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.1-Android.apk` | 4.4 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk) |
+| **Desktop Siri Assistant (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` | 31 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz) |
+| **Desktop Siri Assistant (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.1.zip` | 31 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-win-x64-v0.2.1.zip) |
+| **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | `omniagent-engine-linux-x64-v0.2.1.tar.gz` | 27 KiB | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz) |
+| **Python SDK Wheel** | Python 3.10+ | `omniagent-0.2.1-py3-none-any.whl` | 38 KiB | **Verified**: PyPI-compliant wheel distribution | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl) |
+| **Python Source Distribution** | Python 3.10+ | `omniagent-0.2.1.tar.gz` | 60 KiB | **Verified**: Standard sdist source tarball | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1.tar.gz) |
+
+> [!NOTE]
+> Desktop Siri Assistant is specifically engineered for **Windows** and **Linux** workstations. (macOS already has native Siri built-in).
 
 ---
 
@@ -77,77 +78,74 @@ Pre-built standalone binaries, signed application packages, and developer SDKs a
 Download and install directly to any Android 8.0+ device:
 ```bash
 # Download production signed APK
-curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-v0.2.0-Android.apk
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk
 
 # Install via ADB:
-adb install -r OmniAgent-v0.2.0-Android.apk
+adb install -r OmniAgent-v0.2.1-Android.apk
 ```
-*Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
+*Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), personal **Voice Match & Accent Calibration**, native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
 
-#### 2. Desktop Worker (Linux x64)
+#### 2. Desktop Siri Assistant (Linux x64)
 Extract and run the self-contained binary:
 ```bash
 # Download and unpack
-curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz
-tar -xzf OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
+tar -xzf OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
 cd linux-x64
 
 # Ensure executable permissions and test
 chmod +x OmniAgent.Desktop
-./OmniAgent.Desktop --help
 
-# Start background dropzone monitor
+# 1. Run Siri-Like Desktop Assistant (Hands-Free Voice / Interactive HUD)
+./OmniAgent.Desktop --assistant
+
+# 2. Issue a one-shot spoken command
+./OmniAgent.Desktop --say "Hey Omni, play Bohemian Rhapsody on Spotify"
+
+# 3. Train your voice match & accent calibration profile
+./OmniAgent.Desktop --train-voice
+
+# 4. Standard enterprise worker tasks (watch, audit, organize)
 ./OmniAgent.Desktop --watch ./dropzone
-
-# Audit confidential code or documents for leaked secrets
 ./OmniAgent.Desktop --audit /path/to/project
 ```
 
-#### 3. Desktop Worker (Windows x64)
-Download `OmniAgent-Desktop-win-x64-v0.2.0.zip`, extract to any folder, and run from Command Prompt or PowerShell:
+#### 3. Desktop Siri Assistant (Windows x64)
+Download `OmniAgent-Desktop-win-x64-v0.2.1.zip`, extract to any folder, and run from Command Prompt or PowerShell:
 ```cmd
-OmniAgent.Desktop.exe --help
+:: 1. Launch hands-free Siri-like Desktop Assistant
+OmniAgent.Desktop.exe --assistant
+
+:: 2. Execute a single voice automation
+OmniAgent.Desktop.exe --say "Hey Omni, lock screen"
+
+:: 3. Train personalized accent calibration profile
+OmniAgent.Desktop.exe --train-voice
+
+:: 4. Background dropzone and security audit
 OmniAgent.Desktop.exe --watch C:\dropzone
 OmniAgent.Desktop.exe --audit C:\my-codebase
 ```
 
-#### 4. Desktop Worker (macOS Apple Silicon & Intel)
-Extract and run the native binary:
-```bash
-# For Apple Silicon (M1/M2/M3/M4):
-curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz
-tar -xzf OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz
-cd osx-arm64
-chmod +x OmniAgent.Desktop
-./OmniAgent.Desktop --help
-
-# For Intel x86_64:
-curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz
-tar -xzf OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz
-cd osx-x64
-chmod +x OmniAgent.Desktop
-./OmniAgent.Desktop --help
-```
-
-#### 5. Main Omni Engine Core (C / C++ SDK)
+#### 4. Main Omni Engine Core (C / C++ SDK)
 Incorporate the C++ edge inference engine into your own native C, C++, Rust, or Go applications:
 ```bash
 # Download and extract C++ SDK
-curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-engine-linux-x64-v0.2.0.tar.gz
-tar -xzf omniagent-engine-linux-x64-v0.2.0.tar.gz
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz
+tar -xzf omniagent-engine-linux-x64-v0.2.1.tar.gz
 cd omniagent-engine-linux-x64
 
 # Compile your application linking against libomni_engine.so:
 gcc -Iinclude -Llib main.c -lomni_engine -Wl,-rpath,'$ORIGIN/lib' -o main
 ```
 
-#### 6. Python Developer SDK
+#### 5. Python Developer SDK
 ```bash
 # Install via wheel
-pip install https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0-py3-none-any.whl
+pip install https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl
 
 # Or install local wheel file:
-pip install omniagent-0.2.0-py3-none-any.whl
+pip install omniagent-0.2.1-py3-none-any.whl
 ```
 
 ---
@@ -626,7 +624,7 @@ python -m omniagent
 Example interaction:
 ```
 ╭──────────────────────────────────────────────────╮
-│ OmniAgent Engine v0.2.0                          │
+│ OmniAgent Engine v0.2.1                          │
 │ Hybrid Local/Cloud Edge Agent Framework          │
 ╰──────────────────────────────────────────────────╯
 
@@ -675,46 +673,62 @@ if __name__ == "__main__":
 
 ### 4. Enterprise Desktop Worker (.NET 10 C#)
 
-The Enterprise Desktop Worker runs as a high-performance background utility or CLI command in C#. It binds dynamically to `libomni_engine.so` via P/Invoke with fallback to the local IDE Hook HTTP server.
+### 4. Siri-Like Desktop Assistant & Worker (.NET 10 C# - Windows & Linux)
+
+The Desktop Assistant turns your Windows or Linux workstation into an autonomous, voice-interactive workstation companion (Siri-like for PC). Built in C# with .NET 10, it hooks directly into low-level OS interfaces for media, apps, and hardware telemetry, binding dynamically to the native C++ Core (`libomni_engine.so`) for on-device reasoning.
+
+> [!NOTE]
+> macOS is intentionally omitted from the desktop assistant target, as macOS already features native system-integrated Siri.
+
+#### Key Desktop Assistant Features:
+- **Hands-Free Wake Word Listening ("Hey Omni", "OK Omni")**: Continuous low-latency background audio monitoring with custom voice matching.
+- **Audible Speech Synthesis & Toast Chimes**: Responsive Text-to-Speech (native Speech Dispatcher on Linux, SAPI on Windows) and desktop notification toasts via `notify-send` and Windows Notification Center.
+- **Deep System Automations**:
+  - **Spotify & Media Playback**: Play/pause, track navigation, and instant Spotify search (`"Hey Omni, play Bohemian Rhapsody on Spotify"`).
+  - **Workstation App Launcher**: Launch browser, code editors, terminal, or tools (`"Hey Omni, open Chrome"`, `"open VS Code"`, `"open terminal"`, `"open calculator"`, `"open steam"`).
+  - **Hardware Controls**: Volume adjustment (`"Hey Omni, set volume to 80%"` / `"mute volume"`), screenshot capture (`"take a screenshot"`), and workstation lock (`"lock screen"`).
+  - **Timers, Alarms & Clock**: Background timer with audio chime & alarm alert (`"set a timer for 10 minutes"`), instant date & time.
+  - **Live Weather & Telemetry**: Instant live weather reports and system metrics (CPU load, RAM usage, storage).
+  - **Private On-Device Inference**: General inquiries and natural conversation processed locally via C++ Core SLM with zero internet leakage.
 
 ```bash
-# Display full CLI help and options
-dotnet run --project desktop -- --help
+# 1. Launch hands-free Siri-like Desktop Assistant (Voice HUD)
+dotnet run --project desktop -- --assistant
 
-# 1. Audit a codebase or sensitive folder for security risks & leaked credentials
+# 2. Execute a single voice automation directly
+dotnet run --project desktop -- --say "Hey Omni, play bohemian rhapsody on spotify"
+dotnet run --project desktop -- --say "Hey Omni, take a screenshot"
+dotnet run --project desktop -- --say "Hey Omni, lock screen"
+
+# 3. Train your personalized Voice Match & Accent profile
+dotnet run --project desktop -- --train-voice
+
+# 4. Standard enterprise worker tasks
 dotnet run --project desktop -- --audit ./my-repo
-
-# 2. Start the silent background dropzone folder watcher
 dotnet run --project desktop -- --watch ./dropzone
-
-# 3. Categorize files in a messy folder (Code, Documents, Data, Media)
 dotnet run --project desktop -- --organize ./cluttered-folder
-
-# 4. Clean and normalize CSV file delimiters and whitespace
 dotnet run --project desktop -- --format-csv ./data.csv
-
-# 5. Check local git repository status
 dotnet run --project desktop -- --git-status
 
-# 6. Launch the interactive menu
+# 5. Interactive text menu
 dotnet run --project desktop
 ```
 
 ---
 
-### 5. Consumer Mobile Companion & Voice Phone Assistant (Android / Java JNI)
+### 5. Consumer Mobile Companion & Voice Match Calibration (Android / Java JNI)
 
-### 5. Consumer Mobile Companion & Voice Phone Assistant (Android / Java JNI)
+The Consumer Mobile Companion executes natively on Android via JNI to the shared C++ Core (`libomni_engine_jni.so`). Designed with an explicit, low-level Java architecture (`AudioRecord` 16kHz PCM streaming, foreground services, Android intent dispatchers), it turns any Android phone into an autonomous assistant with **zero 3rd-party cloud costs** or heavyweight model downloads.
 
-The Consumer Mobile Companion executes natively on Android (or on workstation JVMs for developer testing) via JNI to the shared C++ Core (`libomni_engine_jni.so`). It turns the phone into an autonomous on-device assistant with zero 3rd-party API costs or cloud dependencies.
-
-#### Key Phone Assistant Capabilities:
-- **Zero-Download On-Device Engine (0 MB Overhead)**: Unlike heavy mobile LLMs requiring 1.5 GB+ downloads, OmniAgent maps natural voice commands to Android's built-in framework interfaces in < 5ms with zero model download overhead.
+#### Key Mobile Assistant Capabilities:
+- **Zero-Download On-Device Engine (0 MB Overhead)**: Unlike mobile LLMs requiring 1.5 GB+ downloads, OmniAgent maps natural voice commands to Android framework interfaces in < 5ms with zero model download overhead.
+- **Voice Match & Accent Calibration (Card 3B)**: Guided 4-phrase setup wizard that records user speech samples to profile acoustic energy and phonetics. Accurately identifies "Omni" across diverse global accents, tone pitches, and dialects.
+- **Pure Java Audio Record Engine**: Continuous background PCM audio processing via native `AudioRecord` with zero dependency on proprietary wake-word clouds (e.g. Picovoice or ONNX).
 - **Backend Selection**: Run 100% locally with the built-in on-device engine or point to your self-hosted OmniAgent Remote Server (`http://<ip>:8765`).
 - **Free Wake Word Engine**: Spot `"Hey Omni"`, `"OK Omni"`, `"Omni"`, and `"Hey Agent"` locally in real-time.
 - **Optional Accessibility Automation**: `OmniAccessibilityService` enables hands-free system navigation and app execution as an optional accessibility toggle without interfering with existing companion routines.
 - **ChatGPT-Inspired Cobalt Design System**: Dark surface (`#121211`), cards (`#1E1E1C`), cobalt accent (`#4F5FF7`), and 100% zero emojis (utilizes crisp vector drawables and clean typography).
-- **Signed Production APK Included**: Production signed APK (`OmniAgent-v0.2.0-release.apk`) verified with APK Signature Scheme v2.
+- **Signed Production APK Included**: Production signed APK (`OmniAgent-v0.2.1-Android.apk`) verified with APK Signature Scheme v2.
 
 #### Native Phone Automation Supported:
 - **Music Playback**: `"Hey Omni, play the box by roddy rich"` ➔ Launches Spotify search (`spotify:search:...`) and streams audio.
@@ -732,7 +746,7 @@ cd mobile
 
 # The resulting signed APK is located at:
 # mobile/build/outputs/apk/release/OmniAgentMobile-release.apk (4.4 MB)
-# (Also available at repository root: ./OmniAgent-release.apk)
+# (Also staged at: release_packages/dist/OmniAgent-v0.2.1-Android.apk)
 ```
 
 #### Running Voice Commands on Workstation CLI (Zero-Device Testing):
@@ -868,7 +882,7 @@ Response:
 ```json
 {
   "status": "online",
-  "engine": "OmniAgent v0.2.0",
+  "engine": "OmniAgent v0.2.1",
   "ide_hook_version": "1.0",
   "mcp_protocol_version": "2024-11-05"
 }

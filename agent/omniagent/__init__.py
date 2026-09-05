@@ -5,7 +5,7 @@ A lightweight, cross-platform framework for building autonomous AI agents
 that operate locally on edge devices with intelligent cloud offloading.
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __author__ = "Japheth"
 
 from omniagent.router import TaskRouter

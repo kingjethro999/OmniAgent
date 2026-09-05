@@ -29,6 +29,14 @@
     <!-- Suggestions -->
     <string name="quick_actions_title">Things you can try</string>
     
+    <!-- Voice Match & Accent Calibration -->
+    <string name="voice_match_title">Voice Match &amp; Accent Calibration</string>
+    <string name="voice_match_desc">Train Omni to recognize your personal voice, tone, and accent across 4 quick phrases (like Google Assistant).</string>
+    <string name="voice_match_btn_train">Train Voice Match</string>
+    <string name="voice_match_status_untrained">Not calibrated yet — tap to train</string>
+    <string name="voice_match_status_trained">Calibrated to your voice &amp; accent</string>
+    <string name="voice_match_calibrating">Calibrating voice acoustics...</string>
+
     <!-- Activity Log -->
     <string name="execution_monitor_title">Recent Activity</string>
     <string name="status_ready">Ready</string>

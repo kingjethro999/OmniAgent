@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  *
  * Lightweight, zero-dependency wake word detection engine that spots
  * configurable wake phrases (default: "Hey Omni", "OK Omni", "Omni")
- * and extracts the command payload with zero external cloud API calls.
+ * with adaptive accent calibration and phonetic tolerance.
  */
 public class WakeWordDetector {
 
@@ -27,8 +27,11 @@ public class WakeWordDetector {
 
     private String primaryWakeWord = "hey omni";
     private final String[] aliasWakeWords = new String[] {
-        "hey omni", "ok omni", "omni", "hey agent", "hey phone"
+        "hey omni", "ok omni", "omni", "hey agent", "hey phone",
+        "omnee", "omny", "homni", "aumni", "omini", "onmi"
     };
+
+    private VoiceProfileManager voiceProfileManager;
 
     public WakeWordDetector() {}
 
@@ -38,6 +41,14 @@ public class WakeWordDetector {
         }
     }
 
+    public WakeWordDetector(VoiceProfileManager voiceProfileManager) {
+        this.voiceProfileManager = voiceProfileManager;
+    }
+
+    public void setVoiceProfileManager(VoiceProfileManager voiceProfileManager) {
+        this.voiceProfileManager = voiceProfileManager;
+    }
+
     /**
      * Inspects incoming voice transcription or text for wake words.
      * If detected, returns the extracted command payload.
@@ -45,6 +56,12 @@ public class WakeWordDetector {
     public WakeWordMatch inspect(String input) {
         if (input == null || input.trim().isEmpty()) {
             return new WakeWordMatch(false, null, "");
+        }
+
+        // Check against personalized calibrated profile if available
+        if (voiceProfileManager != null && voiceProfileManager.matchesWakeWord(input)) {
+            String payload = voiceProfileManager.stripWakeWord(input);
+            return new WakeWordMatch(true, primaryWakeWord, payload);
         }
 
         String lower = input.toLowerCase(Locale.ROOT).trim();
@@ -57,7 +74,7 @@ public class WakeWordDetector {
             return new WakeWordMatch(true, primaryWakeWord, payload);
         }
 
-        // 2. Check aliases
+        // 2. Check aliases & phonetic variations
         for (String alias : aliasWakeWords) {
             Pattern aliasPattern = Pattern.compile("^\\s*(" + Pattern.quote(alias) + ")[,!?:]*\\s*(.*)$", Pattern.CASE_INSENSITIVE);
             Matcher am = aliasPattern.matcher(lower);
@@ -67,7 +84,7 @@ public class WakeWordDetector {
             }
         }
 
-        // 3. Check if wake word appears anywhere at the start or mid-phrase
+        // 3. Check if wake word appears anywhere at start or mid-phrase
         for (String alias : aliasWakeWords) {
             int idx = lower.indexOf(alias);
             if (idx >= 0) {

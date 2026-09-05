@@ -61,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvMonitorStatusTag;
     private TextView tvExecutionLog;
 
+    // Voice Match & Accent Calibration
+    private VoiceProfileManager voiceProfileManager;
+    private TextView tvVoiceMatchBadge;
+    private TextView tvVoiceMatchStatus;
+    private Button btnTrainVoice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateAccessibilityStatus();
+        updateVoiceMatchUi();
     }
 
     private void initViews() {
@@ -95,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
         btnRunCommand = findViewById(R.id.btn_run_command);
         tvMonitorStatusTag = findViewById(R.id.tv_monitor_status_tag);
         tvExecutionLog = findViewById(R.id.tv_execution_log);
+
+        tvVoiceMatchBadge = findViewById(R.id.tv_voice_match_badge);
+        tvVoiceMatchStatus = findViewById(R.id.tv_voice_match_status);
+        btnTrainVoice = findViewById(R.id.btn_train_voice);
+
+        voiceProfileManager = new VoiceProfileManager(this);
+        updateVoiceMatchUi();
 
         etServerUrl.setText(config.getServerUrl());
     }
@@ -167,6 +181,63 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.chip_action_gmail).setOnClickListener(v ->
                 handleSpokenCommand("Hey Omni, draft an email to boss saying running late"));
+
+        // Voice Match & Accent Training
+        btnTrainVoice.setOnClickListener(v -> startVoiceMatchTraining());
+    }
+
+    private void updateVoiceMatchUi() {
+        if (voiceProfileManager != null && tvVoiceMatchStatus != null) {
+            if (voiceProfileManager.isVoiceTrained()) {
+                tvVoiceMatchBadge.setText("Calibrated");
+                tvVoiceMatchBadge.setTextColor(getResources().getColor(R.color.brand_cobalt));
+                tvVoiceMatchStatus.setText(getString(R.string.voice_match_status_trained) + " (" + voiceProfileManager.getCalibratedDate() + ")");
+                btnTrainVoice.setText("Retrain Voice Match");
+            } else {
+                tvVoiceMatchBadge.setText("Ready");
+                tvVoiceMatchStatus.setText(R.string.voice_match_status_untrained);
+                btnTrainVoice.setText(R.string.voice_match_btn_train);
+            }
+        }
+    }
+
+    private void startVoiceMatchTraining() {
+        tvVoiceMatchStatus.setText(R.string.voice_match_calibrating);
+        btnTrainVoice.setEnabled(false);
+
+        voiceProfileManager.startCalibrationWizard(new VoiceProfileManager.CalibrationCallback() {
+            @Override
+            public void onStepStarted(int step, String prompt) {
+                tvVoiceMatchStatus.setText("[Step " + step + "/4] " + prompt);
+                tvVoiceStatus.setText(prompt);
+            }
+
+            @Override
+            public void onAudioRecorded(int step, float energyRms) {
+                tvExecutionLog.setText("Acoustic calibration step " + step + "/4: Voice energy captured (RMS: " + (int) energyRms + ").");
+            }
+
+            @Override
+            public void onStepCompleted(int step) {
+                // Next step
+            }
+
+            @Override
+            public void onCalibrationFinished(boolean success, String message) {
+                btnTrainVoice.setEnabled(true);
+                updateVoiceMatchUi();
+                tvVoiceStatus.setText(R.string.voice_status_default);
+                tvExecutionLog.setText("Voice Match Profile Calibrated: OmniAgent is now tuned to your specific accent and vocal tone.");
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String error) {
+                btnTrainVoice.setEnabled(true);
+                updateVoiceMatchUi();
+                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void updateAccessibilityStatus() {
@@ -222,7 +293,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void handleSpokenCommand(String spokenText) {
         tvMonitorStatusTag.setText(R.string.status_listening);
-        MobileAgentService.VoiceCommandResult result = assistantService.processVoiceCommand(spokenText);
+
+        String effectiveCommand = spokenText;
+        if (voiceProfileManager != null && voiceProfileManager.isVoiceTrained()) {
+            effectiveCommand = voiceProfileManager.stripWakeWord(spokenText);
+            if (effectiveCommand.isEmpty()) effectiveCommand = spokenText;
+        }
+
+        MobileAgentService.VoiceCommandResult result = assistantService.processVoiceCommand(effectiveCommand);
 
         String feedback = result.action.voiceResponse != null ? result.action.voiceResponse : "Task finished.";
         String displayLog = "You: \"" + spokenText + "\"\n\nOmniAgent: " + feedback;

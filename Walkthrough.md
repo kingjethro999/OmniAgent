@@ -133,17 +133,38 @@ agent/.venv/bin/python -m omniagent "Audit my local files"
 
 ---
 
-## 📦 4. Cross-Platform Release Packages Published (v0.2.0)
+## 📦 4. Cross-Platform Release Packages Published (v0.2.1)
 
-All packages have been built, packaged into self-contained archives/installers, and uploaded directly to [GitHub Release v0.2.0](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0):
+All packages have been built, packaged into self-contained archives/installers, and uploaded directly to [GitHub Release v0.2.1](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1):
 
 | Component | Target Platform | Format | Asset File |
 | :--- | :--- | :--- | :--- |
-| **Android Assistant** | Android 8.0+ | Signed APK (Scheme v2) | `OmniAgent-v0.2.0-Android.apk` (4.4 MB) |
-| **Desktop Worker (Linux)** | Linux x86_64 | Self-Contained + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` (30.5 MB) |
-| **Desktop Worker (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.0.zip` (30.6 MB) |
-| **Desktop Worker (macOS ARM)** | Apple Silicon M1-M4 | Self-Contained Binary | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` (28.9 MB) |
-| **Desktop Worker (macOS Intel)**| macOS Intel x64 | Self-Contained Binary | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz` (30.6 MB) |
-| **Main Omni Engine Core** | Linux C / C++ / JNI | C Headers, CMake & `.so` | `omniagent-engine-linux-x64-v0.2.0.tar.gz` (26.6 KB) |
-| **Python SDK** | Python 3.10+ | Standalone Wheel & sdist | `omniagent-0.2.0-py3-none-any.whl` & `tar.gz` |
+| **Android Assistant & Voice Match** | Android 8.0+ | Signed APK (Scheme v2) | `OmniAgent-v0.2.1-Android.apk` (4.4 MB) |
+| **Desktop Siri Assistant (Linux)** | Linux x86_64 | Self-Contained + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` (31.0 MB) |
+| **Desktop Siri Assistant (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.1.zip` (31.0 MB) |
+| **Main Omni Engine Core** | Linux C / C++ / JNI | C Headers, CMake & `.so` | `omniagent-engine-linux-x64-v0.2.1.tar.gz` (27.0 KB) |
+| **Python SDK Wheel** | Python 3.10+ | Standalone Wheel | `omniagent-0.2.1-py3-none-any.whl` (38.0 KB) |
+| **Python Source Distribution** | Python 3.10+ | Standard Source Tarball | `omniagent-0.2.1.tar.gz` (60.0 KB) |
+
+---
+
+## 🎙️ 5. Siri-Like Desktop Voice Assistant & Voice Match Calibration (v0.2.1)
+
+### Desktop Assistant (Windows & Linux)
+- **Wake Word Listening Loop**: [DesktopAssistant.cs](/desktop/DesktopAssistant.cs) runs continuous, low-overhead wake word detection listening for *"Hey Omni"*, *"OK Omni"*, and trained phonetic variants.
+- **Audible Speech Engine & Desktop Toasts**: [DesktopSpeechEngine.cs](/desktop/DesktopSpeechEngine.cs) provides realistic text-to-speech via `spd-say` (Linux) and PowerShell SAPI (Windows), along with desktop notifications and audio alert chimes.
+- **Deep System Automation**: [SystemAutomation.cs](/desktop/SystemAutomation.cs) executes native commands without cloud dependencies:
+  - *Spotify Control*: Playback toggle, volume control, track navigation, and instant search playback via `playerctl` and D-Bus.
+  - *App Launcher*: Instant launching of Chrome, VS Code, terminal, calculator, file manager, Steam, and custom utilities.
+  - *System Controls*: Workstation lock (`loginctl lock-session` / Windows `LockWorkStation`), volume adjustment via `pactl` / Windows volume keys, and full-screen screenshot capture.
+  - *Timers & Alarms*: Asynchronous background countdown timers with audible chime and notification alarm when complete.
+  - *Weather & Telemetry*: Real-time weather reports and system health stats (CPU load, RAM consumption, and storage space).
+  - *Local SLM Fallback*: Conversational queries routed locally to the C++ Core (`libomni_engine.so`) with zero privacy leakage.
+- **Personalized Voice Match & Accent Calibration**: [VoiceProfileManager.cs](/desktop/VoiceProfileManager.cs) runs a guided 4-phrase calibration wizard (`--train-voice`) that measures acoustic energy, pitch, and phonetic variants to adapt to regional accents across diverse backgrounds.
+
+### Android Mobile Voice Match (Pure Java Architecture)
+- **Why Pure Java for Low-Level Audio**: Mobile audio capture and wake-word spotting are built in pure Java (`AudioRecord`, `MediaRecorder.AudioSource.VOICE_RECOGNITION`, 16kHz mono PCM buffers). This provides direct, transparent access to Android's native audio pipeline with zero foreign library bloat or expensive cloud SDKs (such as Picovoice or ONNX).
+- **Personal Accent Calibration (Card 3B)**: [VoiceProfileManager.java](/mobile/src/main/java/io/omniagent/mobile/VoiceProfileManager.java) guides the user through 4 spoken calibration phrases ("Hey Omni", "OK Omni", "Hey Omni, play music", "Hey Omni, what's the weather today?"), profiling acoustic energy and personal tone.
+- **Phonetic Distance Matching**: [WakeWordDetector.java](/mobile/src/main/java/io/omniagent/mobile/WakeWordDetector.java) combines acoustic thresholds with Levenshtein phonetic distance tolerance, reliably recognizing user intent regardless of accent or regional dialect.
+
 
