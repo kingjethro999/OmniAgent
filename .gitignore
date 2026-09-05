@@ -85,5 +85,9 @@ idea.md
 me.md
 *.plan.md
 implementation_plan.md
-dist_releases/
-
+# ─── Release Packaging ───
+release_packages/dist/
+release_packages/staging/
+release_packages/desktop/
+*.zip
+*.tar.gz

@@ -20,7 +20,6 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 
 ## 📑 Table of Contents
 
-- [Official Release Packages & Downloads](#-official-release-packages--downloads-v020)
 - [Key Features](#-key-features)
 - [Target Use Cases & Hands-On Examples](#-target-use-cases--hands-on-examples)
   - [1. Privacy-Preserving Code & Document Audits](#1-privacy-preserving-code--document-audits)
@@ -49,23 +48,6 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 - [Configuration Reference (.env)](#-configuration-reference-env)
 - [Roadmap](#-roadmap)
 - [License](#-license)
-
----
-
-## 📦 Official Release Packages & Downloads (v0.2.0)
-
-Pre-built standalone binaries, signed packages, and developer SDKs are hosted directly on [GitHub Releases](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0).
-
-| Component / Platform | Target Architecture | Distribution File | Link / Install |
-| :--- | :--- | :--- | :--- |
-| **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | Production-Signed APK (`v0.2.0`) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-v0.2.0-Android.apk) |
-| **Desktop Worker (Linux)** | Linux x86_64 | Standalone Binary + Native C++ Engine | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz) |
-| **Desktop Worker (Windows)** | Windows 10/11 x64 | Single-File Executable (`.exe`) | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-win-x64-v0.2.0.zip) |
-| **Desktop Worker (macOS ARM)** | Apple Silicon (M1/M2/M3/M4) | Standalone Executable (`arm64`) | [Download macOS ARM tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz) |
-| **Desktop Worker (macOS Intel)**| macOS Intel x86_64 | Standalone Executable (`x64`) | [Download macOS Intel tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz) |
-| **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | C ABI Headers, `libomni_engine.so`, JNI & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-engine-linux-x64-v0.2.0.tar.gz) |
-| **Python SDK Wheel** | Python 3.10+ | Standalone Wheel (`.whl`) | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0-py3-none-any.whl) |
-| **Python Source Distribution** | Python 3.10+ | Source Tarball (`.tar.gz`) | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0.tar.gz) |
 
 ---
 
