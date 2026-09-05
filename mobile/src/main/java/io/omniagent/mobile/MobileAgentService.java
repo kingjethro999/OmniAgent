@@ -43,11 +43,11 @@ public class MobileAgentService {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             if (wakeWordDetected) {
-                sb.append(String.format("🎙️ [Wake Word Detected]: \"%s\"\n", wakeWordUsed));
+                sb.append(String.format("[Wake Word Detected]: \"%s\"\n", wakeWordUsed));
             }
             sb.append(action.toString()).append("\n");
             if (executionResponse != null && !executionResponse.isEmpty()) {
-                sb.append(String.format("🤖 Engine Output:\n%s", executionResponse));
+                sb.append(String.format("[Engine Output]:\n%s", executionResponse));
             }
             return sb.toString().trim();
         }

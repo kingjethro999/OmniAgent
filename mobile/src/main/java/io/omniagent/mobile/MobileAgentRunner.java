@@ -24,7 +24,7 @@ public class MobileAgentRunner {
         if (args.length > 0) {
             MobileAgentService service = new MobileAgentService(config);
             String input = String.join(" ", args);
-            System.out.println("\n🎙️ Received Voice Input: \"" + input + "\"");
+            System.out.println("\n[Voice Input]: \"" + input + "\"");
             MobileAgentService.VoiceCommandResult result = service.processVoiceCommand(input);
             System.out.println("\n" + result + "\n");
             service.destroy();
@@ -34,8 +34,8 @@ public class MobileAgentRunner {
         // 2. Interactive Assistant Mode with Entry Onboarding
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n┌────────────────────────────────────────────────────────────┐");
-        System.out.println("│ 🚀 Choose Assistant Backend on Entry:                      │");
-        System.out.println("│  [1] On-Device SLM (Local NPU/CPU — 100% Offline & Free)   │");
+        System.out.println("│  Choose Assistant Backend on Entry:                        │");
+        System.out.println("│  [1] On-Device Engine (Local 0 MB Smart Intent Routing)    │");
         System.out.println("│  [2] Custom Remote Server (Point to self-hosted HTTP API)  │");
         System.out.println("└────────────────────────────────────────────────────────────┘");
         System.out.print("Select Setup [1 or 2, default: 1]: ");
@@ -47,10 +47,10 @@ public class MobileAgentRunner {
             if (serverUrl.isEmpty()) serverUrl = "http://127.0.0.1:8765";
             config.setMode(AssistantConfig.EngineMode.REMOTE_SERVER);
             config.setServerUrl(serverUrl);
-            System.out.println("✅ Configured to use Remote Server: " + serverUrl);
+            System.out.println("[Configured] Remote Server: " + serverUrl);
         } else {
             config.setMode(AssistantConfig.EngineMode.ON_DEVICE_SLM);
-            System.out.println("✅ Configured to use On-Device SLM: " + config.getLocalModelPath());
+            System.out.println("[Configured] On-Device Smart Engine (0 MB Download Required)");
         }
 
         MobileAgentService service = new MobileAgentService(config);

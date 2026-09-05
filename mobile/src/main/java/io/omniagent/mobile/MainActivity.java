@@ -8,12 +8,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.telecom.TelecomManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -21,10 +31,13 @@ import java.util.Locale;
 /**
  * OmniAgent Mobile Companion — Phone Assistant Android Activity
  *
- * Provides the interactive phone assistant interface:
- *  - Setup dialog on entry: Point to custom server or use on-device SLM
- *  - Speech recognition input with "Hey Omni" wake word detection
- *  - Real Android Intent dispatching (Spotify, AlarmClock, Calls, SMS, WhatsApp, Gmail, Apps)
+ * Provides a ChatGPT-inspired cobalt dark interface for phone automation:
+ *  - On-Device Smart Engine (0 MB model download required)
+ *  - Self-Hosted Remote Server option
+ *  - Optional Accessibility Automation Service toggle
+ *  - "Hey Omni" Wake Word and Speech Recognition
+ *  - Real Android Intent dispatch (Spotify, Alarm, Calls, SMS, WhatsApp, Gmail, Apps)
+ *  - Zero emojis, clean vector icons and typography
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -33,73 +46,159 @@ public class MainActivity extends AppCompatActivity {
     private MobileAgentService assistantService;
     private AssistantConfig config;
 
+    // UI Bindings
+    private SwitchCompat switchAssistantMode;
+    private TextView tvAccessibilityStatus;
+    private RadioGroup rgEngineMode;
+    private RadioButton rbModeLocal;
+    private RadioButton rbModeServer;
+    private LinearLayout layoutServerInput;
+    private EditText etServerUrl;
+    private Button btnSaveServer;
+    private ImageButton btnVoiceListen;
+    private TextView tvVoiceStatus;
+    private EditText etCommandInput;
+    private Button btnRunCommand;
+    private TextView tvMonitorStatusTag;
+    private TextView tvExecutionLog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         this.config = new AssistantConfig();
         this.assistantService = new MobileAgentService(config);
 
-        showOnboardingDialog();
+        initViews();
+        setupListeners();
+        updateAccessibilityStatus();
     }
 
-    /**
-     * Prompts user on entry to choose between On-Device SLM and Remote Server.
-     */
-    private void showOnboardingDialog() {
-        String[] options = {
-            "On-Device SLM (100% Offline & Free)",
-            "Point to Custom Remote Server (http://...)"
-        };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateAccessibilityStatus();
+    }
 
-        new AlertDialog.Builder(this)
-            .setTitle("OmniAgent Phone Assistant Setup")
-            .setItems(options, (dialog, which) -> {
-                if (which == 1) {
-                    promptForServerUrl();
+    private void initViews() {
+        switchAssistantMode = findViewById(R.id.switch_assistant_mode);
+        tvAccessibilityStatus = findViewById(R.id.tv_accessibility_service_status);
+        rgEngineMode = findViewById(R.id.rg_engine_mode);
+        rbModeLocal = findViewById(R.id.rb_mode_local);
+        rbModeServer = findViewById(R.id.rb_mode_server);
+        layoutServerInput = findViewById(R.id.layout_server_input);
+        etServerUrl = findViewById(R.id.et_server_url);
+        btnSaveServer = findViewById(R.id.btn_save_server);
+        btnVoiceListen = findViewById(R.id.btn_voice_listen);
+        tvVoiceStatus = findViewById(R.id.tv_voice_status);
+        etCommandInput = findViewById(R.id.et_command_input);
+        btnRunCommand = findViewById(R.id.btn_run_command);
+        tvMonitorStatusTag = findViewById(R.id.tv_monitor_status_tag);
+        tvExecutionLog = findViewById(R.id.tv_execution_log);
+
+        etServerUrl.setText(config.getServerUrl());
+    }
+
+    private void setupListeners() {
+        // Optional Accessibility Automation Switch
+        switchAssistantMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                if (!OmniAccessibilityService.isServiceActive()) {
+                    promptEnableAccessibilityService();
                 } else {
-                    config.setMode(AssistantConfig.EngineMode.ON_DEVICE_SLM);
-                    assistantService.setConfig(config);
-                    Toast.makeText(this, "Active: On-Device SLM Core", Toast.LENGTH_SHORT).show();
+                    tvAccessibilityStatus.setText(R.string.accessibility_status_active);
                 }
-            })
-            .setCancelable(false)
-            .show();
-    }
+            } else {
+                tvAccessibilityStatus.setText(R.string.accessibility_status_inactive);
+            }
+        });
 
-    private void promptForServerUrl() {
-        final android.widget.EditText input = new android.widget.EditText(this);
-        input.setHint("http://192.168.1.50:8765");
-
-        new AlertDialog.Builder(this)
-            .setTitle("Connect to OmniAgent Server")
-            .setView(input)
-            .setPositiveButton("Connect", (dialog, which) -> {
-                String url = input.getText().toString().trim();
-                if (url.isEmpty()) url = "http://127.0.0.1:8765";
+        // Backend Engine Mode Selector (0 MB On-Device vs Remote Server)
+        rgEngineMode.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rb_mode_server) {
+                layoutServerInput.setVisibility(View.VISIBLE);
                 config.setMode(AssistantConfig.EngineMode.REMOTE_SERVER);
-                config.setServerUrl(url);
                 assistantService.setConfig(config);
-                Toast.makeText(this, "Connected to: " + url, Toast.LENGTH_LONG).show();
-            })
-            .setNegativeButton("Use Local Model", (dialog, which) -> {
+                logAction("Engine Backend", "Switched to Remote Server mode (" + config.getServerUrl() + ")");
+            } else {
+                layoutServerInput.setVisibility(View.GONE);
                 config.setMode(AssistantConfig.EngineMode.ON_DEVICE_SLM);
                 assistantService.setConfig(config);
-            })
-            .show();
+                logAction("Engine Backend", "Active: On-Device Smart Engine (0 MB Download Required)");
+            }
+        });
+
+        btnSaveServer.setOnClickListener(v -> {
+            String url = etServerUrl.getText().toString().trim();
+            if (url.isEmpty()) url = "http://127.0.0.1:8765";
+            config.setServerUrl(url);
+            assistantService.setConfig(config);
+            Toast.makeText(this, "Remote server set to: " + url, Toast.LENGTH_SHORT).show();
+            logAction("Config", "Updated server endpoint: " + url);
+        });
+
+        // Voice Listen Button
+        btnVoiceListen.setOnClickListener(v -> startVoiceListening());
+
+        // Command Text Run Button
+        btnRunCommand.setOnClickListener(v -> {
+            String command = etCommandInput.getText().toString().trim();
+            if (!command.isEmpty()) {
+                handleSpokenCommand(command);
+                etCommandInput.setText("");
+            }
+        });
+
+        // Quick Automation Chips
+        findViewById(R.id.chip_action_music).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, play the box by roddy rich"));
+
+        findViewById(R.id.chip_action_alarm).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, set an alarm for 7:00 AM"));
+
+        findViewById(R.id.chip_action_call).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, call mum"));
+
+        findViewById(R.id.chip_action_whatsapp).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, open whatsapp"));
+
+        findViewById(R.id.chip_action_tiktok).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, open tiktok"));
+
+        findViewById(R.id.chip_action_gmail).setOnClickListener(v ->
+                handleSpokenCommand("Hey Omni, draft a gmail to boss saying running late"));
     }
 
-    /**
-     * Triggers Android speech recognition intent.
-     */
+    private void updateAccessibilityStatus() {
+        boolean active = OmniAccessibilityService.isServiceActive();
+        switchAssistantMode.setChecked(active);
+        tvAccessibilityStatus.setText(active ?
+                R.string.accessibility_status_active : R.string.accessibility_status_inactive);
+    }
+
+    private void promptEnableAccessibilityService() {
+        new AlertDialog.Builder(this)
+                .setTitle("Enable Assistant Automation")
+                .setMessage("OmniAgent uses an optional Accessibility Service for hands-free automation (opening apps, navigating, and executing voice tasks). This runs 100% locally and does not alter your existing companion settings.\n\nEnable OmniAgent in Accessibility settings?")
+                .setPositiveButton("Open Settings", (dialog, which) -> {
+                    Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> switchAssistantMode.setChecked(false))
+                .show();
+    }
+
     public void startVoiceListening() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say 'Hey Omni' followed by your command...");
         try {
+            tvVoiceStatus.setText("Listening for 'Hey Omni'...");
             startActivityForResult(intent, SPEECH_REQUEST_CODE);
         } catch (Exception e) {
+            tvVoiceStatus.setText("Speech recognition unavailable");
             Toast.makeText(this, "Speech recognition not available on this device", Toast.LENGTH_SHORT).show();
         }
     }
@@ -107,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        tvVoiceStatus.setText("Tap mic or say 'Hey Omni' to automate");
 
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -118,9 +218,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleSpokenCommand(String spokenText) {
+        tvMonitorStatusTag.setText("PARSING");
         MobileAgentService.VoiceCommandResult result = assistantService.processVoiceCommand(spokenText);
-        Toast.makeText(this, result.action.voiceResponse, Toast.LENGTH_LONG).show();
+
+        StringBuilder log = new StringBuilder();
+        log.append("Input: \"").append(spokenText).append("\"\n");
+        if (result.wakeWordDetected) {
+            log.append("Wake Word: \"").append(result.wakeWordUsed).append("\" (Detected)\n");
+        }
+        log.append("Action: ").append(result.action.type.name()).append(" — ").append(result.action.title).append("\n");
+        log.append("Response: \"").append(result.action.voiceResponse).append("\"\n");
+
+        if (result.action.targetPackage != null) {
+            log.append("Target: ").append(result.action.targetPackage).append("\n");
+        }
+        if (result.action.androidIntentAction != null) {
+            log.append("Intent: ").append(result.action.androidIntentAction).append("\n");
+        }
+
+        tvExecutionLog.setText(log.toString().trim());
+        tvMonitorStatusTag.setText("EXECUTED");
+        Toast.makeText(this, result.action.voiceResponse, Toast.LENGTH_SHORT).show();
+
         dispatchAndroidAction(result.action);
+    }
+
+    private void logAction(String tag, String message) {
+        tvExecutionLog.setText("[" + tag + "] " + message);
     }
 
     /**
@@ -232,7 +356,6 @@ public class MainActivity extends AppCompatActivity {
                 case SUMMARIZE_NOTIFICATIONS:
                 case GENERAL_QUERY:
                 default:
-                    // Display text result
                     break;
             }
         } catch (Exception e) {

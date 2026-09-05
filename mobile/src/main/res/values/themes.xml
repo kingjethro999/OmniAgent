@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme styled after ChatGPT cobalt dark palette from .21st/design.json -->
+    <style name="Theme.OmniAgent" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/brand_cobalt</item>
+        <item name="colorPrimaryVariant">@color/brand_cobalt_dark</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- Secondary brand colors -->
+        <item name="colorSecondary">@color/brand_cobalt</item>
+        <item name="colorSecondaryVariant">@color/brand_cobalt_dark</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Status bar and window background -->
+        <item name="android:statusBarColor">@color/bg_surface_dark</item>
+        <item name="android:navigationBarColor">@color/bg_surface_dark</item>
+        <item name="android:windowBackground">@color/bg_surface_dark</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+    </style>
+</resources>

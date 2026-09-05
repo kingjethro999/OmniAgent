@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Colors (from .21st/design.json) -->
+    <color name="brand_cobalt">#4F5FF7</color>
+    <color name="brand_cobalt_dark">#6366F1</color>
+    <color name="brand_cobalt_subtle">#EAEBFF</color>
+    <color name="brand_cobalt_subtle_dark">#1E2248</color>
+
+    <!-- Surfaces & Neutrals (Light Mode) -->
+    <color name="bg_surface">#FBFBF9</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="border_subtle">#E5E5E0</color>
+    <color name="text_primary">#1E1E1C</color>
+    <color name="text_secondary">#666660</color>
+
+    <!-- Surfaces & Neutrals (Dark Mode) -->
+    <color name="bg_surface_dark">#121211</color>
+    <color name="bg_card_dark">#1E1E1C</color>
+    <color name="border_subtle_dark">#2D2D2A</color>
+    <color name="text_primary_dark">#F3F3F0</color>
+    <color name="text_secondary_dark">#A0A098</color>
+
+    <!-- Status Accents -->
+    <color name="status_local">#10B981</color>
+    <color name="status_cloud">#F59E0B</color>
+    <color name="status_executing">#4F5FF7</color>
+    <color name="status_error">#EF4444</color>
+</resources>
