@@ -1,4 +1,4 @@
-import { subscribeToEvents, getEvents, AgentEvent } from '../events/route';
+import { subscribeToEvents, getEvents, AgentEvent } from '@/lib/eventsStore';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

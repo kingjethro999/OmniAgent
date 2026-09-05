@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Activity, Trash2, Filter, Zap, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
-import { AgentEvent } from '../api/events/route';
+import { AgentEvent } from '@/lib/eventsStore';
 
 interface ReasoningStreamProps {
   events: AgentEvent[];

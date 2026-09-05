@@ -8,6 +8,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 
+from omniagent import __version__
 from omniagent.executor import AgentExecutor
 from omniagent.events import event_bus, AgentEvent, EventType
 
@@ -31,7 +32,7 @@ async def main_async(prompt: str | None = None):
     executor = AgentExecutor()
 
     console.print(Panel.fit(
-        "[bold cyan]OmniAgent Engine v0.1.0[/bold cyan]\n"
+        f"[bold cyan]OmniAgent Engine v{__version__}[/bold cyan]\n"
         "[dim]Hybrid Local/Cloud Edge Agent Framework[/dim]",
         border_style="cyan"
     ))

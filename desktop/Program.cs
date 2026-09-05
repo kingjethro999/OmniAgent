@@ -37,7 +37,7 @@ namespace OmniAgent.Desktop
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("==========================================================");
-            Console.WriteLine("  OmniAgent Enterprise Desktop Worker (.NET 8)");
+            Console.WriteLine("  OmniAgent Enterprise Desktop Worker v0.2.0 (.NET 10)");
             Console.WriteLine("  Silent Background Automation & Local Document Auditing");
             Console.WriteLine("==========================================================");
             Console.ResetColor();

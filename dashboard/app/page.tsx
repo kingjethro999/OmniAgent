@@ -6,7 +6,7 @@ import { MetricsGrid } from './components/MetricsGrid';
 import { AgentWorkbench } from './components/AgentWorkbench';
 import { ReasoningStream } from './components/ReasoningStream';
 import { ArchitecturePanel } from './components/ArchitecturePanel';
-import { AgentEvent } from './api/events/route';
+import { AgentEvent } from '@/lib/eventsStore';
 
 export default function Home() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');

@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>OmniAgent.Desktop</RootNamespace>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <ApplicationIcon>assets/app_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
