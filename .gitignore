@@ -91,3 +91,6 @@ release_packages/staging/
 release_packages/desktop/
 *.zip
 *.tar.gz
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
