@@ -59,7 +59,6 @@ local.properties
 
 # ─── IDE ───
 .idea/
-.vscode/
 *.swp
 *.swo
 *~
@@ -67,8 +66,6 @@ local.properties
 Thumbs.db
 
 # ─── Environment ───
-.env
-.env.local
 .env.*.local
 
 # ─── Models (large weight files) ───
@@ -91,3 +88,7 @@ release_packages/staging/
 release_packages/desktop/
 *.zip
 *.tar.gz
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
