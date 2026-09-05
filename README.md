@@ -7,12 +7,12 @@
 **A Hybrid Local/Cloud Edge Agent Framework with On-Device SLM Inference & IDE Hook (MCP)**
 
 [![Release: v0.2.1](https://img.shields.io/badge/Release-v0.2.1-blue.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1)
-[![Android: Signed APK](https://img.shields.io/badge/Android-APK%20(v0.2.1)-success.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1)
+[![Android: Signed APK](<https://img.shields.io/badge/Android-APK%20(v0.2.1)-success.svg>)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://python.org)
 [![Next.js: 14](https://img.shields.io/badge/Dashboard-Next.js%2014-black.svg)](https://nextjs.org)
 [![GGUF: llama.cpp](https://img.shields.io/badge/Inference-GGUF%20%2F%20llama.cpp-orange.svg)](https://github.com/ggerganov/llama.cpp)
-[![Protocol: MCP](https://img.shields.io/badge/MCP-Compatible%20(2024--11--05)-purple.svg)](https://modelcontextprotocol.io)
+[![Protocol: MCP](<https://img.shields.io/badge/MCP-Compatible%20(2024--11--05)-purple.svg>)](https://modelcontextprotocol.io)
 
 OmniAgent Engine is a lightweight, high-performance edge framework for running autonomous AI agents on local devices. It features an intelligent **hybrid router** that executes routine tasks locally on quantized Small Language Models (SLMs like Phi-4-mini, Qwen 2.5, or Llama 3.2), seamlessly offloading only heavy multi-step reasoning to cloud LLMs (OpenAI GPT-4o or Google Gemini).
 
@@ -58,14 +58,14 @@ Pre-built standalone binaries, signed application packages, and developer SDKs a
 
 ### Package Distribution Matrix
 
-| Component / Platform | Target Architecture | Distribution File | Size | Verification / Integrity | Direct Download |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.1-Android.apk` | 4.4 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk) |
-| **Desktop Voice Assistant (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` | 31 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz) |
-| **Desktop Voice Assistant (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.1.zip` | 31 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-win-x64-v0.2.1.zip) |
-| **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | `omniagent-engine-linux-x64-v0.2.1.tar.gz` | 27 KiB | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz) |
-| **Python SDK Wheel** | Python 3.10+ | `omniagent-0.2.1-py3-none-any.whl` | 38 KiB | **Verified**: PyPI-compliant wheel distribution | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl) |
-| **Python Source Distribution** | Python 3.10+ | `omniagent-0.2.1.tar.gz` | 60 KiB | **Verified**: Standard sdist source tarball | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1.tar.gz) |
+| Component / Platform                  | Target Architecture           | Distribution File                           | Size    | Verification / Integrity                                                                  | Direct Download                                                                                                                        |
+| :------------------------------------ | :---------------------------- | :------------------------------------------ | :------ | :---------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **Android Phone Assistant**           | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.1-Android.apk`              | 4.4 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified)  | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk)                       |
+| **Desktop Voice Assistant (Linux)**   | Linux x86_64                  | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` | 31 MiB  | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so`    | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz) |
+| **Desktop Voice Assistant (Windows)** | Windows 10/11 x64             | `OmniAgent-Desktop-win-x64-v0.2.1.zip`      | 31 MiB  | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-win-x64-v0.2.1.zip)       |
+| **Main Omni Engine Core**             | Linux x86_64 (C / C++ / JNI)  | `omniagent-engine-linux-x64-v0.2.1.tar.gz`  | 27 KiB  | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake   | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz) |
+| **Python SDK Wheel**                  | Python 3.10+                  | `omniagent-0.2.1-py3-none-any.whl`          | 38 KiB  | **Verified**: PyPI-compliant wheel distribution                                           | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl)                 |
+| **Python Source Distribution**        | Python 3.10+                  | `omniagent-0.2.1.tar.gz`                    | 60 KiB  | **Verified**: Standard sdist source tarball                                               | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1.tar.gz)                           |
 
 > [!NOTE]
 > Desktop Voice Assistant is specifically engineered for **Windows** and **Linux** workstations. (macOS already has native Voice Assistant built-in).
@@ -75,7 +75,9 @@ Pre-built standalone binaries, signed application packages, and developer SDKs a
 ### Quick Installation & Usage Guide
 
 #### 1. Android Phone Assistant
+
 Download and install directly to any Android 8.0+ device:
+
 ```bash
 # Download production signed APK
 curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-v0.2.1-Android.apk
@@ -83,10 +85,13 @@ curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/Omn
 # Install via ADB:
 adb install -r OmniAgent-v0.2.1-Android.apk
 ```
-*Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), personal **Voice Match & Accent Calibration**, native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
+
+_Features_: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), personal **Voice Match & Accent Calibration**, native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
 
 #### 2. Desktop Voice Assistant GUI Application (Linux x64)
+
 Extract and run the one-click installer to register OmniAgent in your Applications menu / Dash:
+
 ```bash
 # Download and unpack
 curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
@@ -96,10 +101,12 @@ cd linux-x64
 # One-Click Linux Desktop Installer:
 ./install.sh
 ```
+
 > [!TIP]
 > Once installed, launch **OmniAgent** directly from your application launcher (GNOME Dash / KDE Menu) or run `omniagent`. It opens as a **floating Voice Assistant GUI overlay with animated voice orb and live visual cards**—no terminal required!
 
 You can also run headless / script commands anytime:
+
 ```bash
 # 1. Spoken one-shot command
 omniagent --say "Hey Omni, play Bohemian Rhapsody on Spotify"
@@ -113,16 +120,21 @@ omniagent --audit /path/to/project
 ```
 
 #### 3. Desktop Voice Assistant GUI Application (Windows x64)
+
 Download `OmniAgent-Desktop-win-x64-v0.2.1.zip`, extract to any folder, and run the installer:
+
 ```powershell
 # Run the Windows Installer (registers Start Menu shortcut & background startup)
 .\install.ps1
 ```
+
 > [!TIP]
-> Launch **OmniAgent** from your Windows Start Menu or double-click `OmniAgent.Desktop.exe`. The floating Voice Assistant GUI will appear with audio waves and quick action cards. Speak *"Hey Omni"* anytime from your desk!
+> Launch **OmniAgent** from your Windows Start Menu or double-click `OmniAgent.Desktop.exe`. The floating Voice Assistant GUI will appear with audio waves and quick action cards. Speak _"Hey Omni"_ anytime from your desk!
 
 #### 4. Main Omni Engine Core (C / C++ SDK)
+
 Incorporate the C++ edge inference engine into your own native C, C++, Rust, or Go applications:
+
 ```bash
 # Download and extract C++ SDK
 curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-engine-linux-x64-v0.2.1.tar.gz
@@ -134,6 +146,7 @@ gcc -Iinclude -Llib main.c -lomni_engine -Wl,-rpath,'$ORIGIN/lib' -o main
 ```
 
 #### 5. Python Developer SDK
+
 ```bash
 # Install via wheel
 pip install https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.1/omniagent-0.2.1-py3-none-any.whl
@@ -193,14 +206,18 @@ python3 -m build agent/
 OmniAgent is not a theoretical wrapper; it is an active multi-runtime edge framework. Below are the primary real-world use cases with executable commands, expected outputs, and code examples:
 
 ### 1. Privacy-Preserving Code & Document Audits
+
 - **Threat Model**: Software engineers, defense contractors, and legal teams cannot upload proprietary codebases or confidential contracts to external cloud APIs without violating NDAs, GDPR, or security policies.
 - **Solution**: The **Enterprise Desktop Worker** (`desktop/`) and **IDE Hook** (`agent/omniagent/ide_hook.py`) parse syntax trees, match vulnerability patterns, and run local SLM summarization 100% on-device. Zero network packets leave the machine.
 
 #### Running a Full Local Repository Audit via C# Desktop Worker:
+
 ```bash
 dotnet run --project desktop -- --audit ./sensitive-project
 ```
-*Sample Output*:
+
+_Sample Output_:
+
 ```text
 ==========================================================
   OmniAgent Enterprise Desktop Worker (.NET 10)
@@ -231,6 +248,7 @@ Code: query = f"SELECT * FROM users WHERE email='{user_email}'"
 ```
 
 #### Triggering an On-Device Audit via HTTP / JSON-RPC IDE Hook:
+
 ```bash
 curl -s -X POST http://127.0.0.1:8765/ \
   -H "Content-Type: application/json" \
@@ -244,7 +262,9 @@ curl -s -X POST http://127.0.0.1:8765/ \
     "id": 1
   }' | jq .
 ```
-*Response*:
+
+_Response_:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -260,14 +280,18 @@ curl -s -X POST http://127.0.0.1:8765/ \
 ---
 
 ### 2. Silent Dropzone Folder Monitoring
+
 - **Challenge**: Compliance officers, lawyers, and audit teams receive hundreds of vendor documents and files daily and need automated triage without opening terminals or uploading files.
 - **Solution**: The Desktop Worker operates as a silent OS background service watching a designated directory (e.g., `./dropzone`). When any file is dropped into the folder, OmniAgent instantly runs AST & credential scanning with local SLM analysis and logs the alert.
 
 #### Running the Background Watcher:
+
 ```bash
 dotnet run --project desktop -- --watch ./dropzone
 ```
-*Live Terminal Event*:
+
+_Live Terminal Event_:
+
 ```text
 [Dropzone Watcher] Actively monitoring folder: /home/user/OmniAgent/dropzone
 Drop any source code or documents into this folder for instant on-device auditing.
@@ -282,14 +306,18 @@ Press Ctrl+C to stop.
 ---
 
 ### 3. Offline OS-Level Task Automation
+
 - **Challenge**: Field engineers, developers on airplanes, or air-gapped systems need automated data organization, spreadsheet cleaning, and repo inspection with zero internet access.
 - **Solution**: The `SystemAutomation` module organizes directories, normalizes messy CSV files, and checks git status locally.
 
 #### Example A: Auto-Categorize Files in a Cluttered Folder
+
 ```bash
 dotnet run --project desktop -- --organize ./downloads
 ```
-*Output*:
+
+_Output_:
+
 ```text
 [Automation] Organized 42 files into categorized folders.
   ├── Code/       (18 files: .py, .cs, .cpp, .js)
@@ -299,10 +327,13 @@ dotnet run --project desktop -- --organize ./downloads
 ```
 
 #### Example B: Clean and Normalize CSV Spreadsheets
+
 ```bash
 dotnet run --project desktop -- --format-csv ./dirty_sales.csv
 ```
-*Output*:
+
+_Output_:
+
 ```text
 [Automation] Formatted CSV (500 rows) -> ./dirty_sales.csv (Trimmed whitespace, balanced column delimiters).
 ```
@@ -310,14 +341,18 @@ dotnet run --project desktop -- --format-csv ./dirty_sales.csv
 ---
 
 ### 4. Battery-Saver Mobile Assistant & Notifications
+
 - **Challenge**: Mobile LLMs drain battery rapidly and cause severe thermal throttling. Furthermore, users do not want their personal SMS, emails, and calendar events streamed to remote servers.
 - **Solution**: The **Consumer Mobile Companion** (`mobile/`) hooks into Android system events via Java, executing quick queries on the local NPU via JNI (`libomni_engine_jni.so`). When battery drops below 15% or enters battery-saver mode, cloud offload is strictly restricted.
 
 #### Executing Local Notification Digest on Device:
+
 ```bash
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Summarize my notifications from the last hour"
 ```
-*Output*:
+
+_Output_:
+
 ```text
 ==========================================================
   OmniAgent Consumer Mobile Companion (Android / Java)
@@ -337,10 +372,13 @@ Response:
 ```
 
 #### Drafting a Context-Aware Quick Reply (14ms Latency):
+
 ```bash
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Draft reply to Mom: Are you coming over for dinner tonight?"
 ```
-*Output*:
+
+_Output_:
+
 ```text
 Routing: [LOCAL_NPU] Score: 0.08 | Reason: Routine task -> Fast on-device NPU
 Response: [C++ Native SLM Inference] Drafted Reply: "Hey Mom! Yes, I will be there around 7:00 PM. Looking forward to it!" (Generated locally in 14ms).
@@ -349,6 +387,7 @@ Response: [C++ Native SLM Inference] Drafted Reply: "Hey Mom! Yes, I will be the
 ---
 
 ### 5. Cost Optimization for High-Volume Workflows
+
 - **Challenge**: Large multi-agent systems executing thousands of automated actions hourly quickly accumulate massive OpenAI/Anthropic cloud bills.
 - **Solution**: The hybrid `TaskRouter` classifies task complexity. ~80% of routine actions execute on-device for **$0.00 cost** and sub-30ms latency, routing only the 20% complex mathematical or multi-step logic to cloud LLMs.
 
@@ -371,6 +410,7 @@ print(f"Decision: {task2.decision.value.upper()} | Score: {task2.complexity_scor
 ---
 
 ### 6. IDE Copilot Enhancement via MCP
+
 - **Challenge**: Generic IDE copilot extensions lack awareness of local system tools, require cloud round-trips for simple syntax checks, and cannot execute shell scripts safely.
 - **Solution**: OmniAgent's IDE Hook server speaks JSON-RPC 2.0 and MCP, allowing Cursor, VS Code, and JetBrains to invoke on-device security linting and task routing seamlessly.
 
@@ -407,14 +447,18 @@ OmniAgent avoids single-model bottlenecks through a continuous 5-stage pipeline:
 ```
 
 #### Stage 1: Ingestion & Environment Normalization
+
 A task prompt enters the ecosystem from any supported front:
+
 - **Python CLI / REPL**: Direct input via terminal stdin.
 - **Enterprise Desktop Worker**: Background file drop into `./dropzone` or `--audit` invocation.
 - **Consumer Mobile Companion**: Android notification listener or voice assistant prompt.
 - **IDE Hook / MCP**: JSON-RPC 2.0 request over HTTP (`http://127.0.0.1:8765/`).
 
 #### Stage 2: Multi-Signal Heuristic Complexity Scoring
+
 The `TaskRouter` analyzes the input across four weighted orthogonal signals:
+
 1. **Keyword Signal ($W_1 = 0.35$)**: Ratio of local routine keywords (`summarize`, `clean`, `format`, `audit`, `reply`, `file`) to high-complexity keywords (`derive`, `proof`, `architecture`, `quantum`, `strategic`).
 2. **Length Signal ($W_2 = 0.25$)**: Word count ratio scaled against a 60-word threshold: $\min(1.0, \frac{\text{word\_count}}{60})$.
 3. **Structural Complexity ($W_3 = 0.20$)**: Presence of multi-clause conditional instructions (`if`, `then`, `otherwise`, `step 1`).
@@ -423,19 +467,25 @@ The `TaskRouter` analyzes the input across four weighted orthogonal signals:
 $$\text{Final Complexity Score} = \sum (W_i \times S_i) \in [0.0, 1.0]$$
 
 #### Stage 3: Contextual Routing Decision Matrix
+
 The routing engine applies hardware context before comparing against the complexity threshold (default: `0.55`):
+
 - **Battery-Aware Override (Mobile)**: If device battery < 15% or OS power-save mode is active, the task is **strictly locked** to `LOCAL_NPU` to prevent modem battery drain.
 - **Threshold Evaluation**: If score < `OMNI_COMPLEXITY_THRESHOLD`, destination is `LOCAL_SLM`. Otherwise, destination is `CLOUD_OFFLOAD`.
 
 #### Stage 4: Unified C++ Hardware Execution
+
 When a task is routed locally, it executes through the shared C++ core:
+
 - **Zero-Fragmentation Arena Allocator**: [memory_pool.cpp](core/src/memory_pool.cpp) pre-allocates a 64MB tensor memory arena, preventing memory leaks during rapid inference loops.
 - **P/Invoke (C# Desktop)**: [NativeEngineBridge.cs](desktop/NativeEngineBridge.cs) calls `omni_generate` directly in unmanaged memory.
 - **JNI (Java Android)**: [NativeEngineJNI.java](mobile/src/main/java/io/omniagent/mobile/NativeEngineJNI.java) calls `libomni_engine_jni.so` across the Java Native Interface.
 - **ctypes (Python)**: [local.py](agent/omniagent/providers/local.py) invokes C ABI entrypoints with zero-copy string buffers.
 
 #### Stage 5: Real-Time Event Bus & Telemetry Stream
+
 Every lifecycle state transition is emitted asynchronously onto the `event_bus`:
+
 - `THINKING` ➔ `ROUTING` ➔ `PLANNING` ➔ `EXECUTING` ➔ `COMPLETED`
 - Telemetry events stream over Server-Sent Events (SSE) to the Next.js web dashboard (`/api/stream`), updating live latency, token speed, and cost savings in real-time.
 
@@ -546,7 +596,7 @@ Copy the example environment file and customize your settings:
 cp .env.example .env
 ```
 
-*(Optional: Add your `OPENAI_API_KEY` or `GEMINI_API_KEY` in `.env` if you wish to use cloud offloading for complex reasoning).*
+_(Optional: Add your `OPENAI_API_KEY` or `GEMINI_API_KEY` in `.env` if you wish to use cloud offloading for complex reasoning)._
 
 ---
 
@@ -583,6 +633,7 @@ python3 models/download_model.py --list
 ### Using Your Own GGUF Model
 
 You can use any GGUF model from Hugging Face, LM Studio, or Ollama:
+
 1. Copy your `.gguf` file to `./models/phi-4-mini.gguf`, **OR**
 2. Point the environment variable in your `.env`:
    ```bash
@@ -616,6 +667,7 @@ python -m omniagent
 ```
 
 Example interaction:
+
 ```
 ╭──────────────────────────────────────────────────╮
 │ OmniAgent Engine v0.2.1                          │
@@ -675,6 +727,7 @@ The Desktop Assistant turns your Windows or Linux workstation into an autonomous
 > macOS is intentionally omitted from the desktop assistant target, as macOS already features native system-integrated Voice Assistant.
 
 #### Key Desktop Assistant Features:
+
 - **Installed Native GUI Application (No Terminal Required)**: Installs directly into the OS Application Menu / Dash / Start Menu. When launched, opens as a floating frameless glassmorphic Voice HUD above all other windows.
 - **Glowing Voice Orb & Audio Waveform Visualizer**: Central multi-layer animated radial gradient orb with active frequency soundwaves reacting in real time to speech and music.
 - **Hands-Free Wake Word Call-out ("Hey Omni", "OK Omni")**: Continuous low-latency background audio monitoring with personal voice matching.
@@ -715,6 +768,7 @@ dotnet run --project desktop -- --git-status
 The Consumer Mobile Companion executes natively on Android via JNI to the shared C++ Core (`libomni_engine_jni.so`). Designed with an explicit, low-level Java architecture (`AudioRecord` 16kHz PCM streaming, foreground services, Android intent dispatchers), it turns any Android phone into an autonomous assistant with **zero 3rd-party cloud costs** or heavyweight model downloads.
 
 #### Key Mobile Assistant Capabilities:
+
 - **Zero-Download On-Device Engine (0 MB Overhead)**: Unlike mobile LLMs requiring 1.5 GB+ downloads, OmniAgent maps natural voice commands to Android framework interfaces in < 5ms with zero model download overhead.
 - **Voice Match & Accent Calibration (Card 3B)**: Guided 4-phrase setup wizard that records user speech samples to profile acoustic energy and phonetics. Accurately identifies "Omni" across diverse global accents, tone pitches, and dialects.
 - **Pure Java Audio Record Engine**: Continuous background PCM audio processing via native `AudioRecord` with zero dependency on proprietary wake-word clouds (e.g. Picovoice or ONNX).
@@ -725,6 +779,7 @@ The Consumer Mobile Companion executes natively on Android via JNI to the shared
 - **Signed Production APK Included**: Production signed APK (`OmniAgent-v0.2.1-Android.apk`) verified with APK Signature Scheme v2.
 
 #### Native Phone Automation Supported:
+
 - **Music Playback**: `"Hey Omni, play the box by roddy rich"` ➔ Launches Spotify search (`spotify:search:...`) and streams audio.
 - **Clock & Alarms**: `"Hey Omni, set an alarm for 7:00 AM"` / `"set a timer for 10 minutes"` ➔ Dispatches native `AlarmClock` intents.
 - **Telecom & Calls**: `"Hey Omni, call mum"` (`tel:mum`), `"Hey Omni, pick the call"` (`TelecomManager.acceptRingingCall`), `"Hey Omni, end call"`.
@@ -733,6 +788,7 @@ The Consumer Mobile Companion executes natively on Android via JNI to the shared
 - **App Launching**: `"Hey Omni, open tiktok"`, `"open whatsapp"`, `"open gallery"`, `"open youtube"`, `"open camera"`, `"open netflix"`.
 
 #### Building and Installing the Production APK:
+
 ```bash
 # Build the signed production release APK:
 cd mobile
@@ -744,6 +800,7 @@ cd mobile
 ```
 
 #### Running Voice Commands on Workstation CLI (Zero-Device Testing):
+
 ```bash
 # Compile standalone classes
 javac -d mobile/bin -cp "mobile/src/main/java" mobile/src/main/java/io/omniagent/mobile/*.java
@@ -783,6 +840,7 @@ jupyter notebook notebooks/omniagent_prototyping.ipynb
 ```
 
 **What you can do in the notebook**:
+
 - **Prototype Routing Heuristics**: Experiment with different prompt lengths, keyword weightings, and complexity thresholds.
 - **Benchmark C++ Native Latency**: Measure on-device token generation speed (ms/token) directly against local RAM/CPU.
 - **Inspect Execution Chains**: Visualize agent step decomposition and memory states interactively.
@@ -802,6 +860,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 **Dashboard Capabilities**:
+
 - **Live Reasoning Stream**: Watch agent events stream via SSE (`THINKING` ➔ `ROUTING` ➔ `PLANNING` ➔ `EXECUTING` ➔ `COMPLETED`).
 - **Interactive Workbench**: Submit prompts, switch between on-device and cloud models, and view step-by-step tool results.
 - **Cost & Latency Analytics**: Live tracking of local vs. cloud task execution ratio, milliseconds saved, and estimated API dollars saved.
@@ -812,6 +871,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## 🔌 IDE Hook & Model Context Protocol (MCP) Server
 
 OmniAgent includes a built-in **IDE Hook and Model Context Protocol (MCP) server** (`omniagent.ide_hook`). It exposes a local HTTP JSON-RPC 2.0 interface that allows developer tools and AI IDEs to leverage OmniAgent for:
+
 - **Local Code Audits**: Deep security and optimization analysis performed 100% on-device.
 - **Smart Task Routing**: Classification queries for whether an inline prompt should run locally or offload to cloud.
 - **MCP Tool Invocation**: Standardized access to OmniAgent's local tools.
@@ -829,6 +889,7 @@ python -m omniagent --ide-hook --port 9000
 ```
 
 You should see:
+
 ```
 🚀 [IDE Hook / MCP] OmniAgent Bridge listening at http://127.0.0.1:8765
    • Endpoints: POST / (JSON-RPC 2.0: 'audit', 'route'), GET /status
@@ -839,6 +900,7 @@ You should see:
 ### Connecting to Cursor / VS Code / Claude
 
 #### 1. Cursor IDE
+
 Add OmniAgent to your project's `.cursor/mcp.json` or Cursor settings:
 
 ```json
@@ -853,6 +915,7 @@ Add OmniAgent to your project's `.cursor/mcp.json` or Cursor settings:
 ```
 
 #### 2. VS Code (Continue / Cline)
+
 In your `config.json`:
 
 ```json
@@ -869,10 +932,13 @@ In your `config.json`:
 ### API Endpoints & JSON-RPC Examples
 
 #### Health & Status Check
+
 ```bash
 curl -s http://127.0.0.1:8765/status | jq .
 ```
+
 Response:
+
 ```json
 {
   "status": "online",
@@ -883,7 +949,9 @@ Response:
 ```
 
 #### On-Device Code Audit (`audit`)
+
 Audits code locally with privacy guarantees:
+
 ```bash
 curl -X POST http://127.0.0.1:8765/ \
   -H "Content-Type: application/json" \
@@ -897,7 +965,9 @@ curl -X POST http://127.0.0.1:8765/ \
     "id": 1
   }' | jq .
 ```
+
 Response:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -911,7 +981,9 @@ Response:
 ```
 
 #### Routing Classification (`route`)
+
 Queries the complexity router for decisions:
+
 ```bash
 curl -X POST http://127.0.0.1:8765/ \
   -H "Content-Type: application/json" \
@@ -924,7 +996,9 @@ curl -X POST http://127.0.0.1:8765/ \
     "id": 2
   }' | jq .
 ```
+
 Response:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -943,19 +1017,19 @@ Response:
 
 All settings are managed via environment variables and loaded automatically at startup:
 
-| Variable | Type | Default | Description |
-|---|---|---|---|
-| `OPENAI_API_KEY` | `string` | `""` | API key for OpenAI cloud routing. |
-| `GEMINI_API_KEY` | `string` | `""` | API key for Google Gemini cloud routing. |
-| `OMNI_CLOUD_PROVIDER` | `string` | `"openai"` | Preferred cloud provider (`"openai"` or `"gemini"`). |
-| `OMNI_CLOUD_MODEL` | `string` | `"gpt-4o"` | Cloud model name for complex reasoning tasks. |
-| `OMNI_LOCAL_MODEL_PATH` | `string` | `"./models/phi-4-mini.gguf"` | Absolute or relative path to the local GGUF model file. |
-| `OMNI_COMPLEXITY_THRESHOLD` | `float` | `0.6` | Complexity threshold (0.0 - 1.0). Tasks scoring above this are offloaded to cloud. |
-| `OMNI_LOCAL_MAX_TOKENS` | `int` | `2048` | Maximum context tokens for local SLM inference. |
-| `OMNI_MAX_STEPS` | `int` | `10` | Maximum steps an agent can execute per task plan. |
-| `OMNI_VERBOSE` | `bool` | `true` | Enables detailed logging of agent thoughts and tool actions. |
-| `DASHBOARD_PORT` | `int` | `3000` | Port for the Next.js web dashboard. |
-| `DASHBOARD_WS_PORT` | `int` | `3001` | Port for WebSocket / SSE stream events. |
+| Variable                    | Type     | Default                      | Description                                                                        |
+| --------------------------- | -------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY`            | `string` | `""`                         | API key for OpenAI cloud routing.                                                  |
+| `GEMINI_API_KEY`            | `string` | `""`                         | API key for Google Gemini cloud routing.                                           |
+| `OMNI_CLOUD_PROVIDER`       | `string` | `"openai"`                   | Preferred cloud provider (`"openai"` or `"gemini"`).                               |
+| `OMNI_CLOUD_MODEL`          | `string` | `"gpt-4o"`                   | Cloud model name for complex reasoning tasks.                                      |
+| `OMNI_LOCAL_MODEL_PATH`     | `string` | `"./models/phi-4-mini.gguf"` | Absolute or relative path to the local GGUF model file.                            |
+| `OMNI_COMPLEXITY_THRESHOLD` | `float`  | `0.6`                        | Complexity threshold (0.0 - 1.0). Tasks scoring above this are offloaded to cloud. |
+| `OMNI_LOCAL_MAX_TOKENS`     | `int`    | `2048`                       | Maximum context tokens for local SLM inference.                                    |
+| `OMNI_MAX_STEPS`            | `int`    | `10`                         | Maximum steps an agent can execute per task plan.                                  |
+| `OMNI_VERBOSE`              | `bool`   | `true`                       | Enables detailed logging of agent thoughts and tool actions.                       |
+| `DASHBOARD_PORT`            | `int`    | `3000`                       | Port for the Next.js web dashboard.                                                |
+| `DASHBOARD_WS_PORT`         | `int`    | `3001`                       | Port for WebSocket / SSE stream events.                                            |
 
 ---
 

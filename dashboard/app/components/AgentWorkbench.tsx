@@ -1,21 +1,33 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Play, Sparkles, Server, Terminal, CheckCircle2, ShieldCheck, FileText, Code } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Play,
+  Sparkles,
+  Server,
+  Terminal,
+  CheckCircle2,
+  ShieldCheck,
+  FileText,
+  Code,
+} from "lucide-react";
 
 interface AgentWorkbenchProps {
   onDispatchTask: (task: string) => Promise<void>;
   isDispatching: boolean;
 }
 
-export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, isDispatching }) => {
-  const [prompt, setPrompt] = useState('');
+export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({
+  onDispatchTask,
+  isDispatching,
+}) => {
+  const [prompt, setPrompt] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!prompt.trim() || isDispatching) return;
     await onDispatchTask(prompt.trim());
-    setPrompt('');
+    setPrompt("");
   };
 
   const handlePreset = (presetText: string) => {
@@ -29,7 +41,9 @@ export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, 
         <div className="flex items-center justify-between mb-3 pb-2 border-b border-[var(--border-subtle)]">
           <div className="flex items-center gap-2">
             <Server className="w-4 h-4 text-[var(--accent-cobalt)]" />
-            <h2 className="text-sm font-semibold text-[var(--text-primary)]">Active Runtime Worker</h2>
+            <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+              Active Runtime Worker
+            </h2>
           </div>
           <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -39,12 +53,20 @@ export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div className="p-2.5 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-            <span className="text-[var(--text-tertiary)] block mb-0.5">Local Engine (Phase 2):</span>
-            <span className="font-mono text-[var(--text-primary)] font-medium">Phi-4-mini (C++ / Vulkan)</span>
+            <span className="text-[var(--text-tertiary)] block mb-0.5">
+              Local Engine (Phase 2):
+            </span>
+            <span className="font-mono text-[var(--text-primary)] font-medium">
+              Phi-4-mini (C++ / Vulkan)
+            </span>
           </div>
           <div className="p-2.5 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-            <span className="text-[var(--text-tertiary)] block mb-0.5">Cloud Adapter (Phase 1):</span>
-            <span className="font-mono text-[var(--text-primary)] font-medium">GPT-4o / Gemini Flash</span>
+            <span className="text-[var(--text-tertiary)] block mb-0.5">
+              Cloud Adapter (Phase 1):
+            </span>
+            <span className="font-mono text-[var(--text-primary)] font-medium">
+              GPT-4o / Gemini Flash
+            </span>
           </div>
         </div>
       </div>
@@ -54,7 +76,9 @@ export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, 
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-[var(--accent-cobalt)]" />
-            <h2 className="text-sm font-semibold text-[var(--text-primary)]">Task Simulator & Dispatcher</h2>
+            <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+              Task Simulator & Dispatcher
+            </h2>
           </div>
         </div>
 
@@ -69,17 +93,27 @@ export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, 
 
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-[var(--text-tertiary)]">Presets:</span>
+              <span className="text-[11px] text-[var(--text-tertiary)]">
+                Presets:
+              </span>
               <button
                 type="button"
-                onClick={() => handlePreset('Summarize my local text files and search recent logs.')}
+                onClick={() =>
+                  handlePreset(
+                    "Summarize my local text files and search recent logs.",
+                  )
+                }
                 className="px-2 py-1 text-[11px] rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-card-hover)] text-[var(--text-secondary)] transition-colors"
               >
                 Local Summary
               </button>
               <button
                 type="button"
-                onClick={() => handlePreset('Calculate the matrix determinant and synthesize deep research essay.')}
+                onClick={() =>
+                  handlePreset(
+                    "Calculate the matrix determinant and synthesize deep research essay.",
+                  )
+                }
                 className="px-2 py-1 text-[11px] rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-card-hover)] text-[var(--text-secondary)] transition-colors"
               >
                 Cloud Math
@@ -92,7 +126,7 @@ export const AgentWorkbench: React.FC<AgentWorkbenchProps> = ({ onDispatchTask, 
               className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium rounded-md bg-[var(--accent-cobalt)] hover:bg-[var(--accent-cobalt-hover)] text-white disabled:opacity-50 transition-colors"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
-              {isDispatching ? 'Dispatching...' : 'Dispatch Task'}
+              {isDispatching ? "Dispatching..." : "Dispatch Task"}
             </button>
           </div>
         </form>

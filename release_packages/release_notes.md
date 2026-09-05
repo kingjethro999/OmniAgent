@@ -13,27 +13,29 @@
 
 ### Official Release Packages
 
-| Package | Target Platform | Description | File |
-| :--- | :--- | :--- | :--- |
-| **Android APK** | Android 8.0+ (ARM64/x86) | Production-signed APK (Scheme v2) | `OmniAgent-v0.2.0-Android.apk` |
-| **Desktop (Linux)** | Linux x86_64 | Self-contained single-file binary + C++ Core engine | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` |
-| **Desktop (Windows)** | Windows 10/11 x64 | Self-contained single-file `.exe` worker | `OmniAgent-Desktop-win-x64-v0.2.0.zip` |
-| **Desktop (macOS ARM)** | macOS Apple Silicon (M1/M2/M3/M4) | Self-contained native worker | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` |
-| **Desktop (macOS Intel)** | macOS Intel x86_64 | Self-contained native worker | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz` |
-| **Omni Engine C++ SDK** | Linux x86_64 | C ABI headers, `libomni_engine.so`, JNI library & CMake | `omniagent-engine-linux-x64-v0.2.0.tar.gz` |
-| **Python SDK Wheel** | Python 3.10+ | PyPI-ready Python Wheel | `omniagent-0.2.0-py3-none-any.whl` |
-| **Python Source Dist** | Python 3.10+ | Source distribution tarball | `omniagent-0.2.0.tar.gz` |
+| Package                   | Target Platform                   | Description                                             | File                                        |
+| :------------------------ | :-------------------------------- | :------------------------------------------------------ | :------------------------------------------ |
+| **Android APK**           | Android 8.0+ (ARM64/x86)          | Production-signed APK (Scheme v2)                       | `OmniAgent-v0.2.0-Android.apk`              |
+| **Desktop (Linux)**       | Linux x86_64                      | Self-contained single-file binary + C++ Core engine     | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` |
+| **Desktop (Windows)**     | Windows 10/11 x64                 | Self-contained single-file `.exe` worker                | `OmniAgent-Desktop-win-x64-v0.2.0.zip`      |
+| **Desktop (macOS ARM)**   | macOS Apple Silicon (M1/M2/M3/M4) | Self-contained native worker                            | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` |
+| **Desktop (macOS Intel)** | macOS Intel x86_64                | Self-contained native worker                            | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz`   |
+| **Omni Engine C++ SDK**   | Linux x86_64                      | C ABI headers, `libomni_engine.so`, JNI library & CMake | `omniagent-engine-linux-x64-v0.2.0.tar.gz`  |
+| **Python SDK Wheel**      | Python 3.10+                      | PyPI-ready Python Wheel                                 | `omniagent-0.2.0-py3-none-any.whl`          |
+| **Python Source Dist**    | Python 3.10+                      | Source distribution tarball                             | `omniagent-0.2.0.tar.gz`                    |
 
 ---
 
 ### Quick Installation
 
 #### Android Mobile
+
 ```bash
 adb install -r OmniAgent-v0.2.0-Android.apk
 ```
 
 #### Desktop Worker (Linux)
+
 ```bash
 tar -xzf OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz
 cd linux-x64
@@ -42,9 +44,11 @@ cd linux-x64
 ```
 
 #### Desktop Worker (Windows)
+
 Unzip `OmniAgent-Desktop-win-x64-v0.2.0.zip` and run `OmniAgent.Desktop.exe`.
 
 #### Desktop Worker (macOS)
+
 ```bash
 tar -xzf OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz
 cd osx-arm64
@@ -52,6 +56,7 @@ cd osx-arm64
 ```
 
 #### Python SDK
+
 ```bash
 pip install omniagent-0.2.0-py3-none-any.whl
 ```

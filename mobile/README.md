@@ -27,12 +27,14 @@ A zero-cloud-cost, privacy-first mobile companion and hands-free voice automatio
 ## Wake Word Detection
 
 OmniAgent listens locally for free wake words:
+
 - "Hey Omni"
 - "OK Omni"
 - "Omni"
 - "Hey Agent"
 
 Example:
+
 ```text
 "Hey Omni, play the box by roddy rich"
 "Hey Omni, set an alarm for 7:00 AM"
@@ -44,37 +46,41 @@ Example:
 
 ## Supported On-Device Voice Automations
 
-| Voice Command | Action Type | Target App / Framework | Intent / Mechanism |
-|---|---|---|---|
-| `play the box by roddy rich` | `PLAY_MUSIC` | `com.spotify.music` | `android.media.action.MEDIA_PLAY_FROM_SEARCH` (`spotify:search:...`) |
-| `set an alarm for 7:00 AM` | `SET_ALARM` | `com.google.android.deskclock` | `android.intent.action.SET_ALARM` |
-| `set a timer for 15 minutes` | `SET_TIMER` | `com.google.android.deskclock` | `android.intent.action.SET_TIMER` |
-| `call mum` | `CALL_CONTACT` | `com.google.android.dialer` | `android.intent.action.CALL` (`tel:mum`) |
-| `pick the call` | `ANSWER_CALL` | `com.google.android.dialer` | `TelecomManager.acceptRingingCall()` |
-| `end call` | `END_CALL` | `com.google.android.dialer` | `TelecomManager.endCall()` |
-| `send message to Sarah saying on my way` | `SEND_SMS` | Default SMS Handler | `android.intent.action.SENDTO` (`smsto:Sarah`) |
-| `send whatsapp to John saying meeting in 5` | `SEND_WHATSAPP` | `com.whatsapp` | `android.intent.action.VIEW` (`https://api.whatsapp.com/send?...`) |
-| `draft a gmail to boss saying running late` | `DRAFT_GMAIL` | `com.google.android.gm` | `android.intent.action.SENDTO` (`mailto:boss`) |
-| `open tiktok` | `OPEN_APP` | `com.zhiliaoapp.musically` | `PackageManager.getLaunchIntentForPackage()` |
-| `open whatsapp` | `OPEN_APP` | `com.whatsapp` | `PackageManager.getLaunchIntentForPackage()` |
-| `open gallery` | `OPEN_APP` | `com.google.android.apps.photos` | `PackageManager.getLaunchIntentForPackage()` |
-| `open youtube` | `OPEN_APP` | `com.google.android.youtube` | `PackageManager.getLaunchIntentForPackage()` |
-| `summarize notifications` | `SUMMARIZE_NOTIFICATIONS` | `NotificationAssistant` | On-device NotificationListenerService |
+| Voice Command                               | Action Type               | Target App / Framework           | Intent / Mechanism                                                   |
+| ------------------------------------------- | ------------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| `play the box by roddy rich`                | `PLAY_MUSIC`              | `com.spotify.music`              | `android.media.action.MEDIA_PLAY_FROM_SEARCH` (`spotify:search:...`) |
+| `set an alarm for 7:00 AM`                  | `SET_ALARM`               | `com.google.android.deskclock`   | `android.intent.action.SET_ALARM`                                    |
+| `set a timer for 15 minutes`                | `SET_TIMER`               | `com.google.android.deskclock`   | `android.intent.action.SET_TIMER`                                    |
+| `call mum`                                  | `CALL_CONTACT`            | `com.google.android.dialer`      | `android.intent.action.CALL` (`tel:mum`)                             |
+| `pick the call`                             | `ANSWER_CALL`             | `com.google.android.dialer`      | `TelecomManager.acceptRingingCall()`                                 |
+| `end call`                                  | `END_CALL`                | `com.google.android.dialer`      | `TelecomManager.endCall()`                                           |
+| `send message to Sarah saying on my way`    | `SEND_SMS`                | Default SMS Handler              | `android.intent.action.SENDTO` (`smsto:Sarah`)                       |
+| `send whatsapp to John saying meeting in 5` | `SEND_WHATSAPP`           | `com.whatsapp`                   | `android.intent.action.VIEW` (`https://api.whatsapp.com/send?...`)   |
+| `draft a gmail to boss saying running late` | `DRAFT_GMAIL`             | `com.google.android.gm`          | `android.intent.action.SENDTO` (`mailto:boss`)                       |
+| `open tiktok`                               | `OPEN_APP`                | `com.zhiliaoapp.musically`       | `PackageManager.getLaunchIntentForPackage()`                         |
+| `open whatsapp`                             | `OPEN_APP`                | `com.whatsapp`                   | `PackageManager.getLaunchIntentForPackage()`                         |
+| `open gallery`                              | `OPEN_APP`                | `com.google.android.apps.photos` | `PackageManager.getLaunchIntentForPackage()`                         |
+| `open youtube`                              | `OPEN_APP`                | `com.google.android.youtube`     | `PackageManager.getLaunchIntentForPackage()`                         |
+| `summarize notifications`                   | `SUMMARIZE_NOTIFICATIONS` | `NotificationAssistant`          | On-device NotificationListenerService                                |
 
 ---
 
 ## Building Production Signed APK
 
 To assemble the production signed release APK:
+
 ```bash
 ./gradlew assembleRelease
 ```
+
 The production APK is generated at:
 `mobile/build/outputs/apk/release/OmniAgentMobile-release.apk`
 (and copied to repository root `./OmniAgent-release.apk`)
 
 ### Run Standalone CLI Runner (Workstation Testing)
+
 To test voice parsing, wake words, and intent dispatch without an attached phone:
+
 ```bash
 # Compile standalone classes
 javac -d mobile/bin -cp "mobile/src/main/java" mobile/src/main/java/io/omniagent/mobile/*.java

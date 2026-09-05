@@ -8,7 +8,7 @@ OmniAgent v0.2.1 delivers a complete, installable **Native Desktop GUI Assistant
   - An actual installed desktop application with launcher icons in GNOME/KDE Dash and Windows Start Menu.
   - Sleek, frameless, floating glassmorphic Voice Assistant HUD overlay that floats above your active workstation windows.
   - Dynamic animated glowing voice orb with multi-layer radial gradient mesh and real-time audio soundwave frequency visualizer.
-  - Hands-free wake word call-out: speak *"Hey Omni"* or *"OK Omni"* anytime from your desk to summon the assistant.
+  - Hands-free wake word call-out: speak _"Hey Omni"_ or _"OK Omni"_ anytime from your desk to summon the assistant.
   - One-click installers: `./install.sh` (Linux) and `install.ps1` (Windows) for seamless OS installation with autostart.
 - **Interactive Visual Action Cards**:
   - **Spotify Player Card**: Track artwork, real-time title/artist, play/pause toggle, skip, and volume slider.
@@ -28,41 +28,49 @@ OmniAgent v0.2.1 delivers a complete, installable **Native Desktop GUI Assistant
 
 ### Official Release Packages
 
-| Package | Target Platform | Description | File |
-| :--- | :--- | :--- | :--- |
-| **Android APK** | Android 8.0+ (ARM64/x86) | Production-signed APK (Scheme v2) | `OmniAgent-v0.2.1-Android.apk` |
-| **Desktop GUI (Linux)** | Linux x86_64 | Native GUI Application + installer + C++ Core | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` |
-| **Desktop GUI (Windows)** | Windows 10/11 x64 | Native GUI Application + installer (`.exe`) | `OmniAgent-Desktop-win-x64-v0.2.1.zip` |
-| **Omni Engine C++ SDK** | Linux x86_64 | C ABI headers, `libomni_engine.so`, JNI library & CMake | `omniagent-engine-linux-x64-v0.2.1.tar.gz` |
-| **Python SDK Wheel** | Python 3.10+ | PyPI-ready Python Wheel | `omniagent-0.2.1-py3-none-any.whl` |
-| **Python Source Dist** | Python 3.10+ | Source distribution tarball | `omniagent-0.2.1.tar.gz` |
+| Package                   | Target Platform          | Description                                             | File                                        |
+| :------------------------ | :----------------------- | :------------------------------------------------------ | :------------------------------------------ |
+| **Android APK**           | Android 8.0+ (ARM64/x86) | Production-signed APK (Scheme v2)                       | `OmniAgent-v0.2.1-Android.apk`              |
+| **Desktop GUI (Linux)**   | Linux x86_64             | Native GUI Application + installer + C++ Core           | `OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz` |
+| **Desktop GUI (Windows)** | Windows 10/11 x64        | Native GUI Application + installer (`.exe`)             | `OmniAgent-Desktop-win-x64-v0.2.1.zip`      |
+| **Omni Engine C++ SDK**   | Linux x86_64             | C ABI headers, `libomni_engine.so`, JNI library & CMake | `omniagent-engine-linux-x64-v0.2.1.tar.gz`  |
+| **Python SDK Wheel**      | Python 3.10+             | PyPI-ready Python Wheel                                 | `omniagent-0.2.1-py3-none-any.whl`          |
+| **Python Source Dist**    | Python 3.10+             | Source distribution tarball                             | `omniagent-0.2.1.tar.gz`                    |
 
 ---
 
 ### Quick Installation
 
 #### Desktop Assistant Application (Linux x64)
+
 Extract and run the one-click installer to register in your Applications menu / Dash:
+
 ```bash
 tar -xzf OmniAgent-Desktop-linux-x64-v0.2.1.tar.gz
 cd linux-x64
 ./install.sh
 ```
-Search for **OmniAgent** in your application launcher or click the app icon. Speak *"Hey Omni"* anytime!
+
+Search for **OmniAgent** in your application launcher or click the app icon. Speak _"Hey Omni"_ anytime!
 
 #### Desktop Assistant Application (Windows x64)
+
 Unzip `OmniAgent-Desktop-win-x64-v0.2.1.zip` and run the installer:
+
 ```powershell
 .\win-x64\install.ps1
 ```
+
 OmniAgent is registered in your Start Menu and ready for hands-free voice commands.
 
 #### Android Mobile
+
 ```bash
 adb install -r OmniAgent-v0.2.1-Android.apk
 ```
 
 #### Python Developer SDK
+
 ```bash
 pip install omniagent-0.2.1-py3-none-any.whl
 ```

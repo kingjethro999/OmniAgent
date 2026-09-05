@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "OmniAgent Engine — Hybrid Local/Cloud Edge Agent Framework",
-  description: "Lightweight, cross-platform framework for building autonomous AI agents operating locally on edge devices.",
+  description:
+    "Lightweight, cross-platform framework for building autonomous AI agents operating locally on edge devices.",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",

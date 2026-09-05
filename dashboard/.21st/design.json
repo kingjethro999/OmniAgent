@@ -13,7 +13,11 @@
   },
   "design": {
     "colorMode": "light and dark",
-    "colors": { "brand": "#4f5ff7", "lightSurface": "#fbfbf9", "darkSurface": "#1e1e1c" },
+    "colors": {
+      "brand": "#4f5ff7",
+      "lightSurface": "#fbfbf9",
+      "darkSurface": "#1e1e1c"
+    },
     "typography": { "ui": "Inter / system sans" },
     "spacing": { "base": 4, "control": 8 },
     "radius": { "control": 8, "panel": 11 },
@@ -24,11 +28,27 @@
   "components": {
     "installed": [],
     "preferredPrimitives": ["CustomSelect", "ConfirmDialog", "ErrorState"],
-    "patterns": ["Search listboxes only when option density warrants it", "Keep destructive controls visible on hover and keyboard focus", "Use a single code-split Studio workbench for advanced project systems", "Group advanced tools as Build, Content, Quality, and Ship"]
+    "patterns": [
+      "Search listboxes only when option density warrants it",
+      "Keep destructive controls visible on hover and keyboard focus",
+      "Use a single code-split Studio workbench for advanced project systems",
+      "Group advanced tools as Build, Content, Quality, and Ship"
+    ]
   },
   "constraints": {
-    "must": ["Use Lucide icons", "Support light and dark mode", "Keep canvas controls compact", "Use visible keyboard focus"],
-    "avoid": ["Decorative gradients", "Text glyphs as icons", "Excessive cards", "Glass effects", "Emojis"]
+    "must": [
+      "Use Lucide icons",
+      "Support light and dark mode",
+      "Keep canvas controls compact",
+      "Use visible keyboard focus"
+    ],
+    "avoid": [
+      "Decorative gradients",
+      "Text glyphs as icons",
+      "Excessive cards",
+      "Glass effects",
+      "Emojis"
+    ]
   },
   "decisions": [
     "Use a ChatGPT-inspired neutral application shell with restrained cobalt interaction color.",

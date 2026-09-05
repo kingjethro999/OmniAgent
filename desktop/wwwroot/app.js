@@ -8,9 +8,11 @@
   const assistantStatus = document.getElementById("assistant-status");
   const responseCard = document.getElementById("response-card");
   const userQueryText = document.getElementById("user-query-text");
-  const assistantResponseText = document.getElementById("assistant-response-text");
+  const assistantResponseText = document.getElementById(
+    "assistant-response-text",
+  );
   const responseTimestamp = document.getElementById("response-timestamp");
-  
+
   const spotifyCard = document.getElementById("spotify-card");
   const mediaTitle = document.getElementById("media-title");
   const mediaArtist = document.getElementById("media-artist");
@@ -66,7 +68,7 @@
     "Hey Omni",
     "OK Omni",
     "Hey Omni, play music",
-    "Hey Omni, what's the weather today?"
+    "Hey Omni, what's the weather today?",
   ];
   let currentCalibrationStep = 0;
 
@@ -87,12 +89,16 @@
 
   function handleHostMessage(rawMessage) {
     try {
-      const data = typeof rawMessage === "string" ? JSON.parse(rawMessage) : rawMessage;
+      const data =
+        typeof rawMessage === "string" ? JSON.parse(rawMessage) : rawMessage;
       console.log("[Photino IPC In]:", data);
 
       switch (data.type) {
         case "wake_word_detected":
-          setAssistantState("listening", `Wake word heard! Listening for command...`);
+          setAssistantState(
+            "listening",
+            `Wake word heard! Listening for command...`,
+          );
           break;
 
         case "speech_transcript":
@@ -117,7 +123,10 @@
           if (data.speaking) {
             setAssistantState("speaking", "Speaking response...");
           } else {
-            setAssistantState("idle", `Listening for <span class="wake-highlight">"Hey Omni"</span>...`);
+            setAssistantState(
+              "idle",
+              `Listening for <span class="wake-highlight">"Hey Omni"</span>...`,
+            );
           }
           break;
 
@@ -166,14 +175,18 @@
 
     // Revert to idle listening after speech completes
     setTimeout(() => {
-      setAssistantState("idle", `Listening for <span class="wake-highlight">"Hey Omni"</span>...`);
+      setAssistantState(
+        "idle",
+        `Listening for <span class="wake-highlight">"Hey Omni"</span>...`,
+      );
     }, 4000);
   }
 
   // ─── Spotify Media Widget ───
   function showSpotifyPlayer(songName) {
     spotifyCard.classList.remove("hidden");
-    mediaTitle.textContent = songName.replace(/on spotify/i, "").trim() || "Spotify Stream";
+    mediaTitle.textContent =
+      songName.replace(/on spotify/i, "").trim() || "Spotify Stream";
     mediaArtist.textContent = "OmniAgent Media Player";
     isSpotifyPlaying = true;
     svgPlay.classList.add("hidden");
@@ -193,8 +206,12 @@
     }
   });
 
-  btnMediaPrev.addEventListener("click", () => sendToHost("command", { query: "previous track" }));
-  btnMediaNext.addEventListener("click", () => sendToHost("command", { query: "next track" }));
+  btnMediaPrev.addEventListener("click", () =>
+    sendToHost("command", { query: "previous track" }),
+  );
+  btnMediaNext.addEventListener("click", () =>
+    sendToHost("command", { query: "next track" }),
+  );
 
   // ─── Timer Widget ───
   function startVisualTimer(minutes) {
@@ -218,7 +235,7 @@
   function updateTimerDisplay() {
     const mins = Math.floor(currentTimerSeconds / 60);
     const secs = currentTimerSeconds % 60;
-    timerRemaining.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    timerRemaining.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   }
 
   btnCancelTimer.addEventListener("click", () => {
@@ -234,11 +251,11 @@
       barCpu.style.width = `${Math.min(data.cpuPercent, 100)}%`;
     }
     if (data.ramPercent !== undefined) {
-      valRam.textContent = `${data.ramUsedMb || '?'} MB / ${data.ramTotalMb || '?'} MB (${data.ramPercent}%)`;
+      valRam.textContent = `${data.ramUsedMb || "?"} MB / ${data.ramTotalMb || "?"} MB (${data.ramPercent}%)`;
       barRam.style.width = `${Math.min(data.ramPercent, 100)}%`;
     }
     if (data.diskPercent !== undefined) {
-      valDisk.textContent = `${data.diskFreeGb || '?'} GB Free (${data.diskPercent}% used)`;
+      valDisk.textContent = `${data.diskFreeGb || "?"} GB Free (${data.diskPercent}% used)`;
       barDisk.style.width = `${Math.min(data.diskPercent, 100)}%`;
     }
     if (data.raw) {
@@ -270,7 +287,10 @@
     }, 100);
 
     // Send record phrase request
-    sendToHost("calibrate_phrase", { step: currentCalibrationStep, phrase: calibrationPhrases[currentCalibrationStep] });
+    sendToHost("calibrate_phrase", {
+      step: currentCalibrationStep,
+      phrase: calibrationPhrases[currentCalibrationStep],
+    });
 
     setTimeout(() => {
       clearInterval(meterTimer);
@@ -311,14 +331,16 @@
     cmdInput.value = "";
   }
 
-  btnSendCmd.addEventListener("click", () => executeUserCommand(cmdInput.value));
+  btnSendCmd.addEventListener("click", () =>
+    executeUserCommand(cmdInput.value),
+  );
   cmdInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       executeUserCommand(cmdInput.value);
     }
   });
 
-  document.querySelectorAll(".quick-card").forEach(card => {
+  document.querySelectorAll(".quick-card").forEach((card) => {
     card.addEventListener("click", () => {
       const cmd = card.getAttribute("data-cmd");
       executeUserCommand(cmd);
@@ -331,7 +353,10 @@
       setAssistantState("listening", "Listening... Speak now!");
       sendToHost("start_listening", {});
     } else {
-      setAssistantState("idle", `Listening for <span class="wake-highlight">"Hey Omni"</span>...`);
+      setAssistantState(
+        "idle",
+        `Listening for <span class="wake-highlight">"Hey Omni"</span>...`,
+      );
       sendToHost("stop_listening", {});
     }
   });
@@ -341,10 +366,10 @@
   });
 
   // ─── Navigation Tabs ───
-  navTabs.forEach(tab => {
+  navTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      navTabs.forEach(t => t.classList.remove("active"));
-      tabPanels.forEach(p => p.classList.remove("active"));
+      navTabs.forEach((t) => t.classList.remove("active"));
+      tabPanels.forEach((p) => p.classList.remove("active"));
 
       tab.classList.add("active");
       const targetId = tab.getAttribute("data-tab");
@@ -369,5 +394,4 @@
   setTimeout(() => {
     sendToHost("get_status", {});
   }, 400);
-
 })();

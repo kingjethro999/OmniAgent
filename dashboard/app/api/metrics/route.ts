@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET() {
   return NextResponse.json({
@@ -7,7 +7,7 @@ export async function GET() {
       cloudTasksRatio: 16,
       avgLatencyMs: 38,
       costSavedUsd: 14.85,
-      activeRuntimes: ['C++ Core', 'C# Desktop', 'Java Mobile', 'Python SDK']
-    }
+      activeRuntimes: ["C++ Core", "C# Desktop", "Java Mobile", "Python SDK"],
+    },
   });
 }

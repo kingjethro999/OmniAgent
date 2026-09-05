@@ -1,36 +1,47 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Activity, Trash2, Filter, Zap, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
-import { AgentEvent } from '@/lib/eventsStore';
+import React, { useState } from "react";
+import {
+  Activity,
+  Trash2,
+  Filter,
+  Zap,
+  CheckCircle2,
+  AlertTriangle,
+  ArrowUpRight,
+} from "lucide-react";
+import { AgentEvent } from "@/lib/eventsStore";
 
 interface ReasoningStreamProps {
   events: AgentEvent[];
   onClearEvents: () => void;
 }
 
-export const ReasoningStream: React.FC<ReasoningStreamProps> = ({ events, onClearEvents }) => {
-  const [filter, setFilter] = useState<string>('ALL');
+export const ReasoningStream: React.FC<ReasoningStreamProps> = ({
+  events,
+  onClearEvents,
+}) => {
+  const [filter, setFilter] = useState<string>("ALL");
 
   const filteredEvents = events.filter((e) => {
-    if (filter === 'ALL') return true;
+    if (filter === "ALL") return true;
     return e.event_type === filter;
   });
 
   const getEventBadgeColor = (type: string) => {
     switch (type) {
-      case 'ROUTING':
-        return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
-      case 'PLANNING':
-        return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
-      case 'EXECUTING':
-        return 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20';
-      case 'COMPLETED':
-        return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-      case 'ERROR':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
+      case "ROUTING":
+        return "bg-amber-500/10 text-amber-500 border-amber-500/20";
+      case "PLANNING":
+        return "bg-purple-500/10 text-purple-500 border-purple-500/20";
+      case "EXECUTING":
+        return "bg-indigo-500/10 text-indigo-500 border-indigo-500/20";
+      case "COMPLETED":
+        return "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
+      case "ERROR":
+        return "bg-red-500/10 text-red-500 border-red-500/20";
       default:
-        return 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20';
+        return "bg-zinc-500/10 text-zinc-400 border-zinc-500/20";
     }
   };
 
@@ -39,8 +50,12 @@ export const ReasoningStream: React.FC<ReasoningStreamProps> = ({ events, onClea
       <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
         <div className="flex items-center gap-2">
           <Activity className="w-4 h-4 text-[var(--accent-cobalt)]" />
-          <h2 className="text-sm font-semibold text-[var(--text-primary)]">Real-Time Reasoning Stream</h2>
-          <span className="text-xs text-[var(--text-tertiary)] font-mono">({filteredEvents.length} events)</span>
+          <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+            Real-Time Reasoning Stream
+          </h2>
+          <span className="text-xs text-[var(--text-tertiary)] font-mono">
+            ({filteredEvents.length} events)
+          </span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -80,11 +95,15 @@ export const ReasoningStream: React.FC<ReasoningStreamProps> = ({ events, onClea
             >
               <div className="flex items-center justify-between mb-1.5 text-[11px]">
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded border text-[10px] font-semibold ${getEventBadgeColor(evt.event_type)}`}>
+                  <span
+                    className={`px-2 py-0.5 rounded border text-[10px] font-semibold ${getEventBadgeColor(evt.event_type)}`}
+                  >
                     {evt.event_type}
                   </span>
                   {evt.routing_decision && (
-                    <span className={`px-1.5 py-0.5 rounded text-[10px] ${evt.routing_decision === 'LOCAL' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}`}>
+                    <span
+                      className={`px-1.5 py-0.5 rounded text-[10px] ${evt.routing_decision === "LOCAL" ? "bg-emerald-500/10 text-emerald-500" : "bg-amber-500/10 text-amber-500"}`}
+                    >
                       Target: {evt.routing_decision}
                     </span>
                   )}
@@ -94,13 +113,36 @@ export const ReasoningStream: React.FC<ReasoningStreamProps> = ({ events, onClea
                 </span>
               </div>
 
-              <div className="text-[var(--text-primary)] leading-relaxed">{evt.message}</div>
+              <div className="text-[var(--text-primary)] leading-relaxed">
+                {evt.message}
+              </div>
 
               {(evt.latency_ms || evt.complexity_score !== undefined) && (
                 <div className="mt-2 pt-1.5 border-t border-[var(--border-subtle)] flex items-center gap-4 text-[10px] text-[var(--text-tertiary)]">
-                  {evt.latency_ms && <span>Latency: <strong className="text-[var(--text-secondary)]">{evt.latency_ms}ms</strong></span>}
-                  {evt.complexity_score !== undefined && <span>Score: <strong className="text-[var(--text-secondary)]">{evt.complexity_score}</strong></span>}
-                  {evt.provider && <span>Provider: <strong className="text-[var(--text-secondary)]">{evt.provider}</strong></span>}
+                  {evt.latency_ms && (
+                    <span>
+                      Latency:{" "}
+                      <strong className="text-[var(--text-secondary)]">
+                        {evt.latency_ms}ms
+                      </strong>
+                    </span>
+                  )}
+                  {evt.complexity_score !== undefined && (
+                    <span>
+                      Score:{" "}
+                      <strong className="text-[var(--text-secondary)]">
+                        {evt.complexity_score}
+                      </strong>
+                    </span>
+                  )}
+                  {evt.provider && (
+                    <span>
+                      Provider:{" "}
+                      <strong className="text-[var(--text-secondary)]">
+                        {evt.provider}
+                      </strong>
+                    </span>
+                  )}
                 </div>
               )}
             </div>

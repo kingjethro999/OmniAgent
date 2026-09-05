@@ -1,11 +1,20 @@
 export interface AgentEvent {
   id: string;
   timestamp: number;
-  event_type: 'THINKING' | 'PLANNING' | 'ROUTING' | 'EXECUTING' | 'TOOL_CALL' | 'TOOL_RESULT' | 'COMPLETED' | 'ERROR' | 'SYSTEM';
+  event_type:
+    | "THINKING"
+    | "PLANNING"
+    | "ROUTING"
+    | "EXECUTING"
+    | "TOOL_CALL"
+    | "TOOL_RESULT"
+    | "COMPLETED"
+    | "ERROR"
+    | "SYSTEM";
   agent_id?: string;
   message: string;
   data?: Record<string, any>;
-  routing_decision?: 'LOCAL' | 'CLOUD';
+  routing_decision?: "LOCAL" | "CLOUD";
   complexity_score?: number;
   step_number?: number;
   total_steps?: number;
@@ -23,12 +32,12 @@ const globalStore = global as unknown as {
 if (!globalStore.omniEvents) {
   globalStore.omniEvents = [
     {
-      id: 'sys-init',
+      id: "sys-init",
       timestamp: Date.now() / 1000,
-      event_type: 'SYSTEM',
-      message: 'OmniAgent Engine Next.js Dashboard initialized.',
-      data: { runtime: 'Next.js App Router' }
-    }
+      event_type: "SYSTEM",
+      message: "OmniAgent Engine Next.js Dashboard initialized.",
+      data: { runtime: "Next.js App Router" },
+    },
   ];
 }
 
@@ -58,7 +67,7 @@ export function addEvent(event: AgentEvent) {
     try {
       callback(event);
     } catch (err) {
-      console.error('Subscriber notify error:', err);
+      console.error("Subscriber notify error:", err);
     }
   });
 }

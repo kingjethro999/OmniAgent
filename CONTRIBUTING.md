@@ -8,15 +8,16 @@ OmniAgent is organized into a modular multi-language structure:
 
 - **`agent/` (Python 3.10+)**: Agent orchestration, task router, planning engine, tools, memory, and IDE hook bridge.
 - **`core/` (C/C++17)**: High-performance inference engine, hardware tensor arena, BPE tokenizer, and C ABI dynamic exports (`omni_engine.h`).
-- **`dashboard/` (Next.js 16 + React 19 + TypeScript + Tailwind v4)**: Real-time telemetry, interactive task simulator, and reasoning feed.
-- **`desktop/` (C# / .NET 8)**: Enterprise Desktop background service and P/Invoke bridge.
-- **`mobile/` (Java / Android Native)**: Consumer Mobile companion app and JNI NPU bridge.
+- **`dashboard/` (Next.js 16 + React 19 + TypeScript + Tailwind v4)**: Real-time telemetry, interactive task simulator, app download hub, and reasoning feed.
+- **`desktop/` (C# / .NET 10 + Photino.NET)**: Native Desktop Voice Assistant, floating voice orb HUD, WebKitGTK/WebView2 shell, and low-level system automation.
+- **`mobile/` (Java 17 / Android Native SDK 34)**: Consumer Mobile companion app, voice match calibration, hands-free automation, and JNI NPU bridge.
 
 ---
 
 ## 🛠️ Development Setup
 
 ### 1. Python Agent Brain
+
 ```bash
 cd agent
 python3 -m venv .venv
@@ -26,6 +27,7 @@ python -m omniagent "Summarize local files"
 ```
 
 ### 2. Next.js Dashboard
+
 ```bash
 cd dashboard
 pnpm install
@@ -33,18 +35,31 @@ pnpm dev
 ```
 
 ### 3. C++ Core Compute Engine
+
 ```bash
 cd core
-mkdir build && cd build
+mkdir -p build && cd build
 cmake ..
 make -j4
 ```
 
-### 4. C# Enterprise Desktop Shell
+### 4. C# Desktop Voice Assistant GUI (.NET 10)
+
 ```bash
 cd desktop
 dotnet build
+# Run native floating GUI assistant window:
 dotnet run
+# Or test CLI commands:
+dotnet run -- --say "Check workstation status"
+```
+
+### 5. Android Mobile Companion (APK)
+
+```bash
+cd mobile
+./gradlew assembleRelease
+# Output: mobile/build/outputs/apk/release/OmniAgentMobile-release.apk
 ```
 
 ---
