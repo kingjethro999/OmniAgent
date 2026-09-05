@@ -20,6 +20,7 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 
 ## 📑 Table of Contents
 
+- [Official Release Packages & Downloads](#-official-release-packages--downloads-v020)
 - [Key Features](#-key-features)
 - [Target Use Cases & Hands-On Examples](#-target-use-cases--hands-on-examples)
   - [1. Privacy-Preserving Code & Document Audits](#1-privacy-preserving-code--document-audits)
@@ -48,6 +49,139 @@ OmniAgent Engine is a lightweight, high-performance edge framework for running a
 - [Configuration Reference (.env)](#-configuration-reference-env)
 - [Roadmap](#-roadmap)
 - [License](#-license)
+
+---
+
+## 📦 Official Release Packages & Downloads (v0.2.0)
+
+Pre-built standalone binaries, signed application packages, and developer SDKs are hosted directly on [GitHub Releases (v0.2.0)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0).
+
+### Package Distribution Matrix
+
+| Component / Platform | Target Architecture | Distribution File | Size | Verification / Integrity | Direct Download |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Android Phone Assistant** | Android 8.0+ (ARM64 / x86_64) | `OmniAgent-v0.2.0-Android.apk` | 4.38 MiB | **Verified**: Signed with RSA 2048-bit release keystore (`apksigner` Scheme v2 verified) | [Download APK](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-v0.2.0-Android.apk) |
+| **Desktop Worker (Linux)** | Linux x86_64 | `OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz` | 30.55 MiB | **Verified**: Self-contained single-file `.NET 10` binary + native `libomni_engine.so` | [Download Linux tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz) |
+| **Desktop Worker (Windows)** | Windows 10/11 x64 | `OmniAgent-Desktop-win-x64-v0.2.0.zip` | 30.58 MiB | **Verified**: Self-contained single-file `OmniAgent.Desktop.exe` with bundled icon & docs | [Download Windows zip](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-win-x64-v0.2.0.zip) |
+| **Desktop Worker (macOS ARM)** | Apple Silicon (M1/M2/M3/M4) | `OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz` | 28.88 MiB | **Verified**: Native self-contained single-file binary for macOS ARM64 | [Download macOS ARM tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz) |
+| **Desktop Worker (macOS Intel)**| macOS Intel x86_64 | `OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz` | 30.65 MiB | **Verified**: Native self-contained single-file binary for macOS Intel x86_64 | [Download macOS Intel tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz) |
+| **Main Omni Engine Core** | Linux x86_64 (C / C++ / JNI) | `omniagent-engine-linux-x64-v0.2.0.tar.gz` | 26.64 KiB | **Verified**: C ABI headers (`omni_engine.h`), `libomni_engine.so`, JNI library & CMake | [Download Engine tar.gz](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-engine-linux-x64-v0.2.0.tar.gz) |
+| **Python SDK Wheel** | Python 3.10+ | `omniagent-0.2.0-py3-none-any.whl` | 35.75 KiB | **Verified**: PyPI-compliant wheel distribution | [Download Wheel](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0-py3-none-any.whl) |
+| **Python Source Distribution** | Python 3.10+ | `omniagent-0.2.0.tar.gz` | 54.18 KiB | **Verified**: Standard sdist source tarball | [Download sdist](https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0.tar.gz) |
+
+---
+
+### Quick Installation & Usage Guide
+
+#### 1. Android Phone Assistant
+Download and install directly to any Android 8.0+ device:
+```bash
+# Download production signed APK
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-v0.2.0-Android.apk
+
+# Install via ADB:
+adb install -r OmniAgent-v0.2.0-Android.apk
+```
+*Features*: 0 MB local model download overhead, free wake-word detection ("Hey Omni"), native Spotify playback, alarms, direct calls, SMS, WhatsApp, Gmail drafting, and app launching.
+
+#### 2. Desktop Worker (Linux x64)
+Extract and run the self-contained binary:
+```bash
+# Download and unpack
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz
+tar -xzf OmniAgent-Desktop-linux-x64-v0.2.0.tar.gz
+cd linux-x64
+
+# Ensure executable permissions and test
+chmod +x OmniAgent.Desktop
+./OmniAgent.Desktop --help
+
+# Start background dropzone monitor
+./OmniAgent.Desktop --watch ./dropzone
+
+# Audit confidential code or documents for leaked secrets
+./OmniAgent.Desktop --audit /path/to/project
+```
+
+#### 3. Desktop Worker (Windows x64)
+Download `OmniAgent-Desktop-win-x64-v0.2.0.zip`, extract to any folder, and run from Command Prompt or PowerShell:
+```cmd
+OmniAgent.Desktop.exe --help
+OmniAgent.Desktop.exe --watch C:\dropzone
+OmniAgent.Desktop.exe --audit C:\my-codebase
+```
+
+#### 4. Desktop Worker (macOS Apple Silicon & Intel)
+Extract and run the native binary:
+```bash
+# For Apple Silicon (M1/M2/M3/M4):
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz
+tar -xzf OmniAgent-Desktop-osx-arm64-v0.2.0.tar.gz
+cd osx-arm64
+chmod +x OmniAgent.Desktop
+./OmniAgent.Desktop --help
+
+# For Intel x86_64:
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz
+tar -xzf OmniAgent-Desktop-osx-x64-v0.2.0.tar.gz
+cd osx-x64
+chmod +x OmniAgent.Desktop
+./OmniAgent.Desktop --help
+```
+
+#### 5. Main Omni Engine Core (C / C++ SDK)
+Incorporate the C++ edge inference engine into your own native C, C++, Rust, or Go applications:
+```bash
+# Download and extract C++ SDK
+curl -LO https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-engine-linux-x64-v0.2.0.tar.gz
+tar -xzf omniagent-engine-linux-x64-v0.2.0.tar.gz
+cd omniagent-engine-linux-x64
+
+# Compile your application linking against libomni_engine.so:
+gcc -Iinclude -Llib main.c -lomni_engine -Wl,-rpath,'$ORIGIN/lib' -o main
+```
+
+#### 6. Python Developer SDK
+```bash
+# Install via wheel
+pip install https://github.com/kingjethro999/OmniAgent/releases/download/v0.2.0/omniagent-0.2.0-py3-none-any.whl
+
+# Or install local wheel file:
+pip install omniagent-0.2.0-py3-none-any.whl
+```
+
+---
+
+### Reproducible Build Instructions
+
+All release packages can be built locally from source in this repository using the provided scripts and standard toolchains:
+
+```bash
+# 1. Package all platforms and generate staging archives:
+./release_packages/package_all.sh
+
+# 2. Build individual platform binaries manually:
+# Android Signed Release APK:
+cd mobile && ./gradlew assembleRelease
+
+# Linux x64 Single-File Desktop:
+dotnet publish desktop/OmniAgent.Desktop.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o release_packages/desktop/linux-x64
+
+# Windows x64 Single-File Desktop:
+dotnet publish desktop/OmniAgent.Desktop.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o release_packages/desktop/win-x64
+
+# macOS ARM64 Single-File Desktop:
+dotnet publish desktop/OmniAgent.Desktop.csproj -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true -o release_packages/desktop/osx-arm64
+
+# macOS Intel x64 Single-File Desktop:
+dotnet publish desktop/OmniAgent.Desktop.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true -o release_packages/desktop/osx-x64
+
+# Main Omni Engine C++ Core:
+cd core && cmake -B build && cmake --build build
+
+# Python SDK:
+python3 -m build agent/
+```
 
 ---
 
@@ -492,7 +626,7 @@ python -m omniagent
 Example interaction:
 ```
 ╭──────────────────────────────────────────────────╮
-│ OmniAgent Engine v0.1.1                          │
+│ OmniAgent Engine v0.2.0                          │
 │ Hybrid Local/Cloud Edge Agent Framework          │
 ╰──────────────────────────────────────────────────╯
 
@@ -734,7 +868,7 @@ Response:
 ```json
 {
   "status": "online",
-  "engine": "OmniAgent v0.1.0",
+  "engine": "OmniAgent v0.2.0",
   "ide_hook_version": "1.0",
   "mcp_protocol_version": "2024-11-05"
 }

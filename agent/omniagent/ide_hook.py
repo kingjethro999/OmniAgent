@@ -17,6 +17,7 @@ from typing import Any
 
 from omniagent.executor import AgentExecutor
 from omniagent.router import TaskRouter
+from omniagent import __version__
 
 class IDEHookHandler(BaseHTTPRequestHandler):
     executor = AgentExecutor()
@@ -80,7 +81,7 @@ class IDEHookHandler(BaseHTTPRequestHandler):
         if self.path == '/status':
             self._send_json(200, {
                 "status": "online",
-                "engine": "OmniAgent v0.1.0",
+                "engine": f"OmniAgent v{__version__}",
                 "ide_hook_version": "1.0",
                 "mcp_protocol_version": "2024-11-05"
             })
