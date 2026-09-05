@@ -13,11 +13,11 @@
     
     <!-- Assistant Setup -->
     <string name="backend_engine_title">Assistant Setup</string>
-    <string name="engine_micro_title">Built-in Phone Assistant</string>
+    <string name="engine_micro_title">Built-in Phone Assistant (On-Device)</string>
     <string name="engine_micro_desc">Fast, private, and works right out of the box with zero setup.</string>
-    <string name="engine_server_title">Connect to Home Computer (Optional)</string>
+    <string name="engine_server_title">Remote Server (Optional)</string>
     <string name="engine_server_hint">http://192.168.1.50:8765</string>
-    <string name="btn_save">Save</string>
+    <string name="btn_save">Connect</string>
     
     <!-- Voice Interaction -->
     <string name="wake_word_label">Wake Word: Hey Omni</string>

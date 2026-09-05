@@ -6,6 +6,8 @@
 
 **A Hybrid Local/Cloud Edge Agent Framework with On-Device SLM Inference & IDE Hook (MCP)**
 
+[![Release: v0.2.0](https://img.shields.io/badge/Release-v0.2.0-blue.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0)
+[![Android: Signed APK](https://img.shields.io/badge/Android-APK%20(v0.2.0)-success.svg)](https://github.com/kingjethro999/OmniAgent/releases/tag/v0.2.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://python.org)
 [![Next.js: 14](https://img.shields.io/badge/Dashboard-Next.js%2014-black.svg)](https://nextjs.org)
@@ -568,28 +570,41 @@ dotnet run --project desktop
 
 ### 5. Consumer Mobile Companion & Voice Phone Assistant (Android / Java JNI)
 
-The Consumer Mobile Companion executes on Android (or on workstation JVMs for developer testing) via JNI to the C++ Core (`libomni_engine_jni.so`). It turns the phone into an autonomous on-device assistant with zero 3rd-party API costs or cloud dependencies.
+### 5. Consumer Mobile Companion & Voice Phone Assistant (Android / Java JNI)
 
-#### Key Phone Assistant Features:
-- **Onboarding Setup on Entry**: Prompts user on first launch to either:
-  1. `On-Device SLM`: Download/run local quantized model on phone NPU/CPU.
-  2. `Custom Remote Server`: Point to their own self-hosted OmniAgent server / desktop IDE hook URL.
-- **Free Wake Word Engine**: Listens for `"Hey Omni"` (or `"Hey Agent"`, `"Hey Phone"`) locally without cloud speech services.
-- **Native Phone Automation**: Automatically maps spoken commands to native Android Intents:
-  - **Music**: `"Hey Omni, play the box by roddy rich"` ➔ Launches Spotify search intent (`spotify:search:...`) and plays track.
-  - **Clock & Alarms**: `"Hey Omni, set an alarm for 7:00 AM"` ➔ Registers alarm via Android `AlarmClock`.
-  - **Calls & Telecom**: `"Hey Omni, call mum"` ➔ Direct telephone dialer intent.
-  - **Call Control**: `"Hey Omni, pick the call"` ➔ Accepts incoming call; `"Hey Omni, end call"` ➔ Hangs up call.
-  - **Messaging**: `"Hey Omni, send message to Dad saying on my way"` ➔ Native SMS compose.
-  - **WhatsApp**: `"Hey Omni, send whatsapp to Alice saying let's meet at 5"` ➔ Launches WhatsApp conversation.
-  - **Gmail**: `"Hey Omni, draft a gmail to boss saying working remotely today"` ➔ Composes email in Gmail app.
-  - **App Launching**: `"Hey Omni, open whatsapp"`, `"open tiktok"`, `"open gallery"`, `"open youtube"` ➔ Direct package launcher intent.
+The Consumer Mobile Companion executes natively on Android (or on workstation JVMs for developer testing) via JNI to the shared C++ Core (`libomni_engine_jni.so`). It turns the phone into an autonomous on-device assistant with zero 3rd-party API costs or cloud dependencies.
 
-#### Running Voice Commands from the CLI:
+#### Key Phone Assistant Capabilities:
+- **Zero-Download On-Device Engine (0 MB Overhead)**: Unlike heavy mobile LLMs requiring 1.5 GB+ downloads, OmniAgent maps natural voice commands to Android's built-in framework interfaces in < 5ms with zero model download overhead.
+- **Backend Selection**: Run 100% locally with the built-in on-device engine or point to your self-hosted OmniAgent Remote Server (`http://<ip>:8765`).
+- **Free Wake Word Engine**: Spot `"Hey Omni"`, `"OK Omni"`, `"Omni"`, and `"Hey Agent"` locally in real-time.
+- **Optional Accessibility Automation**: `OmniAccessibilityService` enables hands-free system navigation and app execution as an optional accessibility toggle without interfering with existing companion routines.
+- **ChatGPT-Inspired Cobalt Design System**: Dark surface (`#121211`), cards (`#1E1E1C`), cobalt accent (`#4F5FF7`), and 100% zero emojis (utilizes crisp vector drawables and clean typography).
+- **Signed Production APK Included**: Production signed APK (`OmniAgent-v0.2.0-release.apk`) verified with APK Signature Scheme v2.
+
+#### Native Phone Automation Supported:
+- **Music Playback**: `"Hey Omni, play the box by roddy rich"` ➔ Launches Spotify search (`spotify:search:...`) and streams audio.
+- **Clock & Alarms**: `"Hey Omni, set an alarm for 7:00 AM"` / `"set a timer for 10 minutes"` ➔ Dispatches native `AlarmClock` intents.
+- **Telecom & Calls**: `"Hey Omni, call mum"` (`tel:mum`), `"Hey Omni, pick the call"` (`TelecomManager.acceptRingingCall`), `"Hey Omni, end call"`.
+- **Messaging**: `"Hey Omni, send message to Sarah saying on my way"` (SMS) / `"Hey Omni, send whatsapp to John saying meeting now"` (WhatsApp).
+- **Email Drafting**: `"Hey Omni, draft an email to boss saying working remotely today"` ➔ Composes in Gmail (`mailto:`).
+- **App Launching**: `"Hey Omni, open tiktok"`, `"open whatsapp"`, `"open gallery"`, `"open youtube"`, `"open camera"`, `"open netflix"`.
+
+#### Building and Installing the Production APK:
 ```bash
-# Compile Java classes
-mkdir -p mobile/bin
-javac -d mobile/bin mobile/src/main/java/io/omniagent/mobile/*.java
+# Build the signed production release APK:
+cd mobile
+./gradlew assembleRelease
+
+# The resulting signed APK is located at:
+# mobile/build/outputs/apk/release/OmniAgentMobile-release.apk (4.4 MB)
+# (Also available at repository root: ./OmniAgent-release.apk)
+```
+
+#### Running Voice Commands on Workstation CLI (Zero-Device Testing):
+```bash
+# Compile standalone classes
+javac -d mobile/bin -cp "mobile/src/main/java" mobile/src/main/java/io/omniagent/mobile/*.java
 
 # 1. Play song on Spotify
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, play the box by roddy rich"
@@ -606,15 +621,11 @@ java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, end call"
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, send message to Sarah saying on my way"
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, send whatsapp to John saying meeting in 5 minutes"
 
-# 5. Draft Gmail
-java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, draft a gmail to boss saying working remotely today"
-
-# 6. Launch apps
+# 5. Launch apps
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open whatsapp"
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open tiktok"
-java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, open gallery"
 
-# 7. Launch interactive Phone Assistant with entry onboarding setup
+# 6. Launch interactive Phone Assistant loop
 java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner
 ```
 

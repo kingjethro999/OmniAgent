@@ -111,7 +111,7 @@ java -cp mobile/bin io.omniagent.mobile.MobileAgentRunner "Hey Omni, play the bo
 
 # Build Signed Production APK:
 ./gradlew assembleRelease
-# Output: mobile/build/outputs/apk/release/OmniAgentMobile-release.apk (4.4 MB)
+# Output: mobile/build/outputs/apk/release/OmniAgentMobile-release.apk (v0.2.0, versionCode 4, 4.4 MB)
 # Signature Verification: Verified using v2 scheme (APK Signature Scheme v2): true
 ```
 

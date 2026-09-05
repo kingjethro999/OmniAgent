@@ -113,13 +113,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Assistant Setup Selector (Built-in vs Home Computer)
+        // Assistant Setup Selector (Built-in vs Remote Server)
         rgEngineMode.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.rb_mode_server) {
                 layoutServerInput.setVisibility(View.VISIBLE);
                 config.setMode(AssistantConfig.EngineMode.REMOTE_SERVER);
                 assistantService.setConfig(config);
-                tvExecutionLog.setText("Connected to Home Computer mode (" + config.getServerUrl() + ").");
+                tvExecutionLog.setText("Connected to Remote Server mode (" + config.getServerUrl() + ").");
             } else {
                 layoutServerInput.setVisibility(View.GONE);
                 config.setMode(AssistantConfig.EngineMode.ON_DEVICE_SLM);
@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
             if (url.isEmpty()) url = "http://127.0.0.1:8765";
             config.setServerUrl(url);
             assistantService.setConfig(config);
-            Toast.makeText(this, "Saved Home Computer address: " + url, Toast.LENGTH_SHORT).show();
-            tvExecutionLog.setText("Home Computer address set to: " + url);
+            Toast.makeText(this, "Connected to Remote Server: " + url, Toast.LENGTH_SHORT).show();
+            tvExecutionLog.setText("Remote Server address set to: " + url);
         });
 
         // Voice Listen Button
